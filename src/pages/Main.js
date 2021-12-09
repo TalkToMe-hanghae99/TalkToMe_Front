@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import Header from "../components/Header";
-import Footer from "../components/Footer";
 import SearchInput from "../components/SearchInput";
 import MainCardConcern from "../components/MainCardConcern";
 import MainCardSelect from "../components/MainCardSelect";
@@ -9,14 +8,13 @@ import MainCardSelect from "../components/MainCardSelect";
 function Main() {
   return (
     <MainBox>
-      <Header />
       <ContentBox>
+        <Header />
         <SearchInput />
         <MainCardSelect />
         <MainCardConcern />
         <MainCardConcern />
       </ContentBox>
-      <Footer />
     </MainBox>
   );
 }
@@ -30,8 +28,8 @@ const ContentBox = styled.div`
   top: 130px;
   width: 375px;
   height: 100vh;
-  
-  background-color:white;
+
+  background-color: white;
 `;
 
 export default Main;
