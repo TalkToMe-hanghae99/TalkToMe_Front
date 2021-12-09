@@ -3,10 +3,13 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./shared/App";
 import reportWebVitals from "./reportWebVitals";
+import { Select } from "./page/Select";
+import { SelectWrite } from "./page/SelectWrite";
+import { Mypage } from "./page/Mypage";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Mypage />
   </React.StrictMode>,
   document.getElementById("root")
 );
