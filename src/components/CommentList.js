@@ -1,7 +1,13 @@
 import React from "react";
 
+import CommentItem from "./CommentItem";
+
 const CommentList = () => {
-  return <div>코멘트리스트</div>;
+  return (
+    <>
+      <CommentItem />
+    </>
+  );
 };
 
 export default CommentList;
