@@ -6,8 +6,11 @@ import { history } from "../redux/configureStore";
 import Login from "../pages/Login";
 import WorryCreateUpdate from "../pages/WorryCreateUpdate";
 import WorryDetail from "../pages/WorryDetail";
-import Main from "../pages/Main"
+import Main from "../pages/Main";
 import SearchPage from "../pages/SearchPage";
+import { Select } from "../pages/Select";
+import { SelectWrite } from "../pages/SelectWrite";
+import { Mypage } from "../pages/Mypage";
 
 function App() {
   return (
@@ -19,6 +22,9 @@ function App() {
           <Route path="/login" exact component={Login}></Route>
           <Route path="/worrywrite" exact component={WorryCreateUpdate}></Route>
           <Route path="/worrydetail" exact component={WorryDetail}></Route>
+          <Route path="/select" exact component={Select}></Route>
+          <Route path="/selectwrite" exact component={SelectWrite}></Route>
+          <Route path="/mypage" exact component={Mypage}></Route>
         </Switch>
       </ConnectedRouter>
     </React.Fragment>
