@@ -16,6 +16,7 @@ height:131px;
 background-color:#FFEFE3;
 display:flex;
 flex-flow:column wrap;
+margin:15px auto;
 `
 
 const Text = styled.div`

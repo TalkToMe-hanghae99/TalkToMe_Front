@@ -30,6 +30,8 @@ const ContentBox = styled.div`
   top: 130px;
   width: 375px;
   height: 100vh;
+  
+  background-color:white;
 `;
 
 export default Main;
