@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Chart } from "../components/Chart";
 
 export const Select = (props) => {
   return (
@@ -37,7 +38,7 @@ export const Select = (props) => {
       </Flat>
       <Border />
       <Text>투표결과</Text>
-      <Pie_chart />
+      <Chart />
       <Button>당신의 선택은?</Button>
     </Container>
   );
@@ -85,14 +86,6 @@ const VoteColor = styled.div`
   width: 70%;
   height: 30px;
   background: #ffefe3;
-`;
-
-const Pie_chart = styled.div`
-  display: inline-block;
-  width: 300px;
-  height: 300px;
-  background: conic-gradient(#8b22ff 0% 25%, #ffc33b 25% 56%, #21f3d6 56% 100%);
-  border-radius: 50%;
 `;
 
 const Button = styled.button`
