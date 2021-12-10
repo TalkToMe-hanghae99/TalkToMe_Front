@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import styled from "styled-components";
 
 export const SelectWrite = (props) => {
-  const [plus, setPlus] = useState(false);
-
   return (
     <Container>
       <Input placeholder="투표 제목을 입력하세요."></Input>
@@ -20,11 +18,10 @@ export const SelectWrite = (props) => {
         //   }
         // }}
         /> */}
-      <InputPlus placeholder="선택1" />
-      <InputPlus placeholder="선택2" />
-      <InputPlus placeholder="선택3" />
-      <InputPlus placeholder="선택4" />
-      <InputPlus placeholder="선택5" />
+      {/* {plus.map((e) => {
+        <InputPlus placeholder="선택1" />;
+      })} */}
+
       {/* </Flat> */}
       <Flat justify="space-between">
         <Button>작성 완료</Button>
@@ -49,7 +46,7 @@ const Input = styled.input`
 `;
 
 const Container = styled.div`
-  margin: 0 auto;
+  margin: 0 20px;
   display: flex;
   flex-direction: column;
   width: 90%;
@@ -87,9 +84,11 @@ const Button = styled.button`
   background: #e9e9e9;
   border: none;
   font-weight: bold;
-  margin: 20px 0;
+  margin: 20px 15px;
 `;
 
 const Days = styled.div`
   color: #858585;
+  display: flex;
+  justify-content: flex-end;
 `;
