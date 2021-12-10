@@ -1,9 +1,11 @@
-import styled from "styled-components"
+import styled from "styled-components";
+
+import search from "../assets/search.png";
 
 function SearchInput () {
     return (
         <SearchBox>
-            <Search></Search>
+            <SearchBar></SearchBar><Img src={search}/>
         </SearchBox>
     )
 
@@ -11,15 +13,21 @@ function SearchInput () {
 const SearchBox = styled.div`
 z-index:5;
 position:fixed;
-top:50px;
+top:0px;
 width:375px;
-height:80px;
-background-color:gray;
+height:75px;
+background-color:white;
+border-bottom:1px solid #E3E3E3;
 `
-const Search = styled.input`
-margin:20px;
+const SearchBar = styled.input`
+margin:25px 0 20px 30px;
 width:270px;
 height:30px;
 `
-
+const Img =styled.img`
+width:30px;
+position:absolute;
+top:25px;
+right:25px;
+`
 export default SearchInput;

@@ -18,7 +18,7 @@ function App() {
           <Route path="/" exact component={Login}></Route>
           <>
             <Route path="/main" exact component={Main}></Route>
-            <Route path="/SearchPage" exact component={SearchPage}></Route>
+            <Route path="/searchPage" exact component={SearchPage}></Route>
             <Route
               path="/worrywrite"
               exact
