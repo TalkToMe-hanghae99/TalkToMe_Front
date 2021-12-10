@@ -17,7 +17,7 @@ background-color:white;
 display:flex;
 flex-flow:column wrap;
 margin:0px auto;
-margin-bottom:15px;
+margin-bottom:20px;
 border:1px solid #E9E9E9;
 border-radius:5px;
 `

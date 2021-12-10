@@ -18,7 +18,7 @@ background-color:white;
 display:flex;
 flex-flow: row wrap;
 margin:0px auto;
-margin-bottom:15px;
+margin-bottom:20px;
 border:1px solid #E9E9E9;
 border-radius:5px;
 `
@@ -32,7 +32,7 @@ margin:15px 0px 0px 16px;
 const Text = styled.div`
 width:90px;
 height:20px;
-margin:5px 0px 10px 16px;
+margin:5px 5px 10px 16px;
 `
 
 export default MainCardConcern;
