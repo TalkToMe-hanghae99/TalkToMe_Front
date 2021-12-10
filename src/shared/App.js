@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { ConnectedRouter } from "connected-react-router";
 import { history } from "../redux/configureStore";
 
+import Footer from "../components/Footer";
 import Login from "../pages/Login";
 import WorryCreateUpdate from "../pages/WorryCreateUpdate";
 import WorryDetail from "../pages/WorryDetail";
