@@ -12,6 +12,7 @@ import SearchPage from "../pages/SearchPage";
 import { Select } from "../pages/Select";
 import { SelectWrite } from "../pages/SelectWrite";
 import { Mypage } from "../pages/Mypage";
+import { NameCorrection } from "../components/NameCorrection";
 
 function App() {
   return (
@@ -26,6 +27,11 @@ function App() {
           <Route path="/select" exact component={Select}></Route>
           <Route path="/selectwrite" exact component={SelectWrite}></Route>
           <Route path="/mypage" exact component={Mypage}></Route>
+          <Route
+            path="/namecorrection"
+            exact
+            component={NameCorrection}
+          ></Route>
         </Switch>
       </ConnectedRouter>
     </React.Fragment>
