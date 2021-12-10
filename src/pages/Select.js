@@ -59,7 +59,7 @@ const Flat = styled.div`
 `;
 
 const Container = styled.div`
-  margin: 0 auto;
+  margin: 0 20px;
   display: flex;
   flex-direction: column;
   width: 90%;
