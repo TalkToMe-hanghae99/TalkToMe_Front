@@ -62,7 +62,7 @@ const Edit = styled.div`
   span {
     cursor: pointer;
     font-size: 12px;
-    color: rgb(134, 142, 150);
+    color: #868e96;
     margin: 5px;
     :hover {
       text-decoration: underline;

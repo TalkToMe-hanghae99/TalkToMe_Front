@@ -7,7 +7,6 @@ const CommentWrite = (props) => {
   return (
     <>
       <Container>
-        <Count>댓글(0)</Count>
         <InputBtn>
           <Input placeholder="댓글을 입력해주세요." />
           <Button>작성</Button>
@@ -25,20 +24,20 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
-const Count = styled.h4`
-  width: 100%;
-  font-size: 16px;
-  font-weight: 600;
-  color: #64656a;
-  display: block;
-  text-align: left;
-  margin-bottom: 10px;
-`;
+// const Count = styled.h4`
+//   width: 100%;
+//   font-size: 16px;
+//   font-weight: 600;
+//   color: #64656a;
+//   display: block;
+//   text-align: left;
+//   margin-bottom: 10px;
+// `;
 
 const InputBtn = styled.div`
   display: flex;
   width: 100%;
-  margin-bottom: 5px;
+  margin: 20px 0 5px 0;
 `;
 
 const Input = styled.input`
