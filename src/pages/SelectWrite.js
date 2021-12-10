@@ -1,28 +1,17 @@
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
+import { Calendar } from "../components/Calendar";
+import PlusBtn from "../components/PlusBtn";
 
 export const SelectWrite = (props) => {
   return (
     <Container>
       <Input placeholder="투표 제목을 입력하세요."></Input>
       <Days>날짜</Days>
-
       <Border />
       <Textarea placeholder="고민을 적어봐요." />
-      {/* <Flat> */}
-      {/* <BtnPlus
-        // onClick={() => {
-        //   setPlus(true);
-        //   if (plus === true) {
-        //     <InputPlus />;
-        //   }
-        // }}
-        /> */}
-      {/* {plus.map((e) => {
-        <InputPlus placeholder="선택1" />;
-      })} */}
-
-      {/* </Flat> */}
+      <PlusBtn />
+      <Calendar />
       <Flat justify="space-between">
         <Button>작성 완료</Button>
         <Button>취소</Button>
