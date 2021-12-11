@@ -20,6 +20,10 @@ const WorryCreateUpdate = (props) => {
         ></Content>
         <Hr />
       </WriteBox>
+      <BtnBox>
+        <button>작성완료</button>
+        <button>취소</button>
+      </BtnBox>
     </Container>
   );
 };
@@ -105,6 +109,13 @@ const Hr = styled.hr`
   width: 100%;
   margin-bottom: 20px;
   border-bottom: 1px solid rgb(233, 236, 239);
+`;
+
+const BtnBox = styled.div`
+  button {
+    height: 40px;
+    width: 100px;
+  }
 `;
 
 export default WorryCreateUpdate;
