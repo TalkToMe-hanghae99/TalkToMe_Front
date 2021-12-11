@@ -10,8 +10,16 @@ const WorryCreateUpdate = (props) => {
         <img src={Left} />
         <span>톡톡 작성하기</span>
       </Header>
-      <Title type="text" placeholder="제목을 입력하세요" />
-      <Content type="text" placeholder="내용을 입력하세요" />
+      <WriteBox>
+        <Title type="text" placeholder="제목을 입력하세요."></Title>
+        <Hr />
+        <Content
+          type="text"
+          placeholder="내용을 입력하세요."
+          rows="10"
+        ></Content>
+        <Hr />
+      </WriteBox>
     </Container>
   );
 };
@@ -50,12 +58,53 @@ const Header = styled.div`
   }
 `;
 
-const Title = styled.input`
+const WriteBox = styled.div`
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 50px;
 `;
 
-const Content = styled.input`
+const Title = styled.input`
+  height: 40px;
   width: 100%;
+  padding: 10px 20px;
+  outline: none;
+  border: none;
+  background-color: #fafafa;
+  margin: 0 15px 15px 0;
+  border-radius: 4px;
+  font-size: 16px;
+  color: rgb(33, 37, 41);
+  line-height: 1.75;
+  word-break: break-all;
+  ::placeholder {
+    color: #adb5bd;
+  }
+`;
+
+const Content = styled.textarea`
+  width: 100%;
+  padding: 10px 20px;
+  outline: none;
+  border: none;
+  background-color: #fafafa;
+  margin: 0 15px 15px 0;
+  border-radius: 4px;
+  font-size: 16px;
+  color: rgb(33, 37, 41);
+  line-height: 1.75;
+  word-break: break-all;
+  ::placeholder {
+    color: #adb5bd;
+  }
+`;
+
+const Hr = styled.hr`
+  width: 100%;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgb(233, 236, 239);
 `;
 
 export default WorryCreateUpdate;
