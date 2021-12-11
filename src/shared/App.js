@@ -19,15 +19,22 @@ function App() {
     <React.Fragment>
       <ConnectedRouter history={history}>
         <Switch>
-          <Route path="/" exact component={Main}></Route>
-          <Route path="/SearchPage" exact component={SearchPage}></Route>
-          <Route path="/login" exact component={Login}></Route>
-          <Route path="/worrywrite" exact component={WorryCreateUpdate}></Route>
-          <Route path="/worrydetail" exact component={WorryDetail}></Route>
-          <Route path="/select" exact component={Select}></Route>
-          <Route path="/selectwrite" exact component={SelectWrite}></Route>
-          <Route path="/mypage" exact component={Mypage}></Route>
-          <Route path="/plusbtn" exact component={PlusBtn}></Route>
+          <Route path="/" exact component={Login}></Route>
+          <>
+            <Route path="/SearchPage" exact component={SearchPage}></Route>
+            <Route path="/main" exact component={Main}></Route>
+            <Route
+              path="/worrywrite"
+              exact
+              component={WorryCreateUpdate}
+            ></Route>
+            <Route path="/worrydetail" exact component={WorryDetail}></Route>
+            <Route path="/select" exact component={Select}></Route>
+            <Route path="/selectwrite" exact component={SelectWrite}></Route>
+            <Route path="/mypage" exact component={Mypage}></Route>
+            <Route path="/plusbtn" exact component={PlusBtn}></Route>
+            <Footer />
+          </>
         </Switch>
       </ConnectedRouter>
     </React.Fragment>
