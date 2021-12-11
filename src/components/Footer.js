@@ -4,15 +4,16 @@ import home from "../assets/home.jpg";
 import write from "../assets/write.png";
 import search from "../assets/search.png";
 import user from "../assets/user.png";
+import { history } from "../redux/configureStore";
 
 function Footer(){
     return(
         <FooterBox>
-            <Button><Img src={home}/><Text>홈</Text></Button>
-            <Button><Img src={write}/><Text>고민 작성</Text></Button>
-            <Button><Img src={write}/><Text>선택 작성</Text></Button>
-            <Button><Img src={search}/><Text>검색</Text></Button>
-            <Button><Img src={user}/><Text>프로필</Text></Button>
+            <Button onClick={()=>{history.push("/main")}}><Img src={home}/><Text>홈</Text></Button>
+            <Button onClick={()=>{history.push("/worrywrite")}}><Img src={write}/><Text>고민 작성</Text></Button>
+            <Button onClick={()=>{history.push("/selectwrite")}}><Img src={write}/><Text>선택 작성</Text></Button>
+            <Button onClick={()=>{history.push("/searchpage")}}><Img src={search}/><Text>검색</Text></Button>
+            <Button onClick={()=>{history.push("/mypage")}}><Img src={user}/><Text>프로필</Text></Button>
         </FooterBox>
     )
 

@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import Footer from "../components/Footer";
 import SearchInput from "../components/SearchInput";
 import Header from "../components/Header";
 import MainCardConcern from "../components/MainCardConcern";
@@ -19,7 +18,6 @@ function SearchPage() {
         <MainCardConcern />
         <MainCardConcern />
       </ContentBox>
-      <Footer />
     </SearchPageBox>
   );
 }
