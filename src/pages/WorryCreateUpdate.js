@@ -1,9 +1,15 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 
 import Left from "../assets/left.svg";
 
+
 const WorryCreateUpdate = (props) => {
+
+const [ TitleValue, setTitleValue ] = useState("");
+const [ ContentValue, setContentValue ] = useState("");
+
+
   return (
     <Container>
       <Header>
@@ -11,12 +17,13 @@ const WorryCreateUpdate = (props) => {
         <span>톡톡 작성하기</span>
       </Header>
       <WriteBox>
-        <Title type="text" placeholder="제목을 입력하세요."></Title>
+        <Title type="text" onChange value={TitleValue} placeholder="제목을 입력하세요."></Title>
         <Hr />
         <Content
           type="text"
           placeholder="내용을 입력하세요."
           rows="10"
+          onChange value={ContentValue}
         ></Content>
         <Hr />
       </WriteBox>
