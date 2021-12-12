@@ -1,6 +1,7 @@
-import axios from "axios";
+// import axios from "axios";
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
+import { axios } from "../common/axios";
 //액션
 const GET_DETAIL = "GET_DETAIL";
 
