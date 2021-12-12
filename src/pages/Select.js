@@ -1,8 +1,12 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { Chart } from "../components/Chart";
 
 export const Select = (props) => {
+  //디테일페이지 불러오기
+  const detail_list = useSelector((state) => state.Select.detail_list);
+  console.log(detail_list, "되나");
   return (
     <Container>
       <Flat justify=" space-between">
