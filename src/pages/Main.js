@@ -1,10 +1,30 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import SearchInput from "../components/SearchInput";
 import MainCardConcern from "../components/MainCardConcern";
 import MainCardSelect from "../components/MainCardSelect";
+import { instance } from "../common/api";
 
 function Main() {
+
+  const [worryList, setWorryList] = useState("")
+
+  useEffect(()=>{
+    const getWorryList = async()=>{
+      try{
+        const response = await instance.get(
+          '`http://ozam.shop/board?sort=${sort}&page=${page}`'
+        );
+        setWorryList(response.data);
+      }catch{
+        console.log(worryList)
+      }
+      console.log(worryList)
+    };
+    getWorryList();
+  },[]);
+  console.log("worryList", worryList);
+
   return (
     <MainBox>
       <SearchInput />
