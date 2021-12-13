@@ -100,7 +100,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 375px;
-  height: 115vh;
+  height: 140vh;
   background-color: white;
 `;
 

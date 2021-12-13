@@ -1,9 +1,15 @@
 import React from "react";
 import styled from "styled-components";
-
+import { useSelector, useDispatch } from "react-redux";
+import { history } from "../redux/configureStore";
+import { actionCreators as commentAction } from "../redux/modules/comment";
 import CommentList from "./CommentList";
 
 const CommentWrite = (props) => {
+  // const dispatch = useDispatch();
+  // const commentList = useSelector((state) => state);
+  // console.log("댓글불러오기", commentList);
+
   return (
     <>
       <Container>
