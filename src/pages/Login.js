@@ -1,14 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import { GoogleLogin } from "react-google-login";
+
+import { history } from "../redux/configureStore";
 import logo from "../assets/logo.png";
 
 const Login = (props) => {
+  const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
+
+  const LoginSuccess = (res) => {
+    console.log("로그인성공", res.profileObj);
+    history.push("/main");
+  };
+
+  const LoginFail = (res) => {
+    console.log("로그인실패", res);
+  };
+
   return (
     <Container>
       <Logo src={logo} />
       <LoginBtn>
-        <button>카카오 로그인</button>
-        <button>구글 로그인</button>
+        <GoogleLogin
+          clientId={clientId}
+          buttonText="Log in with Google"
+          onSuccess={LoginSuccess}
+          onFailure={LoginFail}
+          cookiePolicy={"single_host_origin"}
+        />
       </LoginBtn>
     </Container>
   );
