@@ -3,7 +3,6 @@ import styled from "styled-components";
 // import { useDispatch, useSelector } from "react-redux";
 
 import logo from "../assets/logo.png";
-// import GoogleLoginBtn from "../components/GoogleLoginBtn";
 // import { instance } from "../common/api";
 // import axios from "axios";
 
@@ -66,7 +65,6 @@ const Login = (props) => {
           onFailure={(result) => console.log(result)}
         /> */}
         <a href="https://bomborobom.shop/api/auth/google">구글로그인</a>
-        {/* <GoogleLoginBtn /> */}
       </LoginBtn>
     </Container>
   );
