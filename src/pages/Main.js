@@ -9,29 +9,6 @@ import { Link } from "react-router-dom";
 
 function Main() {
   const [worryList, setWorryList] = useState("");
-  const 연습 = [
-    {
-      selectId: "셀렉트아이디",
-      selectTitle: "셀렉트타이틀",
-      viewCount: "뷰카운트",
-      createdAt: "작성일자가길다고고고고고",
-    },
-    {
-      selectId: "셀렉트아이디",
-      selectTitle: "셀렉트타이틀",
-      viewCount: "뷰카운트",
-      createdAt: "작성일자가길다고고고고고",
-    },
-    {
-      selectId: "셀렉트아이디",
-      selectTitle: "셀렉트타이틀",
-      viewCount: "뷰카운트",
-      createdAt: "작성일자가길다고고고고고?",
-    },
-  ];
-  function goPage() {
-    history.push("/select");
-  }
 
   useEffect(() => {
     const getWorryList = async () => {
@@ -55,22 +32,16 @@ function Main() {
     <MainBox>
       <SearchInput />
       <ContentBox>
-        {/* {worryList.map((list)=>(
-          
-<MainCardSelect key={list.selectId} List={list} />
-        ))} */}
-
-        {연습.map((연습) => (
-          <MainCardSelect onClick={goPage} List={연습} />
-        ))}
+        {worryList &&
+          worryList.map((list) => (
+            <MainCardSelect key={list.selectId} List={list} />
+          ))}
 
         <PageNation>
           <Page>인기순</Page>
           <Page>최신순</Page>
           <Page>댓글순</Page>
         </PageNation>
-        <MainCardConcern />
-        <MainCardConcern />
         <MainCardConcern />
       </ContentBox>
     </MainBox>
