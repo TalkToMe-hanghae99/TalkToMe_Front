@@ -4,11 +4,13 @@ import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import { connectRouter } from "connected-react-router";
 
 import Comment from "./modules/comment";
+import select from "./modules/select";
 
 export const history = createBrowserHistory();
 
 const rootReducer = combineReducers({
   comment: Comment,
+  select: select,
   router: connectRouter(history),
 });
 
@@ -28,6 +30,6 @@ const composeEnhancers =
 
 const enhancer = composeEnhancers(applyMiddleware(...middlewares));
 
-let store = (initialStore) => createStore(rootReducer, enhancer);
+let store = createStore(rootReducer, enhancer);
 
-export default store();
+export default store;

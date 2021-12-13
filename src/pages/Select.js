@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router";
 import styled from "styled-components";
 import { Chart } from "../components/Chart";
-
+import { actionCreators as SelectCr } from "../redux/modules/select";
 export const Select = (props) => {
+  const dispatch = useDispatch();
+  //디테일페이지 불러오기
+  const detail_list = useSelector((state) => state.select.detail_list);
+  console.log(detail_list, "되나");
+  const params = useParams();
+  const selectId = params.selectId;
+  console.log(selectId);
+
+  useEffect(() => {
+    dispatch(SelectCr.getDetailAPI());
+  }, []);
   return (
     <Container>
       <Flat justify=" space-between">
