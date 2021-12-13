@@ -5,12 +5,14 @@ import { connectRouter } from "connected-react-router";
 
 import User from "./modules/user";
 import Comment from "./modules/comment";
+import select from "./modules/select";
 
 export const history = createBrowserHistory();
 
 const rootReducer = combineReducers({
   user: User,
   comment: Comment,
+  select: select,
   router: connectRouter(history),
 });
 
@@ -30,6 +32,6 @@ const composeEnhancers =
 
 const enhancer = composeEnhancers(applyMiddleware(...middlewares));
 
-let store = (initialStore) => createStore(rootReducer, enhancer);
+let store = createStore(rootReducer, enhancer);
 
-export default store();
+export default store;

@@ -3,8 +3,13 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./shared/App";
 import reportWebVitals from "./reportWebVitals";
-import { Provider } from "react-redux";
+
+import axios from "axios";
 import store from "./redux/configureStore";
+import { Provider } from "react-redux";
+
+axios.defaults.withCredentials = true;
+// axios defulat 헤더
 
 ReactDOM.render(
   <Provider store={store}>
