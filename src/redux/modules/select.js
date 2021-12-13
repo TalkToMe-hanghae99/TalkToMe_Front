@@ -1,7 +1,7 @@
 // import axios from "axios";
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
-import { axios } from "../common/axios";
+import { instance } from "../../common/api";
 //액션
 const GET_DETAIL = "GET_DETAIL";
 
@@ -16,7 +16,7 @@ const initialState = {
 //미들웨어
 const getDetailAPI = (selectId) => {
   return function (dispatch, getState, { history }) {
-    axios
+    instance
       .get(`/select/${selectId}`)
       .then((res) => {
         console.log(res);
