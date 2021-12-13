@@ -5,6 +5,7 @@ import PlusBtn from "../components/PlusBtn";
 import Left from "../assets/left.svg";
 import axios from 'axios';
 import { instance } from '../common/api';
+import { history } from "../redux/configureStore";
 
 export const SelectWrite = (props) => {
   const [TitleValue, setTitleValue] = useState("");
@@ -17,9 +18,9 @@ export const SelectWrite = (props) => {
   const [users, setUsers] = useState(null);
 
  
-
   async function postSelect(){
       try{
+        sessionStorage.getItem('accessToken')
         const response = await instance.post(
           'http://ozam.shop/select/write',
         JSON.stringify({
@@ -27,7 +28,8 @@ export const SelectWrite = (props) => {
           selectDes:ContentValue,
           option1:TitleValue,
           option2:TitleValue,
-          ednDate:TitleValue
+          endDate:TitleValue
+          
         })
         );
         return response;
@@ -78,16 +80,9 @@ export const SelectWrite = (props) => {
       <Calendar />
       <Flat justify="space-between">
         <Button onClick={postSelect}>작성 완료</Button>
-        <Button>취소</Button>
+        <Button onClick={()=>{history.push("/main")}}>취소</Button>
       </Flat>
 
-      <ul>
-      {users?.map(user => (
-        <li key={user.selectId}>
-          {user.selectTitle} ({user.selectDesc})
-        </li>
-      ))}
-    </ul>
 
 
     </Container>
@@ -99,7 +94,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 375px;
-  height: 115vh;
+  height: 140vh;
   background-color: white;
 `;
 

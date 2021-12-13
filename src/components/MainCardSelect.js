@@ -1,11 +1,11 @@
 import styled from "styled-components"
 
-function MainCardSelect(){
+function MainCardSelect(props){
     return(
         <CardBox>
-            <Title>타이틀</Title>
-            <Text>투표수 10</Text>
-            <Text>2021. 12. 17</Text>
+            <Title>{props.List?.selectTitle}</Title>
+            <Text>조회수 {props.List?.viewCount}</Text>
+            <Text>{props.List?.createdAt}</Text>
             </CardBox>
     )
 
