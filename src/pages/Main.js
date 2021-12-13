@@ -4,37 +4,72 @@ import SearchInput from "../components/SearchInput";
 import MainCardConcern from "../components/MainCardConcern";
 import MainCardSelect from "../components/MainCardSelect";
 import { instance } from "../common/api";
+import { history } from "../redux/configureStore";
+import { Link } from "react-router-dom";
 
 function Main() {
+  const [worryList, setWorryList] = useState("");
+  const 연습 = [
+    {
+      selectId: "셀렉트아이디",
+      selectTitle: "셀렉트타이틀",
+      viewCount: "뷰카운트",
+      createdAt: "작성일자가길다고고고고고",
+    },
+    {
+      selectId: "셀렉트아이디",
+      selectTitle: "셀렉트타이틀",
+      viewCount: "뷰카운트",
+      createdAt: "작성일자가길다고고고고고",
+    },
+    {
+      selectId: "셀렉트아이디",
+      selectTitle: "셀렉트타이틀",
+      viewCount: "뷰카운트",
+      createdAt: "작성일자가길다고고고고고?",
+    },
+  ];
+  function goPage() {
+    history.push("/select");
+  }
 
-  const [worryList, setWorryList] = useState("")
-
-  useEffect(()=>{
-    const getWorryList = async()=>{
-      try{
+  useEffect(() => {
+    const getWorryList = async () => {
+      try {
         const response = await instance.get(
-          '`http://ozam.shop/board?sort=${sort}&page=${page}`'
+          // '`http://ozam.shop/board?sort=${sort}&page=${page}`'
+          "http://ozam.shop/select?sort=date"
         );
-        setWorryList(response.data);
-      }catch{
-        console.log(worryList)
+        setWorryList(response.data.selectsList);
+        console.log(response.data.selectsList);
+      } catch {
+        console.log(worryList);
       }
-      console.log(worryList)
+      console.log(worryList);
     };
     getWorryList();
-  },[]);
+  }, []);
   console.log("worryList", worryList);
 
   return (
     <MainBox>
       <SearchInput />
       <ContentBox>
-        <MainCardSelect />
+        {/* {worryList.map((list)=>(
+          
+<MainCardSelect key={list.selectId} List={list} />
+        ))} */}
+
+        {연습.map((연습) => (
+          <MainCardSelect onClick={goPage} List={연습} />
+        ))}
+
         <PageNation>
           <Page>인기순</Page>
           <Page>최신순</Page>
           <Page>댓글순</Page>
         </PageNation>
+        <MainCardConcern />
         <MainCardConcern />
         <MainCardConcern />
       </ContentBox>
@@ -50,7 +85,6 @@ const ContentBox = styled.div`
   position: absolute;
   top: 75px;
   width: 375px;
-  height: 100vh;
   padding: 20px;
 
   background-color: white;
