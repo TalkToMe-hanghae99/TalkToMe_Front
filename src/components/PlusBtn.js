@@ -30,16 +30,16 @@ const PlusBtn = (props) => {
 export default PlusBtn;
 
 const Button = styled.button`
-  width: 120px;
-  height: 50px;
+  width: 140px;
+  height: 40px;
   background: #e9e9e9;
   border: none;
   font-weight: bold;
-  margin: 20px 15px;
+  margin: 5px 15px;
 `;
 
 const CreateListDiv = styled.div`
-  padding: 3rem;
+  padding: 1rem;
   width: 100%;
   display: flex;
   align-items: center;

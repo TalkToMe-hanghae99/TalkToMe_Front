@@ -45,5 +45,6 @@ const Title = styled.div`
 `;
 
 const Flex = styled.div`
-  /* display: flex; */
+  padding-left:18px;
 `;
+

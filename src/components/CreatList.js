@@ -8,7 +8,7 @@ export const CreatList = (props) => {
         props.countList.map((item, i) => (
           <div key={i}>
             <div>
-              <InputPlus />
+              <InputPlus placeholder="항목 입력"/>
             </div>
           </div>
         ))}
@@ -18,13 +18,15 @@ export const CreatList = (props) => {
 
 const Detail = styled.div`
   div {
-    margin-bottom: 2rem;
+    margin-bottom: 0.5rem;
     width: 320px;
   }
 `;
 
 const InputPlus = styled.input`
   width: 100%;
-  height: 30px;
+  height: 40px;
   margin-top: 5px;
+  padding-left:10px;
+  border:1px solid #E3E3E3;
 `;
