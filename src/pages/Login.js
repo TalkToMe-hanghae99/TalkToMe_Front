@@ -4,7 +4,7 @@ import { GoogleLogin } from "react-google-login";
 // import { useDispatch, useSelector } from "react-redux";
 import { history } from "../redux/configureStore";
 import logo from "../assets/logo.png";
-// import { instance } from "../common/api";
+import { instance } from "../common/api";
 // import axios from "axios";
 
 const Login = (props) => {
@@ -17,20 +17,20 @@ const Login = (props) => {
   // const user = useSelector((state) => state.user);
   // console.log("유저정보", user);
 
-  // const loginWithGoogle = () => {
-  //   axios
-  //     .get("http://ozam.shop/user/google")
-  //     .then(function (response) {
-  //       console.dir("겟요청성공", response);
-  //       // setIsRedirect(true);
-  //     })
-  //     .catch(function (error) {
-  //       console.log("실패");
-  //     })
-  //     .then(function () {
-  //       // 항상 실행
-  //     });
-  // };
+  const loginWithGoogle = () => {
+    instance
+      .get("http://ozam.shop/user/google")
+      .then(function (response) {
+        console.dir("겟요청성공", response);
+        // setIsRedirect(true);
+      })
+      .catch(function (error) {
+        console.log("실패");
+      })
+      .then(function () {
+        // 항상 실행
+      });
+  };
 
   // const loginWithGoogle = async () => {
   //   try {
@@ -76,7 +76,8 @@ const Login = (props) => {
           onFailure={LoginFail}
           cookiePolicy={"single_host_origin"}
         /> */}
-        <a href="https://ozam.shop/api/auth/google">구글로그인</a>
+        <div onClick={loginWithGoogle}>구글로그인</div>
+        {/* <a href="https://ozam.shop/api/auth/google">구글로그인</a> */}
       </LoginBtn>
     </Container>
   );
