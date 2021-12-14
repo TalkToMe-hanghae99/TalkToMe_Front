@@ -6,7 +6,9 @@ export const instance = axios.create({
 
 instance.interceptors.request.use((config) => {
   config.headers["Content-Type"] = "application/json; charset=utf-8";
-  config.headers["X-Auth-Token"] = `${sessionStorage.getItem("token")}`;
+  config.headers["Authorization"] = `Bearer ${localStorage.getItem(
+    "accessToken"
+  )}`;
   return config;
 });
 

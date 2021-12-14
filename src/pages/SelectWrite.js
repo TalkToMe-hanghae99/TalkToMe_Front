@@ -23,15 +23,15 @@ export const SelectWrite = (props) => {
  ////
 
   const [users, setUsers] = useState(null);
-
- 
+  const getToken = localStorage.getItem('accessToken');
+  
   async function postSelect(){
       try{
-        sessionStorage.getItem('accessToken')
+        localStorage.getItem('accessToken')
         const response = await instance.post(
           'http://ozam.shop/select/write',
         JSON.stringify({
-          selectTitle:TitleValue,
+          selectTitle:parseInt(1),
           selectDes:ContentValue,
           option1:TitleValue,
           option2:TitleValue,
