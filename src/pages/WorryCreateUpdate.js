@@ -12,12 +12,13 @@ const WorryCreateUpdate = (props) => {
 
   return (
     <Container>
-      <Header
-        onClick={() => {
-          history.push("/main");
-        }}
-      >
-        <img src={Left} />
+      <Header>
+        <img
+          src={Left}
+          onClick={() => {
+            history.push("/main");
+          }}
+        />
         <span>톡톡 작성하기</span>
       </Header>
       <WriteBox>
