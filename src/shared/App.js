@@ -26,7 +26,7 @@ function App() {
           <Route path="/main" exact component={Main}></Route>
           <Route path="/worrywrite" exact component={WorryCreateUpdate}></Route>
           <Route path="/worrydetail" exact component={WorryDetail}></Route>
-          <Route path="/select" exact component={Select}></Route>
+          <Route path="/select/:selectId" exact component={Select}></Route>
           <Route path="/selectwrite" exact component={SelectWrite}></Route>
           <Route path="/mypage" exact component={Mypage} />
           <Route path="/plusbtn" exact component={PlusBtn} />
