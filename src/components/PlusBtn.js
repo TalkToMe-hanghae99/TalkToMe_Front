@@ -4,7 +4,8 @@ import { CreatList } from "./CreatList";
 
 const PlusBtn = (props) => {
   const [countList, setCountList] = useState([0]);
-  console.log(countList.length, "후후");
+  console.log(countList, "후후");
+  console.log(props.ContentValue)
 
   //버튼
   const onAddInput = () => {
