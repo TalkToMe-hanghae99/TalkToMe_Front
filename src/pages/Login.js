@@ -1,33 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import { GoogleLogin } from "react-google-login";
 
-import { history } from "../redux/configureStore";
 import logo from "../assets/logo.png";
+import google from "../assets/google.png";
 
 const Login = (props) => {
-  const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
-
-  const LoginSuccess = (res) => {
-    console.log("로그인성공", res.profileObj);
-    history.push("/main");
-  };
-
-  const LoginFail = (res) => {
-    console.log("로그인실패", res);
-  };
-
   return (
     <Container>
       <Logo src={logo} />
       <LoginBtn>
-        <GoogleLogin
-          clientId={clientId}
-          buttonText="Log in with Google"
-          onSuccess={LoginSuccess}
-          onFailure={LoginFail}
-          cookiePolicy={"single_host_origin"}
-        />
+        <Google>
+          <img src={google} />
+          <a href="http://ozam.shop/user/google">Sign in with Google</a>
+        </Google>
       </LoginBtn>
     </Container>
   );
@@ -52,9 +37,40 @@ const LoginBtn = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+`;
 
-  button {
-    margin-bottom: 20px;
+const Google = styled.div`
+  width: 260px;
+  height: 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px 1px #818181;
+
+  img {
+    width: 40px;
+    height: 40px;
+  }
+
+  a:link {
+    color: black;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 18px;
+  }
+  a:visited {
+    color: black;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 18px;
+  }
+  a:hover {
+    color: blue;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 18px;
   }
 `;
 

@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-// import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { ConnectedRouter } from "connected-react-router";
 import { history } from "../redux/configureStore";
-import axios from "axios";
 
 import Footer from "../components/Footer";
 import Login from "../pages/Login";
@@ -17,6 +15,14 @@ import { Mypage } from "../pages/Mypage";
 import PlusBtn from "../components/PlusBtn";
 
 function App() {
+  // *social login
+  if (window.location.pathname.includes("sociallogin")) {
+    const accessToken = window.location.pathname.split("=")[1];
+
+    localStorage.setItem("accessToken", accessToken);
+    history.replace("/main");
+  }
+
   return (
     <React.Fragment>
       <ConnectedRouter history={history}>
