@@ -6,6 +6,8 @@ import Left from "../assets/left.svg";
 import axios from "axios";
 import { instance } from "../common/api";
 import { useHistory } from "react-router";
+import { history } from "../redux/configureStore";
+
 
 export const SelectWrite = (props) => {
   const history = useHistory();
@@ -63,7 +65,7 @@ export const SelectWrite = (props) => {
   return (
     <Container>
       <Header>
-        <img src={Left} />
+        <img src={Left} onClick={()=>{history.push("/main")}}/>
         <span>톡톡 작성하기</span>
       </Header>
       <Input
