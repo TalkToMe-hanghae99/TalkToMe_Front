@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const instance = axios.create({
-  baseURL: "http://ozam.shop/",
+  baseURL: process.env.REACT_APP_server,
 });
 
 instance.interceptors.request.use((config) => {
