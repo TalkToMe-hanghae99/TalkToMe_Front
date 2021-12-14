@@ -15,6 +15,7 @@ import { Select } from "../pages/Select";
 import { SelectWrite } from "../pages/SelectWrite";
 import { Mypage } from "../pages/Mypage";
 import PlusBtn from "../components/PlusBtn";
+import SocialLogin from "../pages/SocialLogin";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
       <ConnectedRouter history={history}>
         <Switch>
           <Route path="/" exact component={Login}></Route>
+          <Route path="/sociallogin" exact component={SocialLogin}></Route>
           <>
             <Route path="/searchpage" exact component={SearchPage}></Route>
             <Route path="/main" exact component={Main}></Route>
