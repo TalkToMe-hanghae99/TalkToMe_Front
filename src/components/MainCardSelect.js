@@ -1,10 +1,12 @@
+import { useState } from "react";
 import styled from "styled-components";
 import { history } from "../redux/configureStore";
 
 function MainCardSelect(props){
+
     return(
         <CardBox onClick={()=>{console.log("선택지카드")
-        history.push("`/select/${props.List.selectId}`")}}>
+        history.push(`/select/${props.List?.selectId}`)}}>
             <Title>{props.List?.selectTitle}</Title>
             <Text>조회수 {props.List?.selectViewCount}</Text>
             <Text>{props.List?.createdAt.slice(0,10)}</Text>
