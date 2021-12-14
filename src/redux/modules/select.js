@@ -5,6 +5,7 @@ import { instance } from "../../common/api";
 //액션
 const GET_DETAIL = "GET_DETAIL";
 const GET_MAIN = "GET_MAIN";
+// const delete_det
 // 액션함수
 const detailDetail = createAction(GET_DETAIL, (detailList) => ({ detailList }));
 
@@ -24,7 +25,7 @@ const getDetailAPI = (selectId) => {
       .get(`select/${selectId}`)
       .then((res) => {
         console.log(res);
-        dispatch(detailDetail(res.data));
+        dispatch(detailDetail(res.data.selectsList[0]));
       })
       .catch((err) => {
         console.log(err, "디테일에러");
@@ -46,6 +47,8 @@ const getMAinAPI = (date) => {
       });
   };
 };
+
+//
 
 export default handleActions(
   {

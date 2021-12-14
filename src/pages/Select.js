@@ -11,52 +11,48 @@ export const Select = (props) => {
   console.log(props, "쭝");
   const params = useParams();
   const selectId = params.selectId;
+  console.log(selectId, "나무");
 
-  //메인
-  const main_list = useSelector((state) => state.select.main_list);
-  console.log(main_list?.selectsList, "ㅇㅇㅇㅇㅇㅇ");
-  // console.log(main_list.selectsList[2].selectId, "고구마");
-  console.log(detail_list, "되나");
+  console.log(detail_list, "되DDD나");
+  console.log(detail_list.selectTitle, "dd");
 
-  // const list = main_list?.selectsList?.map((e) => e.selectId);
-  // console.log(list);
+  const {
+    createdAt,
+    selectTitle,
+    selectDesc,
+    option1,
+    option2,
+    option3,
+    option4,
+    option5,
+  } = detail_list;
 
-  //메인
-  useEffect(() => {
-    dispatch(SelectCr.getMAinAPI());
-  }, []);
-
+  // 시간정리
+  const dayTime = detail_list.createdAt;
+  const day = new Date(dayTime);
+  console.log(day.toLocaleString());
+  const dateUpate = day.toLocaleString();
+  console.log(dateUpate);
   //선택디테일페이지
   useEffect(() => {
-    dispatch(SelectCr.getDetailAPI(1));
+    dispatch(SelectCr.getDetailAPI(selectId));
   }, []);
   return (
     <Container>
       <Flat justify=" space-between">
-        <Text size="16px">점심 고민입니다</Text>
-        <Days>날짜</Days>
+        <Text size="16px">{selectTitle}</Text>
       </Flat>
       <Flat justify=" space-between">
         <Text>닉네임</Text>
-        <Days>시간</Days>
+        <Days>{dateUpate}</Days>
       </Flat>
       <Border />
-      <TextBox>
-        짜장면 먹으실짜장면 먹으실짜장면 먹으실짜장면 먹으실짜장면 먹으실 짜장면
-        먹으실 짜장면 먹으실 짜장면 먹으실 짜장면 먹으실 짜장면 먹으실 짜장면
-        먹으실 짜장면 먹으실 짜장면 먹으실 짜장면 먹으실 짜장면 먹으실 짜장면
-        먹으실 짜장면 먹으실 짜장면 먹으실 짜장면 먹으실 짜장면 먹으실 짜장면
-        먹으실 짜장면 먹으실 짜장면 먹으실
-      </TextBox>
-      <Vote>
-        <VoteColor />
-      </Vote>
-      <Vote>
-        <VoteColor />
-      </Vote>
-      <Vote>
-        <VoteColor />
-      </Vote>
+      <TextBox>{selectDesc}</TextBox>
+      <Vote>{option1}</Vote>
+      <Vote>{option2}</Vote>
+      <Vote>{option3}</Vote>
+      <Vote>{option4}</Vote>
+      <Vote>{option5}</Vote>
       <Flat justify="space-evenly">
         <div>🧡 숫자</div>
         <Text>공유</Text>
@@ -107,12 +103,13 @@ const Vote = styled.div`
   height: 30px;
   border: 1px solid #e7e7e7;
   margin-top: 20px;
+  background-color: white;
 `;
 
 const VoteColor = styled.div`
   width: 70%;
   height: 30px;
-  background: #ffefe3;
+  background: crimson;
 `;
 
 const Button = styled.button`
