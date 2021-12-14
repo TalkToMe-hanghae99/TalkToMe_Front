@@ -1,25 +1,49 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router";
 import styled from "styled-components";
 import { history } from "../redux/configureStore";
 import Left from "../assets/left.svg";
-
+import { actionCreators as worryCr } from "../redux/modules/worrywrite";
 const WorryCreateUpdate = (props) => {
-  const [TitleValue, setTitleValue] = useState("");
-  const [ContentValue, setContentValue] = useState("");
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const [boardTitle, setboardTitle] = useState("");
+  const [boardDesc, setboardDesc] = useState("");
+
+  //바튼
+  const submitBtn = (e) => {
+    if (!boardDesc) {
+      window.alert("내용을 적어주세요");
+      return;
+    }
+    const worryInfo = {
+      boardId: 1,
+      boardTitle,
+      boardDesc,
+    };
+    dispatch(worryCr.postWriteAPI(worryInfo));
+    // history.replace("/main");
+  };
 
   return (
     <Container>
       <Header>
-        <img src={Left} onClick={()=>{history.push("/main")}}/>
+        <img
+          src={Left}
+          onClick={() => {
+            history.push("/main");
+          }}
+        />
         <span>톡톡 작성하기</span>
       </Header>
       <WriteBox>
         <Title
           type="text"
           onChange={(e) => {
-            setTitleValue(e.target.value);
+            setboardTitle(e.target.value);
           }}
-          value={TitleValue}
+          value={boardTitle}
           placeholder="제목을 입력하세요."
         ></Title>
         <Hr />
@@ -28,14 +52,14 @@ const WorryCreateUpdate = (props) => {
           placeholder="내용을 입력하세요."
           rows="10"
           onChange={(e) => {
-            setContentValue(e.target.value);
+            setboardDesc(e.target.value);
           }}
-          value={ContentValue}
+          value={boardDesc}
         ></Content>
         <Hr />
       </WriteBox>
       <BtnBox>
-        <button>작성완료</button>
+        <button onClick={submitBtn}>작성완료</button>
         <button>취소</button>
       </BtnBox>
     </Container>
