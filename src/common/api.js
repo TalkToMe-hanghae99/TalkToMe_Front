@@ -2,18 +2,11 @@ import axios from "axios";
 
 export const instance = axios.create({
   baseURL: "http://ozam.shop/",
-  headers: {
-    "Content-type": "application/json;charset=UTF-8",
-    accept: "application/json",
-    "Access-Control-Allow-Origin": "*",
-  },
 });
 
 instance.interceptors.request.use((config) => {
   config.headers["Content-Type"] = "application/json; charset=utf-8";
-  config.headers["X-Auth-Token"] =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTYzOTM3NDg3OCwiZXhwIjoxNjM5NDYxMjc4fQ.FydziDTe_2DYzLOP6jrhjdjJj8-89JbLrAQlxYMvUNg";
-  // ${sessionStorage.getItem("token")}
+  config.headers["X-Auth-Token"] = `${sessionStorage.getItem("token")}`;
   return config;
 });
 

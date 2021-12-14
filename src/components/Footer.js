@@ -12,7 +12,7 @@ const Footer = (props) => {
   return (
     <FooterBox>
       {/* 메인 */}
-      <Button onClick={() => history.push("/")}>
+      <Button onClick={() => history.push("/main")}>
         <Img src={home} alt="home" />
 
         <Text>홈</Text>

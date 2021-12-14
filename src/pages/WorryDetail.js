@@ -51,7 +51,7 @@ const WorryDetail = (props) => {
           </div>
         </EditBox>
       </WriteBox>
-      <CommentWrite />
+      {/* <CommentWrite /> */}
     </Container>
   );
 };

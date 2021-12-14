@@ -1,11 +1,13 @@
-import styled from "styled-components"
+import styled from "styled-components";
+import { history } from "../redux/configureStore";
 
 function MainCardSelect(props){
     return(
-        <CardBox>
+        <CardBox onClick={()=>{console.log("선택지카드")
+        history.push("`/select/${props.List.selectId}`")}}>
             <Title>{props.List?.selectTitle}</Title>
-            <Text>조회수 {props.List?.viewCount}</Text>
-            <Text>{props.List?.createdAt}</Text>
+            <Text>조회수 {props.List?.selectViewCount}</Text>
+            <Text>{props.List?.createdAt.slice(0,10)}</Text>
             </CardBox>
     )
 
