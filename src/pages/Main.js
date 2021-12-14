@@ -8,30 +8,34 @@ import { history } from "../redux/configureStore";
 import { Link } from "react-router-dom";
 
 function Main() {
-  const [worryList, setWorryList] = useState("");
+  const [selectList, setSelectList] = useState("");
   const 연습 = [
     {
       boardId: "1",
       boardTitle: "보드타이틀1",
       viewCount: "3",
+      commentCount: "5",
       createdAt: "크레이티",
     },
     {
       boardId: "2",
       boardTitle: "보드타이틀2",
       viewCount: "2",
+      commentCount: "4",
       createdAt: "크레이티",
     },
     {
       boardId: "3",
       boardTitle: "보드타이틀3",
       viewCount: "1",
+      commentCount: "5",
       createdAt: "크레이티",
     },
     {
       boardId: "4",
       boardTitle: "보드타이틀4",
       viewCount: "0",
+      commentCount: "2",
       createdAt: "크레이티",
     },
   ];
@@ -44,29 +48,30 @@ function Main() {
   }
 
   useEffect(() => {
-    const getWorryList = async () => {
+    const getSelectList = async () => {
       try {
         const response = await instance.get(
           // '`http://ozam.shop/board?sort=${sort}&page=${page}`'
           "http://ozam.shop/select?sort=date"
         );
-        setWorryList(response.data.selectsList);
+        setSelectList(response.data.selectsList);
         console.log(response.data.selectsList);
       } catch {
-        console.log(worryList);
+        console.log(selectList);
       }
-      console.log(worryList);
+      console.log(selectList);
     };
-    getWorryList();
+    getSelectList();
   }, []);
-  console.log("worryList", worryList);
+
+  console.log("selectList", selectList);
 
   return (
     <MainBox>
       <SearchInput />
       <ContentBox>
-        {worryList &&
-          worryList.map((list) => (
+        {selectList &&
+          selectList?.map((list) => (
             <MainCardSelect key={list.selectId} List={list} />
           ))}
 
@@ -93,8 +98,8 @@ function Main() {
             댓글순
           </Page>
         </PageNation>
-        <MainCardConcern List={연습} />
-        {연습 && 연습.map((list) => <MainCardConcern List={list} />)}
+        {연습 && 연습?.map((list) => <MainCardConcern List={list} />)}
+        <PaddingBox />
       </ContentBox>
     </MainBox>
   );
@@ -127,6 +132,10 @@ const Page = styled.div`
   margin: 10px;
   font-weight: bold;
   padding-top: 3px;
+`;
+
+const PaddingBox = styled.div`
+  height: 60px;
 `;
 
 export default Main;

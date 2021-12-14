@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import SearchInput from "../components/SearchInput";
 import Header from "../components/Header";
@@ -13,24 +13,28 @@ function SearchPage() {
       boardId: "1",
       boardTitle: "보드타이틀1",
       viewCount: "3",
+      commentCount: "5",
       createdAt: "크레이티",
     },
     {
       boardId: "2",
       boardTitle: "보드타이틀2",
       viewCount: "2",
+      commentCount: "4",
       createdAt: "크레이티",
     },
     {
       boardId: "3",
       boardTitle: "보드타이틀3",
       viewCount: "1",
+      commentCount: "5",
       createdAt: "크레이티",
     },
     {
       boardId: "4",
       boardTitle: "보드타이틀4",
       viewCount: "0",
+      commentCount: "2",
       createdAt: "크레이티",
     },
   ];
@@ -63,10 +67,11 @@ function SearchPage() {
           <Page>선택지</Page>
         </PageNation>
         {worryList &&
-          worryList.map((list) => (
+          worryList?.map((list) => (
             <MainCardSelect key={list.selectId} List={list} />
           ))}
-            {연습 && 연습.map((list) => <MainCardConcern List={list} />)}
+        {연습 && 연습?.map((list) => <MainCardConcern List={list} />)}
+        <PaddingBox />
       </ContentBox>
     </SearchPageBox>
   );
@@ -81,7 +86,6 @@ const SearchPageBox = styled.div`
 
 const ContentBox = styled.div`
   width: 375px;
-  height: 100vh;
   padding: 20px;
   position: relative;
 `;
@@ -100,6 +104,9 @@ const Page = styled.div`
   margin: 10px;
   font-weight: bold;
   padding-top: 3px;
+`;
+const PaddingBox = styled.div`
+  height: 60px;
 `;
 
 export default SearchPage;

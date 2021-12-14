@@ -7,9 +7,12 @@ import styled from "styled-components";
 // CSS Modules, react-datepicker-cssmodules.css
 // import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
-export const Calendar = () => {
+export const Calendar = (props) => {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
+  console.log("calender_props",props)
+  console.log("calender_value",props.value)
+  console.log("calender_value",endDate)
   return (
     <div>
       <Flex>
@@ -28,7 +31,7 @@ export const Calendar = () => {
         <DatePicker
           dateFormat="yyyy/MM/dd"
           selected={endDate}
-          onChange={(date) => setEndDate(date)}
+          onChange={(date) => props.setEndDate(date)}
           selectsEnd
           startDate={startDate}
           endDate={endDate}
