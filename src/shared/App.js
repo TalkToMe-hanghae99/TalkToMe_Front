@@ -29,6 +29,7 @@ function App() {
       <ConnectedRouter history={history}>
         <Switch>
           <Route path="/" exact component={Login}></Route>
+          <>
           <Route path="/searchpage" exact component={SearchPage}></Route>
           <Route path="/main" exact component={Main}></Route>
           <Route path="/worrywrite" exact component={WorryCreateUpdate}></Route>
@@ -38,6 +39,7 @@ function App() {
           <Route path="/mypage" exact component={Mypage} />
           <Route path="/plusbtn" exact component={PlusBtn} />
           <Footer />
+          </>
         </Switch>
       </ConnectedRouter>
     </Provider>
