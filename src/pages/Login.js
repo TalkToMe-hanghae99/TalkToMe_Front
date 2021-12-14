@@ -76,7 +76,7 @@ const Login = (props) => {
           onFailure={LoginFail}
           cookiePolicy={"single_host_origin"}
         /> */}
-        <div onClick={loginWithGoogle}>구글로그인</div>
+        <button onClick={loginWithGoogle}>구글로그인</button>
         {/* <a href="https://ozam.shop/api/auth/google">구글로그인</a> */}
       </LoginBtn>
     </Container>
