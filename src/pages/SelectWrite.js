@@ -12,6 +12,13 @@ export const SelectWrite = (props) => {
   const [ContentValue, setContentValue] = useState("");
   const [SelectValue, setSelectValue] = useState("");
 
+  let today = new Date();
+  let year = today.getFullYear().toString();
+  let month = today.getMonth().toString();
+  let date = today.getDate().toString();
+
+  
+  console.log("today",(year)+(month)+(date))
 
  ////
 
@@ -68,7 +75,7 @@ export const SelectWrite = (props) => {
         value={TitleValue}
         placeholder="투표 제목을 입력하세요."
       ></Input>
-      <Days>날짜</Days>
+      <Days>{year} - {month} - {date}</Days>
       <Border />
       <Textarea
         onChange={onContentChange}

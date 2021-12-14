@@ -1,11 +1,12 @@
 import styled from "styled-components"
 
-function MainCardConcern(){
+function MainCardConcern(props){
+    console.log(props.List)
     return(
         <CardBox>
-            <Title>회사생활 정말 고민입니다.</Title>
-            <Text>조회수 10</Text>
-            <Text>2021. 12. 17</Text>
+            <Title>{props.List.boardTitle}</Title>
+            <Text>조회수 {props.List.viewCount}</Text>
+            <Text>{props.List.createdAt}</Text>
             <Text>댓글수 10</Text>
         </CardBox>
     )
