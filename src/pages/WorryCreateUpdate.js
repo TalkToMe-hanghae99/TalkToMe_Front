@@ -1,15 +1,22 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useHistory } from "react-router";
 
 import Left from "../assets/left.svg";
 
 const WorryCreateUpdate = (props) => {
+  const history = useHistory();
+
   const [TitleValue, setTitleValue] = useState("");
   const [ContentValue, setContentValue] = useState("");
 
   return (
     <Container>
-      <Header>
+      <Header
+        onClick={() => {
+          history.push("/main");
+        }}
+      >
         <img src={Left} />
         <span>톡톡 작성하기</span>
       </Header>

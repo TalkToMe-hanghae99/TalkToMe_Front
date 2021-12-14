@@ -62,9 +62,13 @@ export const SelectWrite = (props) => {
 
   return (
     <Container>
-      <Header>
+      <Header
+        onClick={() => {
+          history.push("/main");
+        }}
+      >
         <img src={Left} />
-        <span>톡톡 작성하기</span>
+        <span>선택 작성하기</span>
       </Header>
       <Input
         onChange={onTitleChange}

@@ -23,7 +23,7 @@ const Footer = (props) => {
         }}
       >
         <Img src={write} alt="home" />
-        <Text>고민 작성</Text>
+        <Text>톡톡 작성</Text>
       </Button>
       <Button
         onClick={() => {

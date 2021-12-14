@@ -14,9 +14,9 @@ function SearchPage() {
           <Page>고민</Page>
           <Page>선택지</Page>
         </PageNation>
-        <MainCardConcern />
-        <MainCardConcern />
-        <MainCardConcern />
+        {/* <MainCardConcern /> */}
+        {/* <MainCardConcern /> */}
+        {/* <MainCardConcern /> */}
       </ContentBox>
     </SearchPageBox>
   );

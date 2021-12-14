@@ -8,6 +8,7 @@ export const Select = (props) => {
   const dispatch = useDispatch();
   //디테일페이지 불러오기
   const detail_list = useSelector((state) => state.select.detail_list);
+  const list = useSelector((state) => state);
 
   const params = useParams();
   const selectId = params.selectId;
@@ -16,6 +17,7 @@ export const Select = (props) => {
   console.log(main_list?.selectsList, "ㅇㅇㅇㅇㅇㅇ");
   // console.log(main_list.selectsList[2].selectId, "고구마");
   console.log(detail_list, "되나");
+  console.log(list, "???");
 
   // const list = main_list?.selectsList?.map((e) => e.selectId);
   // console.log(list);
