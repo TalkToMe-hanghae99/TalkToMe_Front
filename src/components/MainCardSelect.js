@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 import { history } from "../redux/configureStore";
 
@@ -6,7 +7,7 @@ function MainCardSelect(props) {
     <CardBox
       onClick={() => {
         console.log("선택지카드");
-        history.push(`/select/${props.List.selectId}`);
+        history.push(`/select/${props.List?.selectId}`);
       }}
     >
       <Title>{props.List?.selectTitle}</Title>
