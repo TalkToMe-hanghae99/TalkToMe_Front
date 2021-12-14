@@ -1,20 +1,19 @@
 import React from "react";
 import styled from "styled-components";
-import home from "../assets/home.jpg";
-import write from "../assets/write.png";
-import search from "../assets/search.png";
-import user from "../assets/user.png";
+import home from "../assets/home.svg";
+import write from "../assets/write.svg";
+import search from "../assets/search.svg";
+import profile from "../assets/profile.svg";
+import vote from "../assets/vote.svg";
 import { useHistory } from "react-router";
-// import { history } from "../redux/configureStore";
 
 const Footer = (props) => {
   const history = useHistory();
+
   return (
     <FooterBox>
-      {/* 메인 */}
       <Button onClick={() => history.push("/main")}>
         <Img src={home} alt="home" />
-
         <Text>홈</Text>
       </Button>
 
@@ -31,7 +30,7 @@ const Footer = (props) => {
           history.push("/selectwrite");
         }}
       >
-        <Img src={write} alt="home" />
+        <Img src={vote} alt="home" />
         <Text>선택 작성</Text>
       </Button>
       <Button
@@ -47,7 +46,7 @@ const Footer = (props) => {
           history.push("/mypage");
         }}
       >
-        <Img src={user} />
+        <Img src={profile} />
         <Text>프로필</Text>
       </Button>
     </FooterBox>
@@ -80,7 +79,13 @@ const Img = styled.img`
   width: 26px;
   height: 26px;
   margin: 0 auto;
+
+  :hover {
+    filter: invert(35%) sepia(86%) saturate(7440%) hue-rotate(315deg)
+      brightness(95%) contrast(99%);
+  }
 `;
+
 const Text = styled.div`
   text-align: center;
   padding-top: 6px;

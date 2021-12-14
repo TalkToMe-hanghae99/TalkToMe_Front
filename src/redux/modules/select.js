@@ -13,7 +13,7 @@ const cardList = createAction(GET_MAIN, (mainList) => ({ mainList }));
 
 // 초기값
 const initialState = {
-  deail_list: [],
+  detail_list: [],
   main_list: [],
 };
 
@@ -51,7 +51,7 @@ export default handleActions(
   {
     [GET_DETAIL]: (state, action) =>
       produce(state, (draft) => {
-        draft.deail_list = action.payload.detailList;
+        draft.detail_list = action.payload.detailList;
       }),
     [GET_MAIN]: (state, action) =>
       produce(state, (draft) => {

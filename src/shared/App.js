@@ -30,15 +30,19 @@ function App() {
         <Switch>
           <Route path="/" exact component={Login}></Route>
           <>
-          <Route path="/searchpage" exact component={SearchPage}></Route>
-          <Route path="/main" exact component={Main}></Route>
-          <Route path="/worrywrite" exact component={WorryCreateUpdate}></Route>
-          <Route path="/worrydetail" exact component={WorryDetail}></Route>
-          <Route path="/select/:selectId" exact component={Select}></Route>
-          <Route path="/selectwrite" exact component={SelectWrite}></Route>
-          <Route path="/mypage" exact component={Mypage} />
-          <Route path="/plusbtn" exact component={PlusBtn} />
-          <Footer />
+            <Route path="/searchpage" exact component={SearchPage}></Route>
+            <Route path="/main" exact component={Main}></Route>
+            <Route
+              path="/worrywrite"
+              exact
+              component={WorryCreateUpdate}
+            ></Route>
+            <Route path="/worrydetail" exact component={WorryDetail}></Route>
+            <Route path="/select/:selectId" exact component={Select}></Route>
+            <Route path="/selectwrite" exact component={SelectWrite}></Route>
+            <Route path="/mypage" exact component={Mypage} />
+            <Route path="/plusbtn" exact component={PlusBtn} />
+            <Footer />
           </>
         </Switch>
       </ConnectedRouter>
