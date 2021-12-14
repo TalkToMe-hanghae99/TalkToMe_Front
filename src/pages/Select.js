@@ -8,9 +8,10 @@ export const Select = (props) => {
   const dispatch = useDispatch();
   //디테일페이지 불러오기
   const detail_list = useSelector((state) => state.select.detail_list);
-
+  console.log(props, "쭝");
   const params = useParams();
   const selectId = params.selectId;
+
   //메인
   const main_list = useSelector((state) => state.select.main_list);
   console.log(main_list?.selectsList, "ㅇㅇㅇㅇㅇㅇ");
