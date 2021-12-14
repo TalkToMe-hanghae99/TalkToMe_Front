@@ -3,11 +3,12 @@ import styled from "styled-components";
 import { Calendar } from "../components/Calendar";
 import PlusBtn from "../components/PlusBtn";
 import Left from "../assets/left.svg";
-import axios from 'axios';
-import { instance } from '../common/api';
-import { history } from "../redux/configureStore";
+import axios from "axios";
+import { instance } from "../common/api";
+import { useHistory } from "react-router";
 
 export const SelectWrite = (props) => {
+  const history = useHistory();
   const [TitleValue, setTitleValue] = useState("");
   const [ContentValue, setContentValue] = useState("");
   const [SelectValue, setSelectValue] = useState("");
@@ -17,47 +18,42 @@ export const SelectWrite = (props) => {
   let month = today.getMonth().toString();
   let date = today.getDate().toString();
 
-  
-  console.log("today",(year)+(month)+(date))
+  console.log("today", year + month + date);
 
- ////
+  ////
 
   const [users, setUsers] = useState(null);
 
- 
-  async function postSelect(){
-      try{
-        sessionStorage.getItem('accessToken')
-        const response = await instance.post(
-          'http://ozam.shop/select/write',
+  async function postSelect() {
+    try {
+      const response = await instance.post(
+        "http://ozam.shop/select/write",
         JSON.stringify({
-          selectTitle:TitleValue,
-          selectDes:ContentValue,
-          option1:TitleValue,
-          option2:TitleValue,
-          endDate:TitleValue
-          
+          selectTitle: TitleValue,
+          selectDes: ContentValue,
+          option1: TitleValue,
+          option2: TitleValue,
+          ednDate: TitleValue,
         })
-        );
-        return response;
-        console.log("response", response)
-      }catch{
-        console.log("users", users)
-      }
-      console.log("users",users);
-    };
+      );
+      return response;
+      console.log("response", response);
+    } catch {
+      console.log("users", users);
+    }
+    console.log("users", users);
+  }
 
-
-  function onTitleChange(e){
+  function onTitleChange(e) {
     setTitleValue(e.target.value);
   }
 
-  function onContentChange(e){
+  function onContentChange(e) {
     setContentValue(e.target.value);
   }
 
-  function onSelectValue(e){
-    setSelectValue(e.target.SelectValue);    
+  function onSelectValue(e) {
+    setSelectValue(e.target.SelectValue);
   }
 
   console.log("TitleValue", TitleValue);
@@ -75,23 +71,35 @@ export const SelectWrite = (props) => {
         value={TitleValue}
         placeholder="투표 제목을 입력하세요."
       ></Input>
-      <Days>{year} - {month} - {date}</Days>
+      <Days>
+        {year} - {month} - {date}
+      </Days>
       <Border />
       <Textarea
         onChange={onContentChange}
         value={ContentValue}
         placeholder="고민을 적어보세요."
       />
-      <PlusBtn onSelectValue={onSelectValue}
-        SelectValue={SelectValue}/>
+      <PlusBtn onSelectValue={onSelectValue} SelectValue={SelectValue} />
       <Calendar />
       <Flat justify="space-between">
         <Button onClick={postSelect}>작성 완료</Button>
-        <Button onClick={()=>{history.push("/main")}}>취소</Button>
+        <Button
+          onClick={() => {
+            history.replace("/main");
+          }}
+        >
+          취소
+        </Button>
       </Flat>
 
-
-
+      <ul>
+        {users?.map((user) => (
+          <li key={user.selectId}>
+            {user.selectTitle} ({user.selectDesc})
+          </li>
+        ))}
+      </ul>
     </Container>
   );
 };
