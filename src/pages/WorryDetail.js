@@ -8,13 +8,14 @@ import Share from "../assets/share.svg";
 import Edit from "../assets/edit.svg";
 import Trash from "../assets/trash.svg";
 import Heart from "../assets/heart.svg";
+import { history } from "../redux/configureStore";
 import CommentWrite from "../components/CommentWrite";
 
 const WorryDetail = (props) => {
   return (
     <Container>
       <Header>
-        <img src={Left} />
+        <img src={Left} onClick={()=>{history.push("/main")}}/>
         <span>톡톡</span>
       </Header>
       <WriteBox>

@@ -6,12 +6,15 @@ import Left from "../assets/left.svg";
 import axios from "axios";
 import { instance } from "../common/api";
 import { useHistory } from "react-router";
+import { history } from "../redux/configureStore";
+
 
 export const SelectWrite = (props) => {
   const history = useHistory();
   const [TitleValue, setTitleValue] = useState("");
   const [ContentValue, setContentValue] = useState("");
   const [SelectValue, setSelectValue] = useState("");
+  const [CalenderValue, setCalenderValue]=useState("");
 
   let today = new Date();
   let year = today.getFullYear().toString();
@@ -22,7 +25,9 @@ export const SelectWrite = (props) => {
 
   ////
 
-  const [users, setUsers] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+
+  console.log("selectWrite_setEndDate", endDate);
 
   async function postSelect() {
     try {
@@ -30,18 +35,18 @@ export const SelectWrite = (props) => {
         "http://ozam.shop/select/write",
         JSON.stringify({
           selectTitle: TitleValue,
-          selectDes: ContentValue,
+          selectDesc: ContentValue,
           option1: TitleValue,
           option2: TitleValue,
-          ednDate: TitleValue,
+          endDate: endDate,
         })
       );
       return response;
       console.log("response", response);
     } catch {
-      console.log("users", users);
+      console.log("select_error");
     }
-    console.log("users", users);
+    console.log("select_complete");
   }
 
   function onTitleChange(e) {
@@ -53,7 +58,11 @@ export const SelectWrite = (props) => {
   }
 
   function onSelectValue(e) {
-    setSelectValue(e.target.SelectValue);
+    setSelectValue(e.target.value);
+  }
+
+  function onCalenderValue(e){
+    setCalenderValue(e.target.value)
   }
 
   console.log("TitleValue", TitleValue);
@@ -63,7 +72,7 @@ export const SelectWrite = (props) => {
   return (
     <Container>
       <Header>
-        <img src={Left} />
+        <img src={Left} onClick={()=>{history.push("/main")}}/>
         <span>톡톡 작성하기</span>
       </Header>
       <Input
@@ -81,7 +90,7 @@ export const SelectWrite = (props) => {
         placeholder="고민을 적어보세요."
       />
       <PlusBtn onSelectValue={onSelectValue} SelectValue={SelectValue} />
-      <Calendar />
+      <Calendar value={CalenderValue} onChange={onCalenderValue} setEndDate={setEndDate}/>
       <Flat justify="space-between">
         <Button onClick={postSelect}>작성 완료</Button>
         <Button
@@ -93,13 +102,6 @@ export const SelectWrite = (props) => {
         </Button>
       </Flat>
 
-      <ul>
-        {users?.map((user) => (
-          <li key={user.selectId}>
-            {user.selectTitle} ({user.selectDesc})
-          </li>
-        ))}
-      </ul>
     </Container>
   );
 };

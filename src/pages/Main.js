@@ -10,34 +10,37 @@ import { useDispatch } from "react-redux";
 import { actionCreators as main } from "../redux/modules/select";
 
 function Main() {
-  const [worryList, setWorryList] = useState("");
-  const dispatch = useDispatch();
-  // const 연습 = [
-  //   {
-  //     boardId: "1",
-  //     boardTitle: "보드타이틀1",
-  //     viewCount: "3",
-  //     createdAt: "크레이티",
-  //   },
-  //   {
-  //     boardId: "2",
-  //     boardTitle: "보드타이틀2",
-  //     viewCount: "2",
-  //     createdAt: "크레이티",
-  //   },
-  //   {
-  //     boardId: "3",
-  //     boardTitle: "보드타이틀3",
-  //     viewCount: "1",
-  //     createdAt: "크레이티",
-  //   },
-  //   {
-  //     boardId: "4",
-  //     boardTitle: "보드타이틀4",
-  //     viewCount: "0",
-  //     createdAt: "크레이티",
-  //   },
-  // ];
+  const [selectList, setSelectList] = useState("");
+  const 연습 = [
+    {
+      boardId: "1",
+      boardTitle: "보드타이틀1",
+      viewCount: "3",
+      commentCount: "5",
+      createdAt: "크레이티",
+    },
+    {
+      boardId: "2",
+      boardTitle: "보드타이틀2",
+      viewCount: "2",
+      commentCount: "4",
+      createdAt: "크레이티",
+    },
+    {
+      boardId: "3",
+      boardTitle: "보드타이틀3",
+      viewCount: "1",
+      commentCount: "5",
+      createdAt: "크레이티",
+    },
+    {
+      boardId: "4",
+      boardTitle: "보드타이틀4",
+      viewCount: "0",
+      commentCount: "2",
+      createdAt: "크레이티",
+    },
+  ];
 
   // console.log("연습", 연습);
   // function 인기순() {
@@ -47,30 +50,30 @@ function Main() {
   // }
 
   useEffect(() => {
-    dispatch(main.getMAinAPI());
-    // const getWorryList = async () => {
-    //   try {
-    //     const response = await instance.get(
-    //       // '`http://ozam.shop/board?sort=${sort}&page=${page}`'
-    //       "http://ozam.shop/select?sort=date"
-    //     );
-    //     setWorryList(response.data.selectsList);
-    //     console.log(response.data.selectsList);
-    //   } catch {
-    //     console.log(worryList);
-    //   }
-    //   console.log(worryList);
-    // };
-    // getWorryList();
+    const getSelectList = async () => {
+      try {
+        const response = await instance.get(
+          // '`http://ozam.shop/board?sort=${sort}&page=${page}`'
+          "http://ozam.shop/select?sort=date"
+        );
+        setSelectList(response.data.selectsList);
+        console.log(response.data.selectsList);
+      } catch {
+        console.log(selectList);
+      }
+      console.log(selectList);
+    };
+    getSelectList();
   }, []);
-  console.log("worryList", worryList);
+
+  console.log("selectList", selectList);
 
   return (
     <MainBox>
       <SearchInput />
       <ContentBox>
-        {worryList &&
-          worryList.map((list) => (
+        {selectList &&
+          selectList?.map((list) => (
             <MainCardSelect key={list.selectId} List={list} />
           ))}
 
@@ -97,8 +100,8 @@ function Main() {
             댓글순
           </Page>
         </PageNation>
-        {/* <MainCardConcern List={연습} />
-        {연습 && 연습.map((list) => <MainCardConcern List={list} />)} */}
+        {연습 && 연습?.map((list) => <MainCardConcern List={list} />)}
+        <PaddingBox />
       </ContentBox>
     </MainBox>
   );
@@ -131,6 +134,10 @@ const Page = styled.div`
   margin: 10px;
   font-weight: bold;
   padding-top: 3px;
+`;
+
+const PaddingBox = styled.div`
+  height: 60px;
 `;
 
 export default Main;

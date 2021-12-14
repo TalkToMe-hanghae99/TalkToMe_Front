@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import styled from "styled-components";
-
+import { history } from "../redux/configureStore";
 import Left from "../assets/left.svg";
 import { actionCreators as worryCr } from "../redux/modules/worrywrite";
 const WorryCreateUpdate = (props) => {
@@ -29,7 +29,12 @@ const WorryCreateUpdate = (props) => {
   return (
     <Container>
       <Header>
-        <img src={Left} />
+        <img
+          src={Left}
+          onClick={() => {
+            history.push("/main");
+          }}
+        />
         <span>톡톡 작성하기</span>
       </Header>
       <WriteBox>
