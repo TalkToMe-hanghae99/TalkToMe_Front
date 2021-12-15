@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import styled from "styled-components";
 import { Chart } from "../components/Chart";
+import { Modal } from "../components/Modal";
 import { actionCreators as SelectCr } from "../redux/modules/select";
 export const Select = (props) => {
   const dispatch = useDispatch();
@@ -12,19 +13,17 @@ export const Select = (props) => {
   const params = useParams();
   const selectId = params.selectId;
   console.log(selectId, "나무");
-
   console.log(detail_list, "되DDD나");
-  console.log(detail_list.selectTitle, "dd");
-
+  console.log(detail_list.userId, "dd");
+  console.log(detail_list.logInUserId, "치킨");
   const {
     createdAt,
+    logInUserId,
+    userId,
     selectTitle,
     selectDesc,
     option1,
     option2,
-    option3,
-    option4,
-    option5,
   } = detail_list;
 
   // 시간정리
@@ -37,6 +36,27 @@ export const Select = (props) => {
   useEffect(() => {
     dispatch(SelectCr.getDetailAPI(selectId));
   }, []);
+
+  //모달 여부
+  const [showModal, setShowModal] = useState(false);
+
+  //모달 내용
+  const modalData = {
+    title: "고민 게시글",
+    descriptionOne: "선택하신 게시글을 삭제 하시겠습니까?",
+    descriptionTwo: " 게시글을 수정하시겠습니까?",
+    btnClose: "취소",
+    btnUpdate: "삭제",
+    btnConfirm: "수정",
+  };
+
+  // 삭제버튼
+  const deleteBtn = () => {
+    dispatch(SelectCr.deleteSelectAPI(selectId));
+    setShowModal(false);
+  };
+  // 수정 버튼
+  const updataBtn = () => {};
   return (
     <Container>
       <Flat justify=" space-between">
@@ -50,19 +70,49 @@ export const Select = (props) => {
       <TextBox>{selectDesc}</TextBox>
       <Vote>{option1}</Vote>
       <Vote>{option2}</Vote>
-      <Vote>{option3}</Vote>
-      <Vote>{option4}</Vote>
-      <Vote>{option5}</Vote>
+
       <Flat justify="space-evenly">
         <div>🧡 숫자</div>
         <Text>공유</Text>
-        <Text>수정</Text>
-        <Text>삭제</Text>
+        {/* 쓴사람에게만 보이는 수정버튼 */}
+        {userId === logInUserId ? (
+          <Text
+            onClick={() => {
+              setShowModal(true);
+            }}
+          >
+            수정
+          </Text>
+        ) : (
+          ""
+        )}
+        {/* 쓴사람에게만 보이는 삭제버튼 */}
+        {userId === logInUserId ? (
+          <Text
+            onClick={() => {
+              setShowModal(true);
+            }}
+          >
+            삭제
+          </Text>
+        ) : (
+          ""
+        )}
       </Flat>
       <Border />
       <Text>투표결과</Text>
       <Chart />
       <Button>당신의 선택은?</Button>
+      {/*  모달 */}
+      {showModal && (
+        <Modal
+          three
+          setShowModal={setShowModal}
+          modalData={modalData}
+          deleteBtn={deleteBtn}
+          updataBtn={updataBtn}
+        ></Modal>
+      )}
     </Container>
   );
 };
