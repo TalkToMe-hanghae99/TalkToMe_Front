@@ -13,12 +13,23 @@ import { useParams} from "react-router-dom";
 import CommentWrite from "../components/CommentWrite";
 
 const WorryDetail = (props) => {
-  
+
 const [worryList, setWorryList] = useState("");
 const { boardId } = useParams();
 
 function worryDelete(){
-
+  const delWorryList = async () => {
+    try {
+      const response = await instance.delete(
+        `http://ozam.shop/board/${boardId}`
+      );
+      console.log(worryList);
+      } catch {
+      console.log(worryList);
+    }
+    console.log(worryList);
+  };
+  delWorryList();
 
 }
 
