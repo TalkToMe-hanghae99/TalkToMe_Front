@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState, useEffect }from "react";
 import styled from "styled-components";
-
+import { instance } from "../common/api";
 import Left from "../assets/left.svg";
 import Eye from "../assets/eye.svg";
 import Clock from "../assets/clock.svg";
@@ -9,9 +9,34 @@ import Edit from "../assets/edit.svg";
 import Trash from "../assets/trash.svg";
 import Heart from "../assets/heart.svg";
 import { history } from "../redux/configureStore";
+import { useParams} from "react-router-dom";
 import CommentWrite from "../components/CommentWrite";
 
 const WorryDetail = (props) => {
+  
+const [worryList, setWorryList] = useState("");
+const { boardId } = useParams();
+
+function worryDelete(){
+
+
+}
+
+useEffect(() => {
+  const getWorryList = async () => {
+    try {
+      const response = await instance.get(
+        `http://ozam.shop/board/${boardId}`
+      );
+      setWorryList(response.data.postViewList.[0]);
+    } catch {
+      console.log(worryList);
+    }
+    console.log(worryList);
+  };
+  getWorryList();
+}, []);
+
   return (
     <Container>
       <Header>
@@ -19,24 +44,22 @@ const WorryDetail = (props) => {
         <span>톡톡</span>
       </Header>
       <WriteBox>
-        <Title>제목입니다.</Title>
+        <Title>{worryList?.boardTitle}</Title>
         <Info>
           <div>
-            <span>닉네임</span>
+            <span>{worryList?.userId}</span>
             <span>
               <img src={Clock} />
-              5분 전
+              {worryList?.updatedAt}
             </span>
           </div>
 
           <span>
-            <img src={Eye} />0
+            <img src={Eye} />{worryList?.boardViewCount}
           </span>
         </Info>
         <Content>
-          내용이 들어갈 자리입니다. 내용이 들어갈 자리입니다. 내용이 들어갈
-          자리입니다. 내용이 들어갈 자리입니다. 내용이 들어갈 자리입니다. 내용이
-          들어갈 자리입니다. 내용이 들어갈 자리입니다. 내용이 들어갈 자리입니다.
+          {worryList?.boardDesc}
         </Content>
         <EditBox>
           <div>
@@ -48,7 +71,7 @@ const WorryDetail = (props) => {
           <div>
             <img src={Share} />
             <img src={Edit} />
-            <img src={Trash} />
+            <img src={Trash} onClick={worryDelete}/>
           </div>
         </EditBox>
       </WriteBox>
