@@ -15,6 +15,9 @@ export const SelectWrite = (props) => {
   const [ContentValue, setContentValue] = useState("");
   const [SelectValue, setSelectValue] = useState("");
   const [CalenderValue, setCalenderValue]=useState("");
+  const [SelectValue01, setSelectValue01]=useState("");
+  const [SelectValue02, setSelectValue02]=useState("");
+
 
   let today = new Date();
   let year = today.getFullYear().toString();
@@ -36,8 +39,8 @@ export const SelectWrite = (props) => {
         JSON.stringify({
           selectTitle: TitleValue,
           selectDesc: ContentValue,
-          option1: TitleValue,
-          option2: TitleValue,
+          option1: SelectValue01,
+          option2: SelectValue02,
           endDate: endDate,
         })
       );
@@ -64,10 +67,18 @@ export const SelectWrite = (props) => {
   function onCalenderValue(e){
     setCalenderValue(e.target.value)
   }
+  function onSelectValue01(e){
+    setSelectValue01(e.target.value)
+  }
+  function onSelectValue02(e){
+    setSelectValue02(e.target.value)
+  }
 
   console.log("TitleValue", TitleValue);
   console.log("ContentValue", ContentValue);
   console.log("SelectValue", SelectValue);
+  console.log("SelectValue01", SelectValue01);
+  console.log("SelectValue02", SelectValue02);
 
   return (
     <Container>
@@ -89,7 +100,9 @@ export const SelectWrite = (props) => {
         value={ContentValue}
         placeholder="고민을 적어보세요."
       />
-      <PlusBtn onSelectValue={onSelectValue} SelectValue={SelectValue} />
+      {/* <PlusBtn onSelectValue={onSelectValue} SelectValue={SelectValue} /> */}
+      <Select01 placeholder="선택지를 적어보세요." value={SelectValue01} onChange={onSelectValue01}/>
+      <Select02 placeholder="선택지를 적어보세요." value={SelectValue02} onChange={onSelectValue02}/>
       <Calendar value={CalenderValue} onChange={onCalenderValue} setEndDate={setEndDate}/>
       <Flat justify="space-between">
         <Button onClick={postSelect}>작성 완료</Button>
@@ -111,7 +124,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 375px;
-  height: 140vh;
+  height: 100vh;
   background-color: white;
 `;
 
@@ -163,6 +176,7 @@ const Border = styled.div`
 const Textarea = styled.textarea`
   width: 335px;
   margin: 0 auto;
+  margin-bottom:10px;
   height: 300px;
   font-size: 15px;
   border: #e7e7e7;
@@ -172,6 +186,17 @@ const Flat = styled.div`
   justify-content: ${(props) => props.justify};
   margin: 10px 0;
 `;
+const Select01 = styled.input`
+height:32px;
+width:335px;
+margin:10px auto;
+`
+const Select02 = styled.input`
+height:32px;
+width:335px;
+margin:10px auto;
+` 
+
 
 const InputPlus = styled.input`
   width: 100%;

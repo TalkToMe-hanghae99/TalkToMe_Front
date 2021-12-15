@@ -80,17 +80,17 @@ function Main() {
         <PageNation>
           <Page
             onClick={() => {
+              console.log("최신순");
+            }}
+          >
+            최신순
+          </Page>
+          <Page
+            onClick={() => {
               console.log("인기순");
             }}
           >
             인기순
-          </Page>
-          <Page
-            onClick={() => {
-              console.log("최신수");
-            }}
-          >
-            최신순
           </Page>
           <Page
             onClick={() => {
