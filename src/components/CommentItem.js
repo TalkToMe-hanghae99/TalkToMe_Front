@@ -2,19 +2,21 @@ import React from "react";
 import styled from "styled-components";
 
 const CommentItem = (props) => {
+  const { comment, createdAt } = props;
+
   return (
     <Container>
       <User>
         <UserInfo>
-          <UserName>닉네임</UserName>
-          <Time>1시간 전</Time>
+          <UserName>익명</UserName>
+          <Time>{createdAt}</Time>
         </UserInfo>
         <Edit>
           <span>수정</span>
           <span>삭제</span>
         </Edit>
       </User>
-      <Content>댓글 내용입니다.</Content>
+      <Content>{comment}</Content>
     </Container>
   );
 };

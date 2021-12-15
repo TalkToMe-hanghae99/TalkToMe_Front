@@ -51,7 +51,12 @@ useEffect(() => {
   return (
     <Container>
       <Header>
-        <img src={Left} onClick={()=>{history.push("/main")}}/>
+        <img
+          src={Left}
+          onClick={() => {
+            history.push("/main");
+          }}
+        />
         <span>톡톡</span>
       </Header>
       <WriteBox>
@@ -86,7 +91,7 @@ useEffect(() => {
           </div>
         </EditBox>
       </WriteBox>
-      {/* <CommentWrite /> */}
+      <CommentWrite />
     </Container>
   );
 };

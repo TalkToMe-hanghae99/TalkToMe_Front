@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import SearchInput from "../components/SearchInput";
+
 import MainCardConcern from "../components/MainCardConcern";
 import MainCardSelect from "../components/MainCardSelect";
 import { instance } from "../common/api";
@@ -8,6 +8,7 @@ import { history } from "../redux/configureStore";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { actionCreators as main } from "../redux/modules/select";
+import Header from "../components/Header";
 
 function Main() {
   const [selectList, setSelectList] = useState("");
@@ -70,7 +71,7 @@ function Main() {
 
   return (
     <MainBox>
-      <SearchInput />
+      <Header />
       <ContentBox>
         {selectList &&
           selectList?.map((list) => (
