@@ -87,7 +87,7 @@ export const SelectWrite = (props) => {
             history.push("/main");
           }}
         />
-        <span>선택 작성하기</span>
+        <span>A / B 작성하기</span>
       </Header>
       <Input
         onChange={onTitleChange}
