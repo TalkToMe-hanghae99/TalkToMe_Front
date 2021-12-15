@@ -6,6 +6,8 @@ import MainCardSelect from "../components/MainCardSelect";
 import { instance } from "../common/api";
 import { history } from "../redux/configureStore";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { actionCreators as main } from "../redux/modules/select";
 
 function Main() {
   const [selectList, setSelectList] = useState("");
@@ -40,12 +42,12 @@ function Main() {
     },
   ];
 
-  console.log("연습", 연습);
-  function 인기순() {
-    연습.sort(function (a, b) {
-      return a.viewCount - b.viewCount;
-    });
-  }
+  // console.log("연습", 연습);
+  // function 인기순() {
+  //   연습.sort(function (a, b) {
+  //     return a.viewCount - b.viewCount;
+  //   });
+  // }
 
   useEffect(() => {
     const getSelectList = async () => {
