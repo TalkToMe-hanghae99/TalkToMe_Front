@@ -12,6 +12,7 @@ import Header from "../components/Header";
 
 function Main() {
   const [selectList, setSelectList] = useState("");
+  const [worryList, setWorryList] = useState("");
   const 연습 = [
     {
       boardId: "1",
@@ -54,20 +55,29 @@ function Main() {
     const getSelectList = async () => {
       try {
         const response = await instance.get(
-          // '`http://ozam.shop/board?sort=${sort}&page=${page}`'
-          "http://ozam.shop/select?sort=date"
+         "http://ozam.shop/select?sort=date"
         );
         setSelectList(response.data.selectsList);
-        console.log(response.data.selectsList);
       } catch {
-        console.log(selectList);
+        console.log("선택지 get 오류");
       }
-      console.log(selectList);
     };
     getSelectList();
+
+    const getWorryList = async () => {
+      try{
+        const response = await instance.get(
+          "http://ozam.shop/board?sort=date"
+        );
+        setWorryList(response.data.worryList);
+      } catch {
+        console.log("고민 get 실패");
+      }
+    }
+    getWorryList();
+
   }, []);
 
-  console.log("selectList", selectList);
 
   return (
     <MainBox>

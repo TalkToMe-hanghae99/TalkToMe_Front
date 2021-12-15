@@ -42,12 +42,13 @@ export const SelectWrite = (props) => {
           endDate: endDate,
         })
       );
+      alert("선택지 작성이 성공하였습니다.");
+      history.push("/main");
       return response;
-      console.log("response", response);
     } catch {
-      console.log("select_error");
+      console.log("선택지 작성실패");
+      alert("선택지 작성이 실패하였습니다.");
     }
-    console.log("select_complete");
   }
 
   function onTitleChange(e) {
@@ -103,7 +104,6 @@ export const SelectWrite = (props) => {
         value={ContentValue}
         placeholder="고민을 적어보세요."
       />
-      {/* <PlusBtn onSelectValue={onSelectValue} SelectValue={SelectValue} /> */}
       <Select01
         placeholder="선택지를 적어보세요."
         value={SelectValue01}

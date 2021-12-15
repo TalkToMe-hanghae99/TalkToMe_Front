@@ -44,7 +44,7 @@ function App() {
             <Route path="/mypage" exact component={Mypage} />
             <Route path="/plusbtn" exact component={PlusBtn} />
             <Footer />
-            <Route component={NotFound} />
+            {/* <Route component={NotFound} /> */}
           </>
         </Switch>
       </ConnectedRouter>
