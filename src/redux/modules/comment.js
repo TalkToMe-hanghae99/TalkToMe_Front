@@ -1,45 +1,45 @@
-// /* eslint-disable */
+/* eslint-disable */
 
-// import { createAction, handleActions } from "redux-actions";
-// import { produce } from "immer";
-// import { instance } from "../../common/api";
+import { createAction, handleActions } from "redux-actions";
+import { produce } from "immer";
+import { apis } from "../../common/api";
 
-// //액션타입
-// const GET_COMMENT = "GET_COMMENT";
+//액션타입
+const GET_COMMENT = "GET_COMMENT";
 // const ADD_COMMENT = "ADD_COMMENT";
 // const DELETE_COMMENT = "DELETE_COMMENT";
 
-// //액션생성자
-// const getComment = createAction(GET_COMMENT, (commentList) => ({
-//   commentList,
-// }));
+//액션생성자
+const getComment = createAction(GET_COMMENT, (commentList) => ({
+  commentList,
+}));
 // const addComment = createAction(ADD_COMMENT, (comment) => ({ comment }));
 // const deleteComment = createAction(DELETE_COMMENT, (commentId) => ({
 //   commentId,
 // }));
 
-// //initialState
-// const initialState = {
-//   commentList: [],
-// };
+//initialState
+const initialState = {
+  commentList: [],
+};
 
-// //middleware
-// const getCommentAPI = (boardId) => {
-//   return function (dispatch, getState, { history }) {
-//     apis
-//       .getComment(boardId)
-//       .then((res) => {
-//         dispatch(getComment(res.data));
-//       })
-//       .catch((e) => {
-//         alert("댓글을 불러오는데 실패하였습니다.");
-//       });
-//   };
-// };
+//middleware
+const getCommentAPI = (boardId) => {
+  return function (dispatch, getState, { history }) {
+    apis
+      .getComment(boardId)
+      .then((res) => {
+        dispatch(getComment(res.data.commentList));
+      })
+      .catch((e) => {
+        alert("댓글을 불러오는데 실패하였습니다.");
+      });
+  };
+};
 
 // const addCommentAPI = (comment) => {
 //   return function (dispatch, getState, { history }) {
-//     apis
+//     instance
 //       .addComment(comment)
 //       .then((res) => {
 //         dispatch(getCommentAPI(comment.boardId));
@@ -53,7 +53,7 @@
 
 // const deleteCommentAPI = (commentId, boardId) => {
 //   return function (dispatch, getState, { history }) {
-//     apis
+//     instance
 //       .deleteComment(commentId)
 //       .then((res) => {
 //         // dispatch(deleteComment(commentId));
@@ -65,34 +65,34 @@
 //   };
 // };
 
-// //reducer
-// export default handleActions(
-//   {
-//     [GET_COMMENT]: (state, action) =>
-//       produce(state, (draft) => {
-//         draft.commentList = action.payload.commentList;
-//       }),
-//     [ADD_COMMENT]: (state, action) =>
-//       produce(state, (draft) => {
-//         draft.commentList.unshift(action.payload.comment);
-//       }),
-//     // [DELETE_COMMENT]: (state, action) =>
-//     //   produce(state, (draft) => {
-//     //     console.log("dddd", action.payload);
-//     //     console.log("dddsssd", draft);
-//     //     draft.commentList = draft.commentList.filter(
-//     //       (c) => c.commentId !== action.payload.commentId
-//     //     );
-//     //   }),
-//   },
-//   initialState
-// );
+//reducer
+export default handleActions(
+  {
+    [GET_COMMENT]: (state, action) =>
+      produce(state, (draft) => {
+        draft.commentList = action.payload.commentList;
+      }),
+    // [ADD_COMMENT]: (state, action) =>
+    //   produce(state, (draft) => {
+    //     draft.commentList.unshift(action.payload.comment);
+    //   }),
+    // [DELETE_COMMENT]: (state, action) =>
+    //   produce(state, (draft) => {
+    //     console.log("dddd", action.payload);
+    //     console.log("dddsssd", draft);
+    //     draft.commentList = draft.commentList.filter(
+    //       (c) => c.commentId !== action.payload.commentId
+    //     );
+    //   }),
+  },
+  initialState
+);
 
-// //action creator export
-// const actionCreators = {
-//   getCommentAPI,
-//   addCommentAPI,
-//   deleteCommentAPI,
-// };
+//action creator export
+const actionCreators = {
+  getCommentAPI,
+  //   addCommentAPI,
+  //   deleteCommentAPI,
+};
 
-// export { actionCreators };
+export { actionCreators };
