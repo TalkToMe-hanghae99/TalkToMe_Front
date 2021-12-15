@@ -5,10 +5,11 @@ import { instance } from "../../common/api";
 //액션
 const GET_DETAIL = "GET_DETAIL";
 const GET_MAIN = "GET_MAIN";
+const DELETE_SELECT = "DELETE_SELECT";
 // const delete_det
 // 액션함수
 const detailDetail = createAction(GET_DETAIL, (detailList) => ({ detailList }));
-
+const deleteSelect = createAction(DELETE_SELECT, (selectId) => ({ selectId }));
 //메인 페이지
 const cardList = createAction(GET_MAIN, (mainList) => ({ mainList }));
 
@@ -25,7 +26,8 @@ const getDetailAPI = (selectId) => {
       .get(`select/${selectId}`)
       .then((res) => {
         console.log(res);
-        dispatch(detailDetail(res.data.selectsList[0]));
+
+        dispatch(detailDetail(res.data.selectList[0]));
       })
       .catch((err) => {
         console.log(err, "디테일에러");
@@ -48,8 +50,20 @@ const getMAinAPI = (date) => {
   };
 };
 
-//
-
+//삭제
+const deleteSelectAPI = (selectId) => {
+  return function (dispatch, getStste, { history }) {
+    instance
+      .delete(`/select/${selectId}`)
+      .then((res) => {
+        dispatch(deleteSelect(selectId));
+        history.replace(`/community`);
+      })
+      .catch((err) => {
+        console.log(err, "삭제에러");
+      });
+  };
+};
 export default handleActions(
   {
     [GET_DETAIL]: (state, action) =>
@@ -60,6 +74,15 @@ export default handleActions(
       produce(state, (draft) => {
         draft.main_list = action.payload.mainList;
       }),
+    [DELETE_SELECT]: (state, action) =>
+      produce(state, (draft) => {
+        const idx = draft.detail_list.findIndex((e) => {
+          return e.selectId === action.payload.selectId;
+        });
+        if (idx !== -1) {
+          draft.detail_list.splice(idx, 1);
+        }
+      }),
   },
   initialState
 );
@@ -67,6 +90,7 @@ export default handleActions(
 const actionCreators = {
   getDetailAPI,
   getMAinAPI,
+  deleteSelectAPI,
 };
 
 export { actionCreators };
