@@ -13,6 +13,7 @@ import { Select } from "../pages/Select";
 import { SelectWrite } from "../pages/SelectWrite";
 import { Mypage } from "../pages/Mypage";
 import PlusBtn from "../components/PlusBtn";
+import NotFound from "../components/NotFound";
 import { Provider } from "react-redux";
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
             <Route path="/mypage" exact component={Mypage} />
             <Route path="/plusbtn" exact component={PlusBtn} />
             <Footer />
+            <Route component={NotFound} />
           </>
         </Switch>
       </ConnectedRouter>

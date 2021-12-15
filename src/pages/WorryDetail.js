@@ -1,4 +1,5 @@
 import React, { useState, useEffect }from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { instance } from "../common/api";
 import Left from "../assets/left.svg";
@@ -13,6 +14,10 @@ import { useParams} from "react-router-dom";
 import CommentWrite from "../components/CommentWrite";
 
 const WorryDetail = (props) => {
+  //댓글 수 
+  const commentLength = useSelector(
+    (state) => state.comment.commentList.length
+  );
 
 const [worryList, setWorryList] = useState("");
 const { boardId } = useParams();
@@ -82,7 +87,7 @@ useEffect(() => {
             <span>
               <img src={Heart} /> 0
             </span>
-            <span>댓글 (0)</span>
+            <span>댓글 ({commentLength})</span>
           </div>
           <div>
             <img src={Share} />
