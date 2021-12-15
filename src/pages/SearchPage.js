@@ -59,13 +59,8 @@ function SearchPage() {
 
   return (
     <SearchPageBox>
-      <Header />
       <SearchInput />
       <ContentBox>
-        <PageNation>
-          <Page>고민</Page>
-          <Page>선택지</Page>
-        </PageNation>
         {worryList &&
           worryList?.map((list) => (
             <MainCardSelect key={list.selectId} List={list} />
@@ -90,21 +85,6 @@ const ContentBox = styled.div`
   position: relative;
 `;
 
-const PageNation = styled.div`
-  width: 335px;
-  height: 45px;
-  position: relative;
-  display: flex;
-  flex-flow: row wrap;
-`;
-
-const Page = styled.div`
-  width: 50px;
-  height: 30px;
-  margin: 10px;
-  font-weight: bold;
-  padding-top: 3px;
-`;
 const PaddingBox = styled.div`
   height: 60px;
 `;

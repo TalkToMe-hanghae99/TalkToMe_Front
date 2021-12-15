@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { history } from "../redux/configureStore";
@@ -6,16 +6,52 @@ import { actionCreators as commentAction } from "../redux/modules/comment";
 import CommentList from "./CommentList";
 
 const CommentWrite = (props) => {
-  // const dispatch = useDispatch();
-  // const commentList = useSelector((state) => state);
-  // console.log("댓글불러오기", commentList);
+  const dispatch = useDispatch();
+  const commentList = useSelector((state) => state.comment.commentList);
+  console.log("정보", commentList);
+  const url = useSelector((state) => state.router);
+  const boardId = url.location.pathname.slice(7);
+
+  useEffect(() => {
+    dispatch(commentAction.getCommentAPI(boardId));
+  }, []);
+
+  const [content, setContent] = useState("");
+
+  const onChangeContent = (e) => {
+    setContent(e.target.value);
+  };
+
+  const onClickWrite = () => {
+    const comment = {
+      boardId: boardId,
+      content: content,
+    };
+
+    if (content === "") {
+      window.alert("내용을 입력해주세요.");
+    }
+
+    dispatch(commentAction.addCommentAPI(comment));
+    setContent("");
+  };
 
   return (
     <>
       <Container>
         <InputBtn>
-          <Input placeholder="댓글을 입력해주세요." />
-          <Button>작성</Button>
+          <Input
+            placeholder="댓글을 입력해주세요."
+            onChange={onChangeContent}
+            value={content}
+          />
+          <Button
+            onClick={() => {
+              onClickWrite();
+            }}
+          >
+            작성
+          </Button>
         </InputBtn>
       </Container>
       <CommentList></CommentList>

@@ -31,7 +31,7 @@ const Footer = (props) => {
         }}
       >
         <Img src={vote} alt="home" />
-        <Text>선택 작성</Text>
+        <Text>A/B 작성</Text>
       </Button>
       <Button
         onClick={() => {

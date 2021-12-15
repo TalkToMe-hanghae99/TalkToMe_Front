@@ -15,7 +15,12 @@ const WorryDetail = (props) => {
   return (
     <Container>
       <Header>
-        <img src={Left} onClick={()=>{history.push("/main")}}/>
+        <img
+          src={Left}
+          onClick={() => {
+            history.push("/main");
+          }}
+        />
         <span>톡톡</span>
       </Header>
       <WriteBox>
@@ -52,7 +57,7 @@ const WorryDetail = (props) => {
           </div>
         </EditBox>
       </WriteBox>
-      {/* <CommentWrite /> */}
+      <CommentWrite />
     </Container>
   );
 };
