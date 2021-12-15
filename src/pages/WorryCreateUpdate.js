@@ -16,16 +16,15 @@ const WorryCreateUpdate = (props) => {
     if (!boardDesc) {
       window.alert("내용을 적어주세요");
       return;
+    } else {
+      const worryInfo = {
+        boardTitle,
+        boardDesc,
+      };
+      dispatch(worryCr.postWriteAPI(worryInfo));
+      // history.replace("/main");}
     }
-    const worryInfo = {
-      boardId: 1,
-      boardTitle,
-      boardDesc,
-    };
-    dispatch(worryCr.postWriteAPI(worryInfo));
-    // history.replace("/main");
   };
-
   return (
     <Container>
       <Header>
