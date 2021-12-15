@@ -2,7 +2,6 @@ import styled from "styled-components"
 import { history } from "../redux/configureStore";
 
 function MainCardConcern(props){
-    console.log(props.List)
     return(
         <CardBox onClick={()=>{history.push(`/board/${props.List?.boardId}`)}}>
             <Title>{props.List.boardTitle}</Title>
