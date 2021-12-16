@@ -31,7 +31,7 @@ const WorryCreateUpdate = (props) => {
         <img
           src={Left}
           onClick={() => {
-            history.push("/main");
+            history.goBack();
           }}
         />
         <span>톡톡 작성하기</span>

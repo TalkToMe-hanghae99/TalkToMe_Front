@@ -3,6 +3,8 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { ConnectedRouter } from "connected-react-router";
 import { useDispatch } from "react-redux";
 import store, { history } from "../redux/configureStore";
+import { userActions } from "../redux/modules/user";
+import { Provider } from "react-redux";
 
 import Footer from "../components/Footer";
 import Login from "../pages/Login";
@@ -13,10 +15,10 @@ import SearchPage from "../pages/SearchPage";
 import { Select } from "../pages/Select";
 import { SelectWrite } from "../pages/SelectWrite";
 import { Mypage } from "../pages/Mypage";
+import SelectBoard from "../pages/SelectBoard";
+import WorryBoard from "../pages/WorryBoard";
 import PlusBtn from "../components/PlusBtn";
 import NotFound from "../components/NotFound";
-import { Provider } from "react-redux";
-import { userActions } from "../redux/modules/user";
 
 function App() {
   // *social login
@@ -49,6 +51,8 @@ function App() {
               exact
               component={WorryCreateUpdate}
             ></Route>
+            <Route path="/worryboard" exact component={WorryBoard}></Route>
+            <Route path="/selectboard" exact component={SelectBoard}></Route>
             <Route path="/board/:boardId" exact component={WorryDetail}></Route>
             <Route path="/select/:selectId" exact component={Select}></Route>
             <Route path="/selectwrite" exact component={SelectWrite}></Route>

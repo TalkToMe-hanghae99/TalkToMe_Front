@@ -19,26 +19,26 @@ const Footer = (props) => {
 
       <Button
         onClick={() => {
-          history.push("/worrywrite");
+          history.push("/worryboard");
         }}
       >
-        <Img src={write} alt="home" />
-        <Text>톡톡 작성</Text>
+        <Img src={write} alt="write" />
+        <Text>톡톡 게시판</Text>
       </Button>
       <Button
         onClick={() => {
-          history.push("/selectwrite");
+          history.push("/selectboard");
         }}
       >
-        <Img src={vote} alt="home" />
-        <Text>A/B 작성</Text>
+        <Img src={vote} alt="vote" />
+        <Text>A/B 게시판</Text>
       </Button>
       <Button
         onClick={() => {
           history.push("/searchpage");
         }}
       >
-        <Img src={search} alt="home" />
+        <Img src={search} alt="search" />
         <Text>검색</Text>
       </Button>
       <Button
@@ -46,7 +46,7 @@ const Footer = (props) => {
           history.push("/mypage");
         }}
       >
-        <Img src={profile} />
+        <Img src={profile} alt="profile" />
         <Text>프로필</Text>
       </Button>
     </FooterBox>
