@@ -16,6 +16,7 @@ import { Mypage } from "../pages/Mypage";
 import NotFound from "../components/NotFound";
 import { Provider } from "react-redux";
 import { userActions } from "../redux/modules/user";
+import WorryRevise from "../pages/WorryRevise";
 
 function App() {
   // *social login
@@ -52,6 +53,7 @@ function App() {
             <Route path="/select/:selectId" exact component={Select}></Route>
             <Route path="/selectwrite" exact component={SelectWrite}></Route>
             <Route path="/mypage" exact component={Mypage} />
+            <Route path="/worryrevise/:boardId" exact component={WorryRevise} />
             <Footer />
           </>
           {/* <Route component={NotFound} /> */}

@@ -1,30 +1,59 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import styled from "styled-components";
 
 import Left from "../assets/left.svg";
 import { actionCreators as worryCr } from "../redux/modules/worrywrite";
+import { instance } from "../common/api";
+import { useParams} from "react-router-dom";
+
 const WorryRevise = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const [boardTitle, setboardTitle] = useState("");
-  const [boardDesc, setboardDesc] = useState("");
+  const [boardTitle, setboardTitle] = useState(null);
+  const [boardDesc, setboardDesc] = useState(null);
+  const { boardId } = useParams();
 
-  //바튼
-  const submitBtn = (e) => {
-    if (!boardDesc) {
-      window.alert("내용을 적어주세요");
-      return;
-    } else {
-      const worryInfo = {
-        boardTitle,
-        boardDesc,
-      };
-      dispatch(worryCr.postWriteAPI(worryInfo));
-      // history.replace("/main");}
+
+//현재 작업중
+  useEffect(() => {
+    //고민 게시글 가져오기
+    const getWorryList = async () => {
+      try {
+        const response = await instance.get(
+          `http://ozam.shop/board/${boardId}`
+        );
+        console.log(response.data);
+        setboardTitle(response.data);
+        setboardDesc(response.data);
+      } catch {
+        console.log("실패시 게시글 리스트", boardTitle);
+      }
+    };
+    getWorryList();
+  }, []);
+
+
+  async function reviseWorry() {
+    try {
+      const response = await instance.patch(
+        `http://ozam.shop/board/${boardId}`,
+        JSON.stringify({
+          boardTitle: boardTitle,
+          boardDesc: boardDesc
+        })
+      );
+      alert("선택지 수정을 성공하였습니다.");
+      history.push("/main");
+      return response;
+    } catch {
+      alert("선택지 내용을 입력해 주세요");
     }
-  };
+  }
+
+
+
   return (
     <Container>
       <Header>
@@ -34,7 +63,7 @@ const WorryRevise = (props) => {
             history.push("/main");
           }}
         />
-        <span>톡톡 작성하기</span>
+        <span>톡톡 수정하기</span>
       </Header>
       <WriteBox>
         <Title
@@ -58,7 +87,7 @@ const WorryRevise = (props) => {
         <Hr />
       </WriteBox>
       <BtnBox>
-        <button onClick={submitBtn}>작성완료</button>
+        <button onClick={reviseWorry}>수정 완료</button>
         <button>취소</button>
       </BtnBox>
     </Container>

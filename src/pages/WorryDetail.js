@@ -24,6 +24,7 @@ const { boardId } = useParams();
 const writerId = worryList.userId
 const logInId = useSelector((state)=>state.user.user)
 
+
 function worryDelete(){
   //고민 게시글 삭제
   const delWorryList = async () => {
@@ -97,7 +98,7 @@ useEffect(() => {
 
           { 
           logInId === writerId ? 
-          ( <div><img src={Edit} />
+          ( <div><img src={Edit} onClick={()=>{history.push(`/worryrevise/${boardId}`)}} />
             <img src={Trash} onClick={worryDelete}/>
             </div>) : ("")
             }
