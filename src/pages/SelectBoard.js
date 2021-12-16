@@ -1,29 +1,36 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router";
 
 import Left from "../assets/left.svg";
-import MainCardSelect from "../components/MainCardSelect";
-import { instance } from "../common/api";
+import SelectViewCount from "../components/SelectViewCount";
+import SelectDate from "../components/SelectDate";
 
 const SelectBoard = (props) => {
   const history = useHistory();
 
-  const [selectList, setSelectList] = useState("");
+  //탭
+  const [tabs, setTabs] = useState([
+    {
+      title: "최신순",
+      active: true,
+    },
+    {
+      title: "인기순",
+      active: false,
+    },
+  ]);
 
-  useEffect(() => {
-    const getSelectList = async () => {
-      try {
-        const response = await instance.get(
-          "http://ozam.shop/select?sort=date"
-        );
-        setSelectList(response.data.selectsList);
-      } catch (error) {
-        console.log("선택지 get 오류", error.response);
-      }
-    };
-    getSelectList();
-  }, []);
+  const [index, setIndex] = useState(0);
+
+  const changeTab = (index) => {
+    setTabs(
+      tabs.map((tab, i) =>
+        i === index ? { ...tab, active: true } : { ...tab, active: false }
+      )
+    );
+    setIndex(index);
+  };
 
   return (
     <Container>
@@ -37,33 +44,17 @@ const SelectBoard = (props) => {
         <span>A / B 게시판</span>
       </Header>
       <CardBox>
-        <PageNation>
-          <Page
-            onClick={() => {
-              console.log("최신순");
-            }}
-          >
-            최신순
-          </Page>
-          <Page
-            onClick={() => {
-              console.log("인기순");
-            }}
-          >
-            인기순
-          </Page>
-          <Page
-            onClick={() => {
-              console.log("댓글순");
-            }}
-          >
-            댓글순
-          </Page>
-        </PageNation>
-        {selectList &&
-          selectList?.map((list) => (
-            <MainCardSelect key={list.selectId} List={list} />
+        <TabWrapper>
+          {tabs.map((tab, idx) => (
+            <Tab key={idx} onClick={() => changeTab(idx)} active={tab.active}>
+              {tab.title}
+            </Tab>
           ))}
+        </TabWrapper>
+
+        <ArrayWrapper>
+          {index === 0 ? <SelectDate /> : <SelectViewCount />}
+        </ArrayWrapper>
       </CardBox>
     </Container>
   );
@@ -112,7 +103,7 @@ const CardBox = styled.div`
   background-color: white;
 `;
 
-const PageNation = styled.div`
+const TabWrapper = styled.div`
   width: 335px;
   height: 45px;
   position: relative;
@@ -120,12 +111,24 @@ const PageNation = styled.div`
   flex-flow: row wrap;
 `;
 
-const Page = styled.div`
-  width: 50px;
+const Tab = styled.div`
   height: 30px;
-  margin: 10px;
+  margin-right: 10px;
+  padding-top: 10px;
+  cursor: pointer;
+  font-size: 16px;
   font-weight: bold;
-  padding-top: 3px;
+  ${(props) =>
+    props.active
+      ? "color: red; font-weight: 800;"
+      : "color: black; font-weight: 400;"};
+`;
+
+const ArrayWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  /* justify-content: center; */
 `;
 
 export default SelectBoard;
