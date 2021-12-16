@@ -55,7 +55,7 @@ function Main() {
     const getSelectList = async () => {
       try {
         const response = await instance.get(
-         "http://ozam.shop/select?sort=date"
+          "http://ozam.shop/select?sort=date"
         );
         setSelectList(response.data.selectsList);
       } catch {
@@ -63,21 +63,19 @@ function Main() {
       }
     };
     getSelectList();
+  }, []);
 
+  useEffect(() => {
     const getWorryList = async () => {
-      try{
-        const response = await instance.get(
-          "http://ozam.shop/board?sort=date"
-        );
+      try {
+        const response = await instance.get("http://ozam.shop/board?sort=date");
         setWorryList(response.data.worryList);
       } catch {
         console.log("고민 get 실패");
       }
-    }
+    };
     getWorryList();
-
   }, []);
-
 
   return (
     <MainBox>
