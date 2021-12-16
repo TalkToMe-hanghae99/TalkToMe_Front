@@ -19,7 +19,7 @@ instance.interceptors.request.use((config) => {
 
 export const apis = {
   //회원정보 요청
-  getUser: () => instance.get(`/login`),
+  getUser: () => instance.get(`/user/me`),
 
   // 댓글 조회
   getComment: (boardId) => instance.get(`/board/${boardId}/comment`),
@@ -39,6 +39,4 @@ export const apis = {
   //검색
   getSearch: (group, keyword) =>
     instance.post(`/search?group=${group}&keyword=${keyword}`),
-  //     /search?group=${group}&keyword=검색단어+검색단어+....
-  // (group : board, select)
 };

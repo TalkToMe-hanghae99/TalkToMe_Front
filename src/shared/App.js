@@ -30,11 +30,8 @@ function App() {
   const dispatch = useDispatch();
   const token = localStorage.getItem("accessToken");
 
-  // console.log("토큰있음", token);
-
   useEffect(() => {
     if (token) {
-      console.log("토큰있음", token);
       dispatch(userActions.getUserAPI());
     }
   }, []);

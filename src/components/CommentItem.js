@@ -6,22 +6,29 @@ import { actionCreators as commentAction } from "../redux/modules/comment";
 const CommentItem = (props) => {
   const dispatch = useDispatch();
 
-  const loginUserId = useSelector(
-    (state) => state.select.detail_list.logInUserId
-  );
+  const loginUserId = useSelector((state) => state.user.user);
 
   const { comment, createdAt, commentId, boardId, userId } = props;
 
-  console.log("아이디", loginUserId, userId);
-
   //댓글 수정
-  // const [showEditInput, setShowEditInput] = useState(false);
+  const [showEditInput, setShowEditInput] = useState(false);
+  const [editComment, setEditComment] = useState(null);
 
-  // const onClickEdit = () => {
-  //   setShowEditInput(!showEditInput);
-  //   // dispatch(commentAction.editCommentAPI(boardId, commentId));
-  // };
+  const onClickEdit = () => {
+    setShowEditInput(!showEditInput);
+  };
 
+  const onChangeComment = (e) => {
+    const {
+      target: { name, value },
+    } = e;
+    setEditComment({
+      ...editComment,
+      [name]: value,
+    });
+  };
+
+  //댓글 삭제
   const onClickDelete = () => {
     const result = window.confirm("댓글을 정말로 삭제하시겠습니까?");
 
@@ -39,20 +46,24 @@ const CommentItem = (props) => {
         </UserInfo>
         {loginUserId === userId ? (
           <Edit>
-            <span>수정</span>
+            <span onClick={onClickEdit}>수정</span>
             <span onClick={onClickDelete}>삭제</span>
           </Edit>
         ) : null}
       </User>
-      <Content>{comment}</Content>
-      {/* {showEditInput === false ? (
+      {showEditInput === false ? (
         <Content>{comment}</Content>
       ) : (
         <InputBtn>
-          <Input placeholder="댓글을 입력해주세요." />
+          <Input
+            name="comment"
+            value={comment}
+            onChange={onChangeComment}
+            required
+          />
           <Button>수정</Button>
         </InputBtn>
-      )} */}
+      )}
     </Container>
   );
 };
