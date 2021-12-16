@@ -86,7 +86,6 @@ const Comment = styled.div`
   justify-content: center;
   align-items: center;
   background-color: #f8f8f8;
-  /* background-color: #f2f2f2; */
   border-radius: 10px;
 
   p {

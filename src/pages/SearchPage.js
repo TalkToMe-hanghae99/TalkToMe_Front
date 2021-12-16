@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { useHistory } from "react-router";
+
 import SearchInput from "../components/SearchInput";
-import Header from "../components/Header";
 import { instance } from "../common/api";
 import MainCardConcern from "../components/MainCardConcern";
 import MainCardSelect from "../components/MainCardSelect";
+import Left from "../assets/left.svg";
 
 function SearchPage() {
+  const history = useHistory();
+
   const [selectList, setSelectList] = useState("");
   const [worryList, setWorryList] = useState("");
 
@@ -40,8 +44,17 @@ function SearchPage() {
 
   return (
     <SearchPageBox>
-      <SearchInput />
+      <Header>
+        <img
+          src={Left}
+          onClick={() => {
+            history.goBack();
+          }}
+        />
+        <span>검색</span>
+      </Header>
       <ContentBox>
+        <SearchInput />
         {selectList &&
           selectList?.map((list) => (
             <MainCardSelect key={list.selectId} List={list} />
@@ -53,17 +66,43 @@ function SearchPage() {
   );
 }
 const SearchPageBox = styled.div`
-  position: relative;
   width: 375px;
-  margin: 0 auto;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   background-color: white;
-  top: 60px;
+  padding: 20px;
+`;
+
+const Header = styled.div`
+  position: fixed;
+  top: 0;
+  z-index: 5;
+  background-color: #9ddbf6;
+  width: 375px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+
+  img {
+    height: 60%;
+    cursor: pointer;
+  }
+
+  span {
+    width: 100%;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+  }
 `;
 
 const ContentBox = styled.div`
+  margin-top: 40px;
   width: 375px;
-  padding: 20px;
-  position: relative;
+  background-color: white;
 `;
 
 const PaddingBox = styled.div`
