@@ -4,10 +4,10 @@ import { history } from "../redux/configureStore";
 function MainCardConcern(props){
     return(
         <CardBox onClick={()=>{history.push(`/board/${props.List?.boardId}`)}}>
-            <Title>{props.List.boardTitle}</Title>
-            <Text>조회수 {props.List.viewCount}</Text>
-            <Text>{props.List.createdAt}</Text>
-            <Text>댓글수 {props.List.commentCount}</Text>
+            <Title>{props.List?.boardTitle}</Title>
+            <Text>조회수 {props.List?.boardViewCount}</Text>
+            <Text>{props.List.createdAt.slice(0,10)}</Text>
+            <Text>댓글수 {props.List?.commentCount}</Text>
         </CardBox>
     )
 

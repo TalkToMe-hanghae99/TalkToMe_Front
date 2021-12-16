@@ -14,7 +14,6 @@ import { useParams} from "react-router-dom";
 import CommentWrite from "../components/CommentWrite";
 
 const WorryDetail = (props) => {
-  console.log("props",props)
   //댓글 수 
   const commentLength = useSelector(
     (state) => state.comment.commentList.length
@@ -24,15 +23,16 @@ const [worryList, setWorryList] = useState("");
 const { boardId } = useParams();
 
 function worryDelete(){
+  //고민 게시글 삭제
   const delWorryList = async () => {
     try {
       const response = await instance.delete(
         `http://ozam.shop/board/${boardId}`
       );
-      console.log("worryDelete", response);
-      // if(response.data)
+      alert("게시글이 삭제되었습니다.")
+      history.push("/main")
       } catch {
-      alert("삭제하지 못하였습니다.")
+      alert("게시글 삭제가 취소되었습니다.")
     }
   };
   delWorryList();
@@ -40,16 +40,16 @@ function worryDelete(){
 }
 
 useEffect(() => {
+  //고민 게시글 가져오기
   const getWorryList = async () => {
     try {
       const response = await instance.get(
         `http://ozam.shop/board/${boardId}`
       );
-      setWorryList(response.data.postViewList.[0]);
+      setWorryList(response.data.boardList.[0]);
     } catch {
-      console.log(worryList);
+      console.log("실패시 게시글 리스트", worryList);
     }
-    console.log(worryList);
   };
   getWorryList();
 }, []);
@@ -70,15 +70,15 @@ useEffect(() => {
         <Info>
           <div>
             <span>{worryList?.userId}</span>
-            <span>
+            {/* <span>
               <img src={Clock} />
               {worryList?.updatedAt}
-            </span>
+            </span> */}
           </div>
 
-          <span>
+          {/* <span>
             <img src={Eye} />{worryList?.boardViewCount}
-          </span>
+          </span> */}
         </Info>
         <Content>
           {worryList?.boardDesc}

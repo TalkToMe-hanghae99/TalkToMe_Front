@@ -30,4 +30,18 @@ export const apis = {
     instance.delete(`http://ozam.shop/board/${boardId}/comment/${commentId}`),
 
   //검색페이지
+  
+  
+  //고민상세페이지
+   // 댓글 조회
+   getWorryDetail: (boardId) => instance.get(`/board/${boardId}`),
+
+   //댓글 작성
+   addWorryDetail: (comment) =>
+     instance.post(`/board/${comment.boardId}/comment??`, comment),
+ 
+   // 댓글 삭제
+   deleteWorryDetail: (boardId) =>
+     instance.delete(`http://ozam.shop/board/${boardId}`),
+ 
 };
