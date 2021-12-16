@@ -18,16 +18,25 @@ instance.interceptors.request.use((config) => {
 });
 
 export const apis = {
+  //회원정보 요청
+  getUser: () => instance.get(`/user/me`),
+
   // 댓글 조회
   getComment: (boardId) => instance.get(`/board/${boardId}/comment`),
 
   //댓글 작성
-  // addComment: (comment) =>
-  //   instance.post(`/board/${boardId}/comment`, comment),
+  addComment: (comment) =>
+    instance.post(`/board/${comment.boardId}/comment`, comment),
 
   // 댓글 삭제
-  // deleteComment: (commentId) =>
-  //   instance.delete(`/comment/${commentId}`),
+  deleteComment: (commentId, boardId) =>
+    instance.delete(`/board/${boardId}/comment/${commentId}`),
 
-  //검색페이지
+  // 댓글 수정
+  editComment: (commentId, boardId) =>
+    instance.delete(`/board/${boardId}/comment/${commentId}`),
+
+ 
+  
+ 
 };

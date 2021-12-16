@@ -6,34 +6,31 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
 import searchImg from "../assets/search.svg";
+import { apis } from "../common/api";
 
 function SearchInput() {
   //drop box
-  const [select, setSelect] = useState("");
+  const [group, setGroup] = useState("");
 
   const handleSelectChange = (event) => {
-    setSelect(event.target.value);
+    setGroup(event.target.value);
   };
 
   //search bar
-  const [searchTxt, setSearchTxt] = useState("");
+  const [keyword, setKeyword] = useState("");
 
   const hadleSearchChange = (e) => {
-    setSearchTxt(e.target.value);
+    setKeyword(e.target.value);
   };
 
   //search Btn
-  const clickSearch = () => {
-    const search = {
-      select: select,
-      searchTxt: searchTxt,
-    };
-
-    // const postSearch = async () => {
-    //   try {
-    //   } catch {}
-    // };
-    console.log("잘나오나요", search);
+  const clickSearch = async () => {
+    try {
+      const data = await apis.getSearch(group, keyword);
+      console.log("확인해보자", data);
+    } catch (error) {
+      console.log(error.response);
+    }
   };
 
   return (
@@ -44,13 +41,13 @@ function SearchInput() {
           <Select
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
-            value={select}
+            // value={search}
             onChange={handleSelectChange}
             autoWidth
-            label="select"
+            label="search"
           >
-            <MenuItem value={1}>고민 톡톡</MenuItem>
-            <MenuItem value={2}>고민 A/B</MenuItem>
+            <MenuItem value={"board"}>고민 톡톡</MenuItem>
+            <MenuItem value={"select"}>고민 A/B</MenuItem>
           </Select>
         </FormControl>
       </div>

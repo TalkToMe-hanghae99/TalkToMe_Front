@@ -1,23 +1,21 @@
 import React, { useRef, useState, useEffect } from "react";
 import styled from "styled-components";
 import { Calendar } from "../components/Calendar";
-import PlusBtn from "../components/PlusBtn";
 import Left from "../assets/left.svg";
-import axios from "axios";
 import { instance } from "../common/api";
 import { useHistory } from "react-router";
 import { history } from "../redux/configureStore";
 
 export const SelectWrite = (props) => {
   const history = useHistory();
-  const [TitleValue, setTitleValue] = useState("");
-  const [ContentValue, setContentValue] = useState("");
-  const [SelectValue, setSelectValue] = useState("");
-  const [CalenderValue, setCalenderValue] = useState("");
-  const [SelectValue01, setSelectValue01] = useState("");
-  const [SelectValue02, setSelectValue02] = useState("");
+  const [TitleValue, setTitleValue] = useState(null);
+  const [ContentValue, setContentValue] = useState(null);
+  const [CalenderValue, setCalenderValue] = useState(null);
+  const [SelectValue01, setSelectValue01] = useState(null);
+  const [SelectValue02, setSelectValue02] = useState(null);
 
   let today = new Date();
+  console.log(today);
   let year = today.getFullYear().toString();
   let month = today.getMonth().toString();
   let date = today.getDate().toString();
@@ -42,12 +40,12 @@ export const SelectWrite = (props) => {
           endDate: endDate,
         })
       );
+      alert("선택지 작성을 성공하였습니다.");
+      history.push("/main");
       return response;
-      console.log("response", response);
     } catch {
-      console.log("select_error");
+      alert("선택지 내용을 입력해 주세요");
     }
-    console.log("select_complete");
   }
 
   function onTitleChange(e) {
@@ -56,10 +54,6 @@ export const SelectWrite = (props) => {
 
   function onContentChange(e) {
     setContentValue(e.target.value);
-  }
-
-  function onSelectValue(e) {
-    setSelectValue(e.target.value);
   }
 
   function onCalenderValue(e) {
@@ -72,12 +66,6 @@ export const SelectWrite = (props) => {
     setSelectValue02(e.target.value);
   }
 
-  console.log("TitleValue", TitleValue);
-  console.log("ContentValue", ContentValue);
-  console.log("SelectValue", SelectValue);
-  console.log("SelectValue01", SelectValue01);
-  console.log("SelectValue02", SelectValue02);
-
   return (
     <Container>
       <Header>
@@ -86,8 +74,9 @@ export const SelectWrite = (props) => {
           onClick={() => {
             history.push("/main");
           }}
+          alt="옆으로"
         />
-        <span>선택 작성하기</span>
+        <span>A / B 작성하기</span>
       </Header>
       <Input
         onChange={onTitleChange}
@@ -103,7 +92,6 @@ export const SelectWrite = (props) => {
         value={ContentValue}
         placeholder="고민을 적어보세요."
       />
-      {/* <PlusBtn onSelectValue={onSelectValue} SelectValue={SelectValue} /> */}
       <Select01
         placeholder="선택지를 적어보세요."
         value={SelectValue01}

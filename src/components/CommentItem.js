@@ -1,8 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import { actionCreators as commentAction } from "../redux/modules/comment";
 
 const CommentItem = (props) => {
-  const { comment, createdAt } = props;
+  const dispatch = useDispatch();
+
+  const loginUserId = useSelector((state) => state.user.user);
+
+  const { comment, createdAt, commentId, boardId, userId } = props;
+
+  //댓글 수정
+  const [showEditInput, setShowEditInput] = useState(false);
+  const [editComment, setEditComment] = useState(null);
+
+  const onClickEdit = () => {
+    setShowEditInput(!showEditInput);
+  };
+
+  const onChangeComment = (e) => {
+    const {
+      target: { name, value },
+    } = e;
+    setEditComment({
+      ...editComment,
+      [name]: value,
+    });
+  };
+
+  //댓글 삭제
+  const onClickDelete = () => {
+    const result = window.confirm("댓글을 정말로 삭제하시겠습니까?");
+
+    if (result) {
+      dispatch(commentAction.deleteCommentAPI(boardId, commentId));
+    }
+  };
 
   return (
     <Container>
@@ -11,12 +44,26 @@ const CommentItem = (props) => {
           <UserName>익명</UserName>
           <Time>{createdAt}</Time>
         </UserInfo>
-        <Edit>
-          <span>수정</span>
-          <span>삭제</span>
-        </Edit>
+        {loginUserId === userId ? (
+          <Edit>
+            <span onClick={onClickEdit}>수정</span>
+            <span onClick={onClickDelete}>삭제</span>
+          </Edit>
+        ) : null}
       </User>
-      <Content>{comment}</Content>
+      {showEditInput === false ? (
+        <Content>{comment}</Content>
+      ) : (
+        <InputBtn>
+          <Input
+            name="comment"
+            value={comment}
+            onChange={onChangeComment}
+            required
+          />
+          <Button>수정</Button>
+        </InputBtn>
+      )}
     </Container>
   );
 };
@@ -70,6 +117,47 @@ const Edit = styled.div`
       text-decoration: underline;
       color: #b0b5c3;
     }
+  }
+`;
+
+const InputBtn = styled.div`
+  display: flex;
+  width: 100%;
+  margin: 20px 0 5px 0;
+`;
+
+const Input = styled.input`
+  height: 40px;
+  width: 100%;
+  padding: 10px 20px;
+  outline: none;
+  border: none;
+  background-color: #fafafa;
+  margin: 0 15px 15px 0;
+  border-radius: 4px;
+  font-size: 16px;
+  color: rgb(33, 37, 41);
+  line-height: 1.75;
+  word-break: break-all;
+  ::placeholder {
+    color: #adb5bd;
+  }
+`;
+
+const Button = styled.button`
+  height: 40px;
+  width: 15%;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  background: #c1c1c1;
+  color: white;
+  border-radius: 4px;
+  font-size: 12px;
+  outline: none;
+
+  &:hover {
+    background-color: #fd328b;
   }
 `;
 

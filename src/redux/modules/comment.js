@@ -6,17 +6,21 @@ import { apis } from "../../common/api";
 
 //액션타입
 const GET_COMMENT = "GET_COMMENT";
-// const ADD_COMMENT = "ADD_COMMENT";
-// const DELETE_COMMENT = "DELETE_COMMENT";
+const ADD_COMMENT = "ADD_COMMENT";
+const DELETE_COMMENT = "DELETE_COMMENT";
+const EDIT_COMMENT = "EDIT_COMMENT";
 
 //액션생성자
 const getComment = createAction(GET_COMMENT, (commentList) => ({
   commentList,
 }));
-// const addComment = createAction(ADD_COMMENT, (comment) => ({ comment }));
-// const deleteComment = createAction(DELETE_COMMENT, (commentId) => ({
-//   commentId,
-// }));
+const addComment = createAction(ADD_COMMENT, (comment) => ({ comment }));
+const deleteComment = createAction(DELETE_COMMENT, (commentId) => ({
+  commentId,
+}));
+const editComment = createAction(EDIT_COMMENT, (commentId) => ({
+  commentId,
+}));
 
 //initialState
 const initialState = {
@@ -37,33 +41,48 @@ const getCommentAPI = (boardId) => {
   };
 };
 
-// const addCommentAPI = (comment) => {
-//   return function (dispatch, getState, { history }) {
-//     instance
-//       .addComment(comment)
-//       .then((res) => {
-//         dispatch(getCommentAPI(comment.boardId));
-//       })
-//       .catch((e) => {
-//         console.log(e.response);
-//         // alert("댓글을 작성하는데 실패하였습니다.");
-//       });
-//   };
-// };
+const addCommentAPI = (comment) => {
+  return function (dispatch, getState, { history }) {
+    apis
+      .addComment(comment)
+      .then((res) => {
+        console.log("댓글등록", res);
+        dispatch(getCommentAPI(comment.boardId));
+      })
+      .catch((e) => {
+        console.log(e.response);
+        alert("댓글을 작성하는데 실패하였습니다.");
+      });
+  };
+};
 
-// const deleteCommentAPI = (commentId, boardId) => {
-//   return function (dispatch, getState, { history }) {
-//     instance
-//       .deleteComment(commentId)
-//       .then((res) => {
-//         // dispatch(deleteComment(commentId));
-//         dispatch(getCommentAPI(boardId));
-//       })
-//       .catch((e) => {
-//         alert("댓글 삭제에 실패하였습니다.");
-//       });
-//   };
-// };
+const deleteCommentAPI = (boardId, commentId) => {
+  return function (dispatch, getState, { history }) {
+    apis
+      .deleteComment(commentId, boardId)
+      .then((res) => {
+        console.log("삭제성공", res);
+        dispatch(getCommentAPI(boardId, commentId));
+      })
+      .catch((e) => {
+        alert("댓글 삭제에 실패하였습니다.");
+      });
+  };
+};
+
+const editCommentAPI = (boardId, commentId) => {
+  return function (dispatch, getState, { history }) {
+    apis
+      .deleteComment(commentId, boardId)
+      .then((res) => {
+        console.log("수정성공", res);
+        dispatch(getCommentAPI(boardId, commentId));
+      })
+      .catch((e) => {
+        alert("댓글 수정에 실패하였습니다.");
+      });
+  };
+};
 
 //reducer
 export default handleActions(
@@ -72,18 +91,18 @@ export default handleActions(
       produce(state, (draft) => {
         draft.commentList = action.payload.commentList;
       }),
-    // [ADD_COMMENT]: (state, action) =>
-    //   produce(state, (draft) => {
-    //     draft.commentList.unshift(action.payload.comment);
-    //   }),
-    // [DELETE_COMMENT]: (state, action) =>
-    //   produce(state, (draft) => {
-    //     console.log("dddd", action.payload);
-    //     console.log("dddsssd", draft);
-    //     draft.commentList = draft.commentList.filter(
-    //       (c) => c.commentId !== action.payload.commentId
-    //     );
-    //   }),
+    [ADD_COMMENT]: (state, action) =>
+      produce(state, (draft) => {
+        draft.commentList.unshift(action.payload.comment);
+      }),
+    [DELETE_COMMENT]: (state, action) =>
+      produce(state, (draft) => {
+        console.log("dddd", action.payload);
+        console.log("dddsssd", draft);
+        draft.commentList = draft.commentList.filter(
+          (c) => c.commentId !== action.payload.commentId
+        );
+      }),
   },
   initialState
 );
@@ -91,8 +110,9 @@ export default handleActions(
 //action creator export
 const actionCreators = {
   getCommentAPI,
-  //   addCommentAPI,
-  //   deleteCommentAPI,
+  addCommentAPI,
+  deleteCommentAPI,
+  editCommentAPI,
 };
 
 export { actionCreators };

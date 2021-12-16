@@ -7,8 +7,7 @@ import CommentList from "./CommentList";
 
 const CommentWrite = (props) => {
   const dispatch = useDispatch();
-  const commentList = useSelector((state) => state.comment.commentList);
-  console.log("정보", commentList);
+
   const url = useSelector((state) => state.router);
   const boardId = url.location.pathname.slice(7);
 
@@ -25,7 +24,7 @@ const CommentWrite = (props) => {
   const onClickWrite = () => {
     const comment = {
       boardId: boardId,
-      content: content,
+      comment: content,
     };
 
     if (content === "") {

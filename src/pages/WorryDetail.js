@@ -1,4 +1,5 @@
 import React, { useState, useEffect }from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { instance } from "../common/api";
 import Left from "../assets/left.svg";
@@ -13,37 +14,45 @@ import { useParams} from "react-router-dom";
 import CommentWrite from "../components/CommentWrite";
 
 const WorryDetail = (props) => {
+  //댓글 수 
+  const commentLength = useSelector(
+    (state) => state.comment.commentList.length
+  );
 
 const [worryList, setWorryList] = useState("");
 const { boardId } = useParams();
+const writerId = worryList.userId
+const logInId = useSelector((state)=>state.user.user)
+
 
 function worryDelete(){
+  //고민 게시글 삭제
   const delWorryList = async () => {
     try {
       const response = await instance.delete(
         `http://ozam.shop/board/${boardId}`
       );
-      console.log(worryList);
+      alert("게시글이 삭제되었습니다.")
+      history.push("/main")
       } catch {
-      console.log(worryList);
+      alert("게시글 삭제가 취소되었습니다.")
     }
-    console.log(worryList);
   };
   delWorryList();
 
 }
 
 useEffect(() => {
+  //고민 게시글 가져오기
   const getWorryList = async () => {
     try {
       const response = await instance.get(
         `http://ozam.shop/board/${boardId}`
       );
-      setWorryList(response.data.postViewList.[0]);
+      setWorryList(response.data.boardList.[0]);
     } catch {
-      console.log(worryList);
+      console.log("실패시 게시글 리스트", worryList);
     }
-    console.log(worryList);
   };
   getWorryList();
 }, []);
@@ -82,12 +91,19 @@ useEffect(() => {
             <span>
               <img src={Heart} /> 0
             </span>
-            <span>댓글 (0)</span>
+            <span>댓글 ({commentLength})</span>
           </div>
           <div>
             <img src={Share} />
-            <img src={Edit} />
+
+          { 
+          logInId === writerId ? 
+          ( <div><img src={Edit} onClick={()=>{history.push(`/worryrevise/${boardId}`)}} />
             <img src={Trash} onClick={worryDelete}/>
+            </div>) : ("")
+            }
+
+           
           </div>
         </EditBox>
       </WriteBox>
