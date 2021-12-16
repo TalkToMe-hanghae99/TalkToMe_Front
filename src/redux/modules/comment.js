@@ -8,6 +8,7 @@ import { apis } from "../../common/api";
 const GET_COMMENT = "GET_COMMENT";
 const ADD_COMMENT = "ADD_COMMENT";
 const DELETE_COMMENT = "DELETE_COMMENT";
+const EDIT_COMMENT = "EDIT_COMMENT";
 
 //액션생성자
 const getComment = createAction(GET_COMMENT, (commentList) => ({
@@ -15,6 +16,9 @@ const getComment = createAction(GET_COMMENT, (commentList) => ({
 }));
 const addComment = createAction(ADD_COMMENT, (comment) => ({ comment }));
 const deleteComment = createAction(DELETE_COMMENT, (commentId) => ({
+  commentId,
+}));
+const editComment = createAction(EDIT_COMMENT, (commentId) => ({
   commentId,
 }));
 
@@ -42,7 +46,7 @@ const addCommentAPI = (comment) => {
     apis
       .addComment(comment)
       .then((res) => {
-        console.log("댓글등록 성공", res);
+        console.log("댓글등록", res);
         dispatch(getCommentAPI(comment.boardId));
       })
       .catch((e) => {
@@ -62,6 +66,20 @@ const deleteCommentAPI = (boardId, commentId) => {
       })
       .catch((e) => {
         alert("댓글 삭제에 실패하였습니다.");
+      });
+  };
+};
+
+const editCommentAPI = (boardId, commentId) => {
+  return function (dispatch, getState, { history }) {
+    apis
+      .deleteComment(commentId, boardId)
+      .then((res) => {
+        console.log("수정성공", res);
+        dispatch(getCommentAPI(boardId, commentId));
+      })
+      .catch((e) => {
+        alert("댓글 수정에 실패하였습니다.");
       });
   };
 };
@@ -94,6 +112,7 @@ const actionCreators = {
   getCommentAPI,
   addCommentAPI,
   deleteCommentAPI,
+  editCommentAPI,
 };
 
 export { actionCreators };
