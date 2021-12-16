@@ -24,7 +24,7 @@ const CommentWrite = (props) => {
   const onClickWrite = () => {
     const comment = {
       boardId: boardId,
-      content: content,
+      comment: content,
     };
 
     if (content === "") {

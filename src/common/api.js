@@ -22,12 +22,12 @@ export const apis = {
   getComment: (boardId) => instance.get(`/board/${boardId}/comment`),
 
   //댓글 작성
-  addComment: (boardId, comment) =>
-    instance.post(`/board/${boardId}/comment`, comment),
+  addComment: (comment) =>
+    instance.post(`/board/${comment.boardId}/comment`, comment),
 
   // 댓글 삭제
-  // deleteComment: (commentId) =>
-  //   instance.delete(`/comment/${commentId}`),
+  deleteComment: (commentId, boardId) =>
+    instance.delete(`http://ozam.shop/board/${boardId}/comment/${commentId}`),
 
   //검색페이지
 };
