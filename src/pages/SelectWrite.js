@@ -1,9 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import styled from "styled-components";
 import { Calendar } from "../components/Calendar";
-import PlusBtn from "../components/PlusBtn";
 import Left from "../assets/left.svg";
-import axios from "axios";
 import { instance } from "../common/api";
 import { useHistory } from "react-router";
 import { history } from "../redux/configureStore";
@@ -12,7 +10,6 @@ export const SelectWrite = (props) => {
   const history = useHistory();
   const [TitleValue, setTitleValue] = useState(null);
   const [ContentValue, setContentValue] = useState(null);
-  const [SelectValue, setSelectValue] = useState(null);
   const [CalenderValue, setCalenderValue] = useState(null);
   const [SelectValue01, setSelectValue01] = useState(null);
   const [SelectValue02, setSelectValue02] = useState(null);

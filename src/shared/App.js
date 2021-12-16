@@ -13,7 +13,6 @@ import SearchPage from "../pages/SearchPage";
 import { Select } from "../pages/Select";
 import { SelectWrite } from "../pages/SelectWrite";
 import { Mypage } from "../pages/Mypage";
-import PlusBtn from "../components/PlusBtn";
 import NotFound from "../components/NotFound";
 import { Provider } from "react-redux";
 import { userActions } from "../redux/modules/user";
@@ -53,7 +52,6 @@ function App() {
             <Route path="/select/:selectId" exact component={Select}></Route>
             <Route path="/selectwrite" exact component={SelectWrite}></Route>
             <Route path="/mypage" exact component={Mypage} />
-            <Route path="/plusbtn" exact component={PlusBtn} />
             <Footer />
           </>
           {/* <Route component={NotFound} /> */}

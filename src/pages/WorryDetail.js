@@ -21,9 +21,8 @@ const WorryDetail = (props) => {
 
 const [worryList, setWorryList] = useState("");
 const { boardId } = useParams();
-
-const 민갑연습 = useSelector((state)=>state)
-console.log("민갑연습", 민갑연습)
+const writerId = worryList.userId
+const logInId = useSelector((state)=>state.user.user)
 
 function worryDelete(){
   //고민 게시글 삭제
@@ -73,15 +72,15 @@ useEffect(() => {
         <Info>
           <div>
             <span>{worryList?.userId}</span>
-            {/* <span>
+            <span>
               <img src={Clock} />
               {worryList?.updatedAt}
-            </span> */}
+            </span>
           </div>
 
-          {/* <span>
+          <span>
             <img src={Eye} />{worryList?.boardViewCount}
-          </span> */}
+          </span>
         </Info>
         <Content>
           {worryList?.boardDesc}
@@ -95,8 +94,15 @@ useEffect(() => {
           </div>
           <div>
             <img src={Share} />
-            <img src={Edit} />
+
+          { 
+          logInId === writerId ? 
+          ( <div><img src={Edit} />
             <img src={Trash} onClick={worryDelete}/>
+            </div>) : ("")
+            }
+
+           
           </div>
         </EditBox>
       </WriteBox>
