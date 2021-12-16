@@ -63,7 +63,7 @@ useEffect(() => {
         <img
           src={Left}
           onClick={() => {
-            history.push("/main");
+            history.goBack();
           }}
         />
         <span>톡톡</span>
@@ -126,7 +126,7 @@ const Header = styled.div`
   position: fixed;
   top: 0;
   z-index: 5;
-  background-color: #f8f9fa;
+  background-color: #9ddbf6;
   width: 375px;
   height: 50px;
   display: flex;
