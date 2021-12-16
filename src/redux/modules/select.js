@@ -6,17 +6,25 @@ import { instance } from "../../common/api";
 const GET_DETAIL = "GET_DETAIL";
 const GET_MAIN = "GET_MAIN";
 const DELETE_SELECT = "DELETE_SELECT";
-// const delete_det
-// 액션함수
+const LIKE_SELECT = "LIKE_SELECT";
+const POST_VOTE = "POST_VOTE";
+//액션함수
 const detailDetail = createAction(GET_DETAIL, (detailList) => ({ detailList }));
 const deleteSelect = createAction(DELETE_SELECT, (selectId) => ({ selectId }));
 //메인 페이지
 const cardList = createAction(GET_MAIN, (mainList) => ({ mainList }));
-
+const likeSelect = createAction(LIKE_SELECT, (selectId, like) => ({
+  selectId,
+  like,
+}));
+//투표
+const postVote = createAction(POST_VOTE, (data) => data);
 // 초기값
 const initialState = {
   detail_list: [],
   main_list: [],
+  like_list: [],
+  vote_list: [],
 };
 
 //미들웨어
@@ -50,6 +58,21 @@ const getMAinAPI = (date) => {
   };
 };
 
+//게시글 수정
+const UpdateSelectAPI = (selectId, selectEditInfo) => {
+  return function (dispatch, getState, { history }) {
+    instance
+      .patch(`/select/${selectId}`, selectEditInfo)
+      .then((res) => {
+        console.log(res, "기달");
+        history.replace(`/select/${selectId}`);
+      })
+      .catch((err) => {
+        console.log(err, "수정에러");
+      });
+  };
+};
+
 //삭제
 const deleteSelectAPI = (selectId) => {
   return function (dispatch, getStste, { history }) {
@@ -57,13 +80,53 @@ const deleteSelectAPI = (selectId) => {
       .delete(`/select/${selectId}`)
       .then((res) => {
         dispatch(deleteSelect(selectId));
-        history.replace(`/community`);
+        history.replace(`/main`);
       })
       .catch((err) => {
         console.log(err, "삭제에러");
       });
   };
 };
+
+//좋아요/취소
+// const likeSelectAPI = (selectId) => {
+//   return function (dispatch, getState, { history }) {
+//     instance
+//       .post(`/select/${selectId}/like`, { selectId: selectId })
+//       .then((res) => {
+//         dispatch(likeSelect(selectId));
+//         // if (!like) {
+//         //   window.alert("좋아요를 누르셨습니다.");
+//         // }
+//       })
+//       .catch((err) => {
+//         console.log(err, "좋아요 에러");
+//       });
+//   };
+// };
+
+// 투표
+const postVoteAPI = (selectId, optionId) => {
+  return function (dispatch, getState, { history }) {
+    console.log(selectId, optionId);
+    instance
+      .post(`/select/${selectId}`, { optionNum: optionId })
+      .then((res) => {
+        const data = {
+          selectId: {
+            1: Number(optionId),
+            2: Number(optionId),
+          },
+        };
+        dispatch(postVote(data));
+      })
+      .catch((err) => {
+        console.log(err, "투표에러");
+      });
+  };
+};
+
+// 리덕스
 export default handleActions(
   {
     [GET_DETAIL]: (state, action) =>
@@ -76,13 +139,30 @@ export default handleActions(
       }),
     [DELETE_SELECT]: (state, action) =>
       produce(state, (draft) => {
-        const idx = draft.detail_list.findIndex((e) => {
+        const idx = draft.main_list.findIndex((e) => {
           return e.selectId === action.payload.selectId;
         });
         if (idx !== -1) {
-          draft.detail_list.splice(idx, 1);
+          draft.main_list.splice(idx, 1);
         }
       }),
+
+    [POST_VOTE]: (state, action) =>
+      produce(state, (draft) => {
+        draft.vote_list = action.payload.selectId;
+      }),
+    // [LIKE_SELECT]: (state, action) =>
+    //   produce(state, (draft) => {
+    //     if (action.payload.like.isLiked) {
+    //       draft.like_list.push(action.payload.selectId);
+    //       return;
+    //     } else {
+    //       const idx = draft.like_list.indexOf(action.payload.selectId);
+    //       if (idx !== -1) {
+    //         draft.like_list.splice(idx, 1);
+    //       }
+    //     }
+    //   }),
   },
   initialState
 );
@@ -91,6 +171,9 @@ const actionCreators = {
   getDetailAPI,
   getMAinAPI,
   deleteSelectAPI,
+  UpdateSelectAPI,
+  postVoteAPI,
+  // likeSelectAPI,
 };
 
 export { actionCreators };

@@ -1,71 +1,52 @@
 import React, { useRef, useState, useEffect } from "react";
 import styled from "styled-components";
-import { Calendar } from "../components/Calendar";
 import Left from "../assets/left.svg";
-import { instance } from "../common/api";
 import { useHistory } from "react-router";
-import { history } from "../redux/configureStore";
+import { useDispatch, useSelector } from "react-redux";
+import { actionCreators as SelectCr } from "../redux/modules/select";
 
-export const SelectWrite = (props) => {
+export const EditSelect = (props) => {
   const history = useHistory();
-  const [TitleValue, setTitleValue] = useState(null);
-  const [ContentValue, setContentValue] = useState(null);
-  const [CalenderValue, setCalenderValue] = useState(null);
-  const [SelectValue01, setSelectValue01] = useState(null);
-  const [SelectValue02, setSelectValue02] = useState(null);
+  const dispatch = useDispatch();
 
-  let today = new Date();
-  console.log(today);
-  let year = today.getFullYear().toString();
-  let month = today.getMonth().toString();
-  let date = today.getDate().toString();
+  //selectid
+  const selectId = props.match.params.selectId;
 
-  console.log("today", year + month + date);
+  //디테일페이지 db
+  const detail_list = useSelector((state) => state.select.detail_list);
+  console.log(detail_list.selectDesc, "아놔");
+  //기존 인풋값
+  const [inputValue, setInputValue] = useState({
+    selectTitle: detail_list?.selectTitle,
+    selectDesc: detail_list?.selectDesc,
+    option1: detail_list?.option1,
+    option2: detail_list?.option2,
+  });
 
-  ////
+  const { selectTitle, selectDesc, option1, option2 } = inputValue;
 
-  const [endDate, setEndDate] = useState(null);
+  //인풋값 추적
+  const onChange = (e) => {
+    const { name, value } = e.target;
+    setInputValue({
+      ...inputValue,
+      [name]: value,
+    });
+  };
 
-  console.log("selectWrite_setEndDate", endDate);
-
-  async function postSelect() {
-    try {
-      const response = await instance.post(
-        "http://ozam.shop/select/write",
-        JSON.stringify({
-          selectTitle: TitleValue,
-          selectDesc: ContentValue,
-          option1: SelectValue01,
-          option2: SelectValue02,
-          endDate: endDate,
-        })
-      );
-      alert("선택지 작성을 성공하였습니다.");
-      history.push("/main");
-      return response;
-    } catch {
-      alert("선택지 내용을 입력해 주세요");
-    }
-  }
-
-  function onTitleChange(e) {
-    setTitleValue(e.target.value);
-  }
-
-  function onContentChange(e) {
-    setContentValue(e.target.value);
-  }
-
-  function onCalenderValue(e) {
-    setCalenderValue(e.target.value);
-  }
-  function onSelectValue01(e) {
-    setSelectValue01(e.target.value);
-  }
-  function onSelectValue02(e) {
-    setSelectValue02(e.target.value);
-  }
-
+  //입력버튼
+  const submitBtn = (e) => {
+    //편집내용
+    const selectEditInfo = {
+      selectTitle: inputValue.selectTitle,
+      selectDesc: inputValue.selectDesc,
+      option1: inputValue.option1,
+      option2: inputValue.option2,
+    };
+    //업데이트 dispatch
+    dispatch(SelectCr.UpdateSelectAPI(selectId, selectEditInfo));
+    e.target.disabled = true;
+  };
   return (
     <Container>
       <Header>
@@ -74,44 +55,43 @@ export const SelectWrite = (props) => {
           onClick={() => {
             history.push("/main");
           }}
-          alt="옆으로"
+          alt="뒤로"
         />
-        <span>A / B 작성하기</span>
+        <span>선택 작성하기</span>
       </Header>
       <Input
-        onChange={onTitleChange}
-        value={TitleValue}
+        onChange={onChange}
+        value={selectTitle}
         placeholder="투표 제목을 입력하세요."
+        name="selectTitle"
       ></Input>
-      <Days>
-        {year} - {month} - {date}
-      </Days>
+
       <Border />
       <Textarea
-        onChange={onContentChange}
-        value={ContentValue}
+        onChange={onChange}
+        value={selectDesc}
         placeholder="고민을 적어보세요."
+        name="selectDesc"
       />
+
       <Select01
         placeholder="선택지를 적어보세요."
-        value={SelectValue01}
-        onChange={onSelectValue01}
+        value={option1}
+        onChange={onChange}
+        name="option1"
       />
       <Select02
         placeholder="선택지를 적어보세요."
-        value={SelectValue02}
-        onChange={onSelectValue02}
+        value={option2}
+        onChange={onChange}
+        name="option2"
       />
-      <Calendar
-        value={CalenderValue}
-        onChange={onCalenderValue}
-        setEndDate={setEndDate}
-      />
+
       <Flat justify="space-between">
-        <Button onClick={postSelect}>작성 완료</Button>
+        <Button onClick={submitBtn}>작성 완료</Button>
         <Button
           onClick={() => {
-            history.replace("/main");
+            history.replace(`/select/${selectId}`);
           }}
         >
           취소

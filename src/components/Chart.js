@@ -1,20 +1,39 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { PieChart } from "react-minimal-pie-chart";
 import { useSelector } from "react-redux";
 
 export const Chart = (props) => {
-  const detail_list = useSelector((state) => state.select.detail_list);
-  console.log(detail_list.option1, "헐");
-  const { option1, option2, optionCount } = detail_list;
+  const { option1, option2, optionCount } = props;
+
+  const options = useSelector((state) => state.select.vote_list);
+
+  let cnt = 0;
+
+  if (optionCount) {
+    cnt = optionCount[0];
+  }
+
+  console.log(cnt);
   const data = [
-    { title: "{option1}", value: 3, color: "#f6cb44" },
-    { title: "{option2}", value: 15, color: "#76BEE3" },
+    {
+      title: option1,
+      value: options[1] ? options[1] : 1,
+      color: "#f6cb44",
+    },
+    {
+      title: option2,
+      value: options[2] ? options[2] : 1,
+      color: "#76BEE3",
+    },
   ];
+
+  console.log(data);
   return (
     <PieChart
       data={data}
-      label={({ dataEntry }) => `${Math.round(dataEntry.percentage)} %`}
-      animate
+      label={({ dataEntry }) =>
+        dataEntry.value !== 0 ? `${Math.round(dataEntry.percentage)}%` : null
+      }
     />
   );
 };
