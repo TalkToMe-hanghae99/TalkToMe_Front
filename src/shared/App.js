@@ -14,6 +14,7 @@ import { SelectWrite } from "../pages/SelectWrite";
 import { Mypage } from "../pages/Mypage";
 import PlusBtn from "../components/PlusBtn";
 import { Provider } from "react-redux";
+import { EditSelect } from "../components/EditSelect";
 
 function App() {
   // *social login
@@ -41,7 +42,11 @@ function App() {
             <Route path="/select/:selectId" exact component={Select}></Route>
             <Route path="/selectwrite" exact component={SelectWrite}></Route>
             <Route path="/mypage" exact component={Mypage} />
-            <Route path="/plusbtn" exact component={PlusBtn} />
+            <Route
+              path="/select/editSelect/:selectId"
+              exact
+              component={EditSelect}
+            ></Route>
             <Footer />
           </>
         </Switch>

@@ -211,18 +211,6 @@ const Select02 = styled.input`
   margin: 10px auto;
 `;
 
-const InputPlus = styled.input`
-  width: 100%;
-  height: 30px;
-  margin-top: 20px;
-`;
-
-const BtnPlus = styled.button`
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-`;
-
 const Button = styled.button`
   width: 160px;
   height: 40px;
