@@ -55,6 +55,14 @@ const SelectBoard = (props) => {
         <ArrayWrapper>
           {index === 0 ? <SelectDate /> : <SelectViewCount />}
         </ArrayWrapper>
+        <UpScroll
+          onClick={() => {
+            window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+          }}
+        >
+          <p>맨 위로 🔺</p>
+        </UpScroll>
+        <FakeDiv />
       </CardBox>
     </Container>
   );
@@ -112,23 +120,46 @@ const TabWrapper = styled.div`
 `;
 
 const Tab = styled.div`
-  height: 30px;
-  margin-right: 10px;
-  padding-top: 10px;
+  width: 70px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 10px 10px 0px;
+  padding: 10px;
   cursor: pointer;
   font-size: 16px;
   font-weight: bold;
+  background-color: #e9e9e9;
+  border-radius: 20px;
+
   ${(props) =>
     props.active
-      ? "color: red; font-weight: 800;"
-      : "color: black; font-weight: 400;"};
+      ? "background-color: #F2138C; color:white;"
+      : "font-weight: 400;"};
 `;
 
 const ArrayWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 10px;
-  /* justify-content: center; */
+  margin: 10px 0;
+`;
+
+const UpScroll = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+
+  p {
+    margin: 0;
+  }
+`;
+
+const FakeDiv = styled.div`
+  height: 75px;
 `;
 
 export default SelectBoard;
