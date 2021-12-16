@@ -22,6 +22,9 @@ const WorryDetail = (props) => {
 const [worryList, setWorryList] = useState("");
 const { boardId } = useParams();
 
+const 민갑연습 = useSelector((state)=>state)
+console.log("민갑연습", 민갑연습)
+
 function worryDelete(){
   //고민 게시글 삭제
   const delWorryList = async () => {
