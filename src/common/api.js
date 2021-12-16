@@ -18,6 +18,9 @@ instance.interceptors.request.use((config) => {
 });
 
 export const apis = {
+  //회원정보 요청
+  getUser: () => instance.get(`/user/me`),
+
   // 댓글 조회
   getComment: (boardId) => instance.get(`/board/${boardId}/comment`),
 
@@ -27,7 +30,13 @@ export const apis = {
 
   // 댓글 삭제
   deleteComment: (commentId, boardId) =>
-    instance.delete(`http://ozam.shop/board/${boardId}/comment/${commentId}`),
+    instance.delete(`/board/${boardId}/comment/${commentId}`),
 
-  //검색페이지
+  // 댓글 수정
+  editComment: (commentId, boardId) =>
+    instance.delete(`/board/${boardId}/comment/${commentId}`),
+
+  //검색
+  getSearch: (group, keyword) =>
+    instance.post(`/search?group=${group}&keyword=${keyword}`),
 };
