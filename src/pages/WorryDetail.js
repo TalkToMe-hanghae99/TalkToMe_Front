@@ -14,6 +14,7 @@ import { useParams} from "react-router-dom";
 import CommentWrite from "../components/CommentWrite";
 
 const WorryDetail = (props) => {
+  console.log("props",props)
   //댓글 수 
   const commentLength = useSelector(
     (state) => state.comment.commentList.length
@@ -28,11 +29,11 @@ function worryDelete(){
       const response = await instance.delete(
         `http://ozam.shop/board/${boardId}`
       );
-      console.log(worryList);
+      console.log("worryDelete", response);
+      // if(response.data)
       } catch {
-      console.log(worryList);
+      alert("삭제하지 못하였습니다.")
     }
-    console.log(worryList);
   };
   delWorryList();
 

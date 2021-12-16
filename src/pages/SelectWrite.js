@@ -10,14 +10,15 @@ import { history } from "../redux/configureStore";
 
 export const SelectWrite = (props) => {
   const history = useHistory();
-  const [TitleValue, setTitleValue] = useState("");
-  const [ContentValue, setContentValue] = useState("");
-  const [SelectValue, setSelectValue] = useState("");
-  const [CalenderValue, setCalenderValue] = useState("");
-  const [SelectValue01, setSelectValue01] = useState("");
-  const [SelectValue02, setSelectValue02] = useState("");
+  const [TitleValue, setTitleValue] = useState(null);
+  const [ContentValue, setContentValue] = useState(null);
+  const [SelectValue, setSelectValue] = useState(null);
+  const [CalenderValue, setCalenderValue] = useState(null);
+  const [SelectValue01, setSelectValue01] = useState(null);
+  const [SelectValue02, setSelectValue02] = useState(null);
 
   let today = new Date();
+  console.log(today)
   let year = today.getFullYear().toString();
   let month = today.getMonth().toString();
   let date = today.getDate().toString();
@@ -42,12 +43,11 @@ export const SelectWrite = (props) => {
           endDate: endDate,
         })
       );
-      alert("선택지 작성이 성공하였습니다.");
+      alert("선택지 작성을 성공하였습니다.");
       history.push("/main");
       return response;
     } catch {
-      console.log("선택지 작성실패");
-      alert("선택지 작성이 실패하였습니다.");
+      alert("선택지 내용을 입력해 주세요");
     }
   }
 
@@ -59,10 +59,6 @@ export const SelectWrite = (props) => {
     setContentValue(e.target.value);
   }
 
-  function onSelectValue(e) {
-    setSelectValue(e.target.value);
-  }
-
   function onCalenderValue(e) {
     setCalenderValue(e.target.value);
   }
@@ -72,12 +68,6 @@ export const SelectWrite = (props) => {
   function onSelectValue02(e) {
     setSelectValue02(e.target.value);
   }
-
-  console.log("TitleValue", TitleValue);
-  console.log("ContentValue", ContentValue);
-  console.log("SelectValue", SelectValue);
-  console.log("SelectValue01", SelectValue01);
-  console.log("SelectValue02", SelectValue02);
 
   return (
     <Container>
