@@ -1,8 +1,27 @@
 import React from "react";
 import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import { actionCreators as commentAction } from "../redux/modules/comment";
 
 const CommentItem = (props) => {
-  const { comment, createdAt } = props;
+  const dispatch = useDispatch();
+  // const commentId = useSelector((state) => state.comment.commentList.commentId);
+  // const boardId = useSelector((state) => state.comment.commentList.boardId);
+  // console.log("찾아봄", boardId);
+  const url = useSelector((state) => state.router);
+  const boardId = url.location.pathname.slice(7);
+
+  const { comment, createdAt, commentId } = props;
+
+  console.log("보드", boardId);
+
+  const onClickDelete = () => {
+    const result = window.confirm("댓글을 정말로 삭제하시겠습니까?");
+
+    if (result) {
+      dispatch(commentAction.deleteCommentAPI(boardId, commentId));
+    }
+  };
 
   return (
     <Container>
@@ -13,7 +32,7 @@ const CommentItem = (props) => {
         </UserInfo>
         <Edit>
           <span>수정</span>
-          <span>삭제</span>
+          <span onClick={onClickDelete}>삭제</span>
         </Edit>
       </User>
       <Content>{comment}</Content>
