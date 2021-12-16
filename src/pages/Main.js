@@ -13,43 +13,7 @@ import Header from "../components/Header";
 function Main() {
   const [selectList, setSelectList] = useState("");
   const [worryList, setWorryList] = useState("");
-  const 연습 = [
-    {
-      boardId: "1",
-      boardTitle: "보드타이틀1",
-      viewCount: "3",
-      commentCount: "5",
-      createdAt: "크레이티",
-    },
-    {
-      boardId: "2",
-      boardTitle: "보드타이틀2",
-      viewCount: "2",
-      commentCount: "4",
-      createdAt: "크레이티",
-    },
-    {
-      boardId: "3",
-      boardTitle: "보드타이틀3",
-      viewCount: "1",
-      commentCount: "5",
-      createdAt: "크레이티",
-    },
-    {
-      boardId: "4",
-      boardTitle: "보드타이틀4",
-      viewCount: "0",
-      commentCount: "2",
-      createdAt: "크레이티",
-    },
-  ];
-
-  // console.log("연습", 연습);
-  // function 인기순() {
-  //   연습.sort(function (a, b) {
-  //     return a.viewCount - b.viewCount;
-  //   });
-  // }
+  
 
   useEffect(() => {
     const getSelectList = async () => {
@@ -69,7 +33,8 @@ function Main() {
     const getWorryList = async () => {
       try {
         const response = await instance.get("http://ozam.shop/board?sort=date");
-        setWorryList(response.data.worryList);
+        setWorryList(response.data.boardViewList);
+        
       } catch {
         console.log("고민 get 실패");
       }
@@ -109,7 +74,7 @@ function Main() {
             댓글순
           </Page>
         </PageNation>
-        {연습 && 연습?.map((list) => <MainCardConcern List={list} />)}
+        {worryList && worryList?.map((list) => <MainCardConcern key={list.boardId} List={list} />)}
         <PaddingBox />
       </ContentBox>
     </MainBox>
