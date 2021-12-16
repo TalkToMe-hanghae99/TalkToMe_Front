@@ -15,7 +15,7 @@ export const SelectWrite = (props) => {
   const [SelectValue02, setSelectValue02] = useState(null);
 
   let today = new Date();
-  console.log(today)
+  console.log(today);
   let year = today.getFullYear().toString();
   let month = today.getMonth().toString();
   let date = today.getDate().toString();
@@ -133,7 +133,7 @@ const Header = styled.div`
   position: fixed;
   top: 0;
   z-index: 5;
-  background-color: #f8f9fa;
+  background-color: #9ddbf6;
   width: 375px;
   height: 50px;
   display: flex;

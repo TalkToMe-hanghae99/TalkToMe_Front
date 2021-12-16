@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router";
+import { useParams, useHistory } from "react-router";
 import styled from "styled-components";
 import { Chart } from "../components/Chart";
 import { Modal } from "../components/Modal";
 import { actionCreators as SelectCr } from "../redux/modules/select";
+
+import Left from "../assets/left.svg";
+
 export const Select = (props) => {
+  const history = useHistory();
   const dispatch = useDispatch();
   //디테일페이지 불러오기
   const detail_list = useSelector((state) => state.select.detail_list);
@@ -59,6 +63,15 @@ export const Select = (props) => {
   const updataBtn = () => {};
   return (
     <Container>
+      <Header>
+        <img
+          src={Left}
+          onClick={() => {
+            history.goBack();
+          }}
+        />
+        <span>A / B</span>
+      </Header>
       <Flat justify=" space-between">
         <Text size="16px">{selectTitle}</Text>
       </Flat>
@@ -116,6 +129,30 @@ export const Select = (props) => {
     </Container>
   );
 };
+
+const Header = styled.div`
+  position: fixed;
+  top: 0;
+  z-index: 5;
+  background-color: #9ddbf6;
+  width: 375px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+
+  img {
+    height: 60%;
+    cursor: pointer;
+  }
+
+  span {
+    width: 100%;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+  }
+`;
 
 const Text = styled.div`
   font-weight: bold;
