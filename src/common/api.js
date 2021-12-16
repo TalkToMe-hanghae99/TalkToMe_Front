@@ -36,8 +36,7 @@ export const apis = {
   editComment: (commentId, boardId) =>
     instance.delete(`/board/${boardId}/comment/${commentId}`),
 
-  //검색페이지
-  
+ 
   
  
 };
