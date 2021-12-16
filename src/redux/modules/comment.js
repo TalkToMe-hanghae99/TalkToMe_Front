@@ -43,14 +43,29 @@ const addCommentAPI = (comment) => {
       .addComment(comment)
       .then((res) => {
         console.log("알아보자", res);
-        // dispatch(getCommentAPI(comment.boardId));
+        dispatch(getCommentAPI(comment.boardId));
       })
       .catch((e) => {
         console.log(e.response);
-        // alert("댓글을 작성하는데 실패하였습니다.");
+        alert("댓글을 작성하는데 실패하였습니다.");
       });
   };
 };
+
+// const addCommentAPI = (comment) => {
+//   return function (dispatch, getState, { history }) {
+//     apis
+//       .addComment(comment)
+//       .then((res) => {
+//         console.log("알아보자", res);
+//         // dispatch(getCommentAPI(comment.boardId));
+//       })
+//       .catch((e) => {
+//         console.log(e.response);
+//         // alert("댓글을 작성하는데 실패하였습니다.");
+//       });
+//   };
+// };
 
 // const deleteCommentAPI = (commentId, boardId) => {
 //   return function (dispatch, getState, { history }) {

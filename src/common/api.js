@@ -22,8 +22,8 @@ export const apis = {
   getComment: (boardId) => instance.get(`/board/${boardId}/comment`),
 
   //댓글 작성
-  addComment: (boardId, comment) =>
-    instance.post(`/board/${boardId}/comment`, comment),
+  addComment: (comment) =>
+    instance.post(`/board/${comment.boardId}/comment`, comment),
 
   // 댓글 삭제
   // deleteComment: (commentId) =>
