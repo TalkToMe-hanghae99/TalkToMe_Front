@@ -27,7 +27,5 @@ export const apis = {
 
   // 댓글 삭제
   deleteComment: (commentId, boardId) =>
-    instance.delete(`http://ozam.shop/board/${boardId}/comment/${commentId}`),
-
-  //검색페이지
+    instance.delete(`/board/${boardId}/comment/${commentId}`),
 };

@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { ConnectedRouter } from "connected-react-router";
+import { useDispatch } from "react-redux";
 import store, { history } from "../redux/configureStore";
 
 import Footer from "../components/Footer";
@@ -15,6 +16,7 @@ import { Mypage } from "../pages/Mypage";
 import PlusBtn from "../components/PlusBtn";
 import NotFound from "../components/NotFound";
 import { Provider } from "react-redux";
+import { userActions } from "../redux/modules/user";
 
 function App() {
   // *social login

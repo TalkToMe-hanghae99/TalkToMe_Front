@@ -42,7 +42,7 @@ const addCommentAPI = (comment) => {
     apis
       .addComment(comment)
       .then((res) => {
-        console.log("알아보자", res);
+        console.log("댓글등록 성공", res);
         dispatch(getCommentAPI(comment.boardId));
       })
       .catch((e) => {
@@ -58,7 +58,6 @@ const deleteCommentAPI = (boardId, commentId) => {
       .deleteComment(commentId, boardId)
       .then((res) => {
         console.log("삭제성공", res);
-        // dispatch(deleteComment(commentId));
         dispatch(getCommentAPI(boardId, commentId));
       })
       .catch((e) => {

@@ -2,18 +2,16 @@ import React from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as commentAction } from "../redux/modules/comment";
+import { useParams } from "react-router";
 
 const CommentItem = (props) => {
   const dispatch = useDispatch();
-  // const commentId = useSelector((state) => state.comment.commentList.commentId);
-  // const boardId = useSelector((state) => state.comment.commentList.boardId);
-  // console.log("찾아봄", boardId);
-  const url = useSelector((state) => state.router);
-  const boardId = url.location.pathname.slice(7);
 
-  const { comment, createdAt, commentId } = props;
+  const loginUserId = useSelector(
+    (state) => state.select.detail_list.logInUserId
+  );
 
-  console.log("보드", boardId);
+  const { comment, createdAt, commentId, boardId, userId } = props;
 
   const onClickDelete = () => {
     const result = window.confirm("댓글을 정말로 삭제하시겠습니까?");
@@ -30,10 +28,12 @@ const CommentItem = (props) => {
           <UserName>익명</UserName>
           <Time>{createdAt}</Time>
         </UserInfo>
-        <Edit>
-          <span>수정</span>
-          <span onClick={onClickDelete}>삭제</span>
-        </Edit>
+        {loginUserId == userId ? (
+          <Edit>
+            <span>수정</span>
+            <span onClick={onClickDelete}>삭제</span>
+          </Edit>
+        ) : null}
       </User>
       <Content>{comment}</Content>
     </Container>
