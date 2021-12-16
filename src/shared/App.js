@@ -17,8 +17,8 @@ import { SelectWrite } from "../pages/SelectWrite";
 import { Mypage } from "../pages/Mypage";
 import SelectBoard from "../pages/SelectBoard";
 import WorryBoard from "../pages/WorryBoard";
-import PlusBtn from "../components/PlusBtn";
 import NotFound from "../components/NotFound";
+import WorryRevise from "../pages/WorryRevise";
 
 function App() {
   // *social login
@@ -57,7 +57,7 @@ function App() {
             <Route path="/select/:selectId" exact component={Select}></Route>
             <Route path="/selectwrite" exact component={SelectWrite}></Route>
             <Route path="/mypage" exact component={Mypage} />
-            <Route path="/plusbtn" exact component={PlusBtn} />
+            <Route path="/worryrevise/:boardId" exact component={WorryRevise} />
             <Footer />
           </>
           {/* <Route component={NotFound} /> */}
