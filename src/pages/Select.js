@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, useHistory } from "react-router";
+import { useHistory, useParams } from "react-router";
 import styled from "styled-components";
 import { Chart } from "../components/Chart";
 import { Modal } from "../components/Modal";
+import ShareBtn from "../components/ShareBtn";
 import { actionCreators as SelectCr } from "../redux/modules/select";
 
 import Left from "../assets/left.svg";
@@ -11,15 +12,13 @@ import Left from "../assets/left.svg";
 export const Select = (props) => {
   const history = useHistory();
   const dispatch = useDispatch();
+
   //디테일페이지 불러오기
   const detail_list = useSelector((state) => state.select.detail_list);
   console.log(props, "쭝");
   const params = useParams();
+  console.log(detail_list, "맥주");
   const selectId = params.selectId;
-  console.log(selectId, "나무");
-  console.log(detail_list, "되DDD나");
-  console.log(detail_list.userId, "dd");
-  console.log(detail_list.logInUserId, "치킨");
   const {
     createdAt,
     logInUserId,
@@ -28,18 +27,42 @@ export const Select = (props) => {
     selectDesc,
     option1,
     option2,
+    nickname,
+    optionCount,
   } = detail_list;
+
+  const options = useSelector((state) => state.select.vote_list);
+  console.log(options);
+
+  const [like, setlike] = useState(0);
+  // 좋아요버튼
+  const onIncrease = () => {
+    // dispatch(SelectCr.likeSelectAPI(selectId));
+    setlike((likes) => likes + 1);
+  };
+
+  //투표
+  const [option, setOption] = useState(0);
+
+  //투표버튼
+  const oneBtn = (e) => {
+    setOption(e.target.className.slice(-1));
+  };
 
   // 시간정리
   const dayTime = detail_list.createdAt;
   const day = new Date(dayTime);
   console.log(day.toLocaleString());
   const dateUpate = day.toLocaleString();
-  console.log(dateUpate);
   //선택디테일페이지
   useEffect(() => {
-    dispatch(SelectCr.getDetailAPI(selectId));
-  }, []);
+    if (option !== 0) {
+      dispatch(SelectCr.postVoteAPI(selectId, option));
+    }
+    setTimeout(() => {
+      dispatch(SelectCr.getDetailAPI(selectId));
+    }, 1000);
+  }, [option]);
 
   //모달 여부
   const [showModal, setShowModal] = useState(false);
@@ -60,7 +83,10 @@ export const Select = (props) => {
     setShowModal(false);
   };
   // 수정 버튼
-  const updataBtn = () => {};
+  const updataBtn = () => {
+    history.push(`/select/editSelect/${selectId}`);
+  };
+
   return (
     <Container>
       <Header>
@@ -76,17 +102,22 @@ export const Select = (props) => {
         <Text size="16px">{selectTitle}</Text>
       </Flat>
       <Flat justify=" space-between">
-        <Text>닉네임</Text>
+        <Text>{nickname}</Text>
         <Days>{dateUpate}</Days>
       </Flat>
       <Border />
       <TextBox>{selectDesc}</TextBox>
-      <Vote>{option1}</Vote>
-      <Vote>{option2}</Vote>
+      <VoteOne className="1" onClick={oneBtn}>
+        {option1}
+      </VoteOne>
+      <VoteTwo className="2" onClick={oneBtn}>
+        {option2}
+      </VoteTwo>
 
       <Flat justify="space-evenly">
-        <div>🧡 숫자</div>
-        <Text>공유</Text>
+        <div onClick={onIncrease}>🧡{like}명</div>
+
+        <ShareBtn />
         {/* 쓴사람에게만 보이는 수정버튼 */}
         {userId === logInUserId ? (
           <Text
@@ -113,9 +144,10 @@ export const Select = (props) => {
         )}
       </Flat>
       <Border />
-      <Text>투표결과</Text>
-      <Chart />
+
+      <Chart option1={option1} option2={option2} optionCount={optionCount} />
       <Button>당신의 선택은?</Button>
+
       {/*  모달 */}
       {showModal && (
         <Modal
@@ -185,12 +217,20 @@ const Border = styled.div`
 
 const TextBox = styled.div``;
 
-const Vote = styled.div`
+const VoteOne = styled.div`
   width: 100%;
   height: 30px;
   border: 1px solid #e7e7e7;
   margin-top: 20px;
-  background-color: white;
+  background-color: #f6cb44;
+`;
+
+const VoteTwo = styled.div`
+  width: 100%;
+  height: 30px;
+  border: 1px solid #e7e7e7;
+  margin-top: 20px;
+  background-color: #76bee3;
 `;
 
 const VoteColor = styled.div`

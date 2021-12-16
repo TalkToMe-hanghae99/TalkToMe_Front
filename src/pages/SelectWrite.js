@@ -74,6 +74,7 @@ export const SelectWrite = (props) => {
           onClick={() => {
             history.push("/main");
           }}
+          alt="옆으로"
         />
         <span>A / B 작성하기</span>
       </Header>
@@ -196,18 +197,6 @@ const Select02 = styled.input`
   height: 32px;
   width: 335px;
   margin: 10px auto;
-`;
-
-const InputPlus = styled.input`
-  width: 100%;
-  height: 30px;
-  margin-top: 20px;
-`;
-
-const BtnPlus = styled.button`
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
 `;
 
 const Button = styled.button`

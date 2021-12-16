@@ -19,7 +19,7 @@ import SelectBoard from "../pages/SelectBoard";
 import WorryBoard from "../pages/WorryBoard";
 import NotFound from "../components/NotFound";
 import WorryRevise from "../pages/WorryRevise";
-
+import { EditSelect } from "../components/EditSelect";
 function App() {
   // *social login
   if (window.location.pathname.includes("sociallogin")) {
@@ -56,6 +56,11 @@ function App() {
             <Route path="/board/:boardId" exact component={WorryDetail}></Route>
             <Route path="/select/:selectId" exact component={Select}></Route>
             <Route path="/selectwrite" exact component={SelectWrite}></Route>
+            <Route
+              path="/select/editSelect/:selectId"
+              exact
+              component={EditSelect}
+            ></Route>
             <Route path="/mypage" exact component={Mypage} />
             <Route path="/worryrevise/:boardId" exact component={WorryRevise} />
             <Footer />
