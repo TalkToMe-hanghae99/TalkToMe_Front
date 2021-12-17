@@ -35,4 +35,8 @@ export const apis = {
   // 댓글 수정
   editComment: (commentId, boardId) =>
     instance.delete(`/board/${boardId}/comment/${commentId}`),
+
+  //검색
+  getSearch: (group, keyword) =>
+    instance.post(`/search?group=${group}&keyword=${keyword}`),
 };
