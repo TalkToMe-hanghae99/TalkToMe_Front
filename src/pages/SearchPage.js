@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
+/* eslint-disable */
+
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router";
 
 import SearchInput from "../components/SearchInput";
-import { instance } from "../common/api";
-import MainCardConcern from "../components/MainCardConcern";
-import MainCardSelect from "../components/MainCardSelect";
 import Left from "../assets/left.svg";
 import eye from "../assets/eye.svg";
 import clock from "../assets/clock.svg";
@@ -14,39 +13,6 @@ function SearchPage(props) {
   const history = useHistory();
 
   const [data, setData] = useState([]);
-
-  // const [worryList, setWorryList] = useState("");
-  // const [selectList, setSelectList] = useState("");
-
-  // useEffect(() => {
-  //   const getWorryList = async () => {
-  //     try {
-  //       const response = await instance.get("/board?sort=date");
-  //       const resData = response.data.boardViewList;
-  //       const Filter = resData.filter((res) => res === data);
-
-  //       console.log("하이고", Filter);
-  //       // setWorryList(response.data.boardViewList);
-  //       // setWorryList(response.data.searchList);
-  //     } catch (err) {
-  //       console.log("고민 get 실패", err);
-  //     }
-  //   };
-  //   getWorryList();
-  // }, []);
-
-  // useEffect(() => {
-  //   const getSelectList = async () => {
-  //     try {
-  //       const response = await instance.get("/select?sort=date");
-  //       setSelectList(response.data.selectsList);
-  //     } catch (err) {
-  //       console.log("선택 get 실패", err);
-  //     }
-  //   };
-  //   getSelectList();
-  // }, []);
-  // console.log("selectList", selectList);
 
   return (
     <SearchPageBox>
@@ -61,48 +27,62 @@ function SearchPage(props) {
       </Header>
       <ContentBox>
         <SearchInput setData={setData} />
-        {/* {data.group === "board"
-          ? data.searchList?.map((item, idx) => (
-              <MainCardConcern key={idx} {...item} />
-            ))
-          : data.searchList?.map((item, idx) => (
-              <MainCardSelect key={idx} {...item} />
-            ))} */}
+        {data.group === "board" &&
+          data.searchList?.map((item, idx) => (
+            <CardBox
+              key={idx}
+              onClick={() => {
+                history.push(`/board/${data.searchList[idx].boardId}`);
+              }}
+            >
+              <Top>
+                <span>
+                  <img src={clock} />
+                  {data.searchList[idx].createdAt.slice(0, 10)}
+                </span>
+                <span>
+                  <img src={eye} />
+                  {data.searchList[idx].boardViewCount}
+                </span>
+              </Top>
+              <Bottom>
+                <Title>{data.searchList[idx].boardTitle}</Title>
+                <Noti>
+                  <p>{data.searchList[idx].commentCount}</p>
+                  <span>댓글</span>
+                </Noti>
+              </Bottom>
+            </CardBox>
+          ))}
 
-        {/* {selectList && selectList?.map((item, idx) => <MainCardSelect key={idx} />)} */}
-        {/* {worryList && worryList?.map((list) => <MainCardConcern List={list} />)} */}
-        {/* <PaddingBox /> */}
-
-        {data.group === "board" && (
-          <CardBox
-          // onClick={() => {
-          //   history.push(`/board/${props.List?.boardId}`);
-          // }}
-          >
-            <Top>
-              <span>
-                <img src={clock} />
-                시간
-                {/* {props.List?.createdAt.slice(0, 10)} */}
-              </span>
-              <span>
-                <img src={eye} />
-                조회수
-                {/* {props.List?.boardViewCount} */}
-              </span>
-            </Top>
-            <Bottom>
-              <Title>
-                제목
-                {/* {props.List?.boardTitle} */}
-              </Title>
-              <Comment>
-                <p>0{/* {props.List?.commentCount} */}</p>
-                <span>댓글</span>
-              </Comment>
-            </Bottom>
-          </CardBox>
-        )}
+        {data.group === "select" &&
+          data.searchList?.map((item, idx) => (
+            <CardBox
+              key={idx}
+              onClick={() => {
+                history.push(`/board/${data.searchList[idx].selectId}`);
+              }}
+            >
+              <Top>
+                <span>
+                  <img src={clock} />
+                  {data.searchList[idx].createdAt.slice(0, 10)}
+                </span>
+                <span>
+                  <img src={eye} />
+                  {data.searchList[idx].selectViewCount}
+                </span>
+              </Top>
+              <Bottom>
+                <Title>{data.searchList[idx].selectTitle}</Title>
+                <Noti>
+                  <p>{data.searchList[idx].participationCount}</p>
+                  <span>투표수</span>
+                </Noti>
+              </Bottom>
+            </CardBox>
+          ))}
+        <FakeDiv />
       </ContentBox>
     </SearchPageBox>
   );
@@ -145,10 +125,6 @@ const ContentBox = styled.div`
   margin-top: 40px;
   width: 375px;
   background-color: white;
-`;
-
-const PaddingBox = styled.div`
-  height: 60px;
 `;
 
 const CardBox = styled.div`
@@ -198,7 +174,7 @@ const Title = styled.h1`
   margin: 0;
 `;
 
-const Comment = styled.div`
+const Noti = styled.div`
   width: 50px;
   height: 55px;
   display: flex;
@@ -216,6 +192,10 @@ const Comment = styled.div`
   span {
     font-size: 12px;
   }
+`;
+
+const FakeDiv = styled.div`
+  height: 75px;
 `;
 
 export default SearchPage;
