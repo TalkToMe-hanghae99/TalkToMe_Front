@@ -28,7 +28,7 @@ function SearchPage(props) {
       <ContentBox>
         <SearchInput setData={setData} />
 
-        {data.searchList.length === 0 ? (
+        {data?.searchList?.length == 0 ? (
           <Msg>
             <p>해당되는 검색결과가 없습니다.</p>
           </Msg>
