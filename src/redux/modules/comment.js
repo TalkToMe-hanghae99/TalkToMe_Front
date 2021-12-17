@@ -18,8 +18,8 @@ const addComment = createAction(ADD_COMMENT, (comment) => ({ comment }));
 const deleteComment = createAction(DELETE_COMMENT, (commentId) => ({
   commentId,
 }));
-const editComment = createAction(EDIT_COMMENT, (commentId) => ({
-  commentId,
+const editComment = createAction(EDIT_COMMENT, (comment) => ({
+  comment,
 }));
 
 //initialState
@@ -70,15 +70,16 @@ const deleteCommentAPI = (boardId, commentId) => {
   };
 };
 
-const editCommentAPI = (boardId, commentId) => {
+const editCommentAPI = (boardId, comment) => {
   return function (dispatch, getState, { history }) {
     apis
-      .deleteComment(commentId, boardId)
+      .editComment(comment, boardId)
       .then((res) => {
         console.log("수정성공", res);
-        dispatch(getCommentAPI(boardId, commentId));
+        dispatch(getCommentAPI(boardId));
       })
-      .catch((e) => {
+      .catch((err) => {
+        console.log(err);
         alert("댓글 수정에 실패하였습니다.");
       });
   };

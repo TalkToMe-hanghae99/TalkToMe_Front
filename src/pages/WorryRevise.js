@@ -41,7 +41,7 @@ const WorryRevise = (props) => {
         })
       );
       alert("선택지 수정을 성공하였습니다.");
-      history.push("/main");
+      history.goBack();
       return response;
     } catch {
       alert("선택지 내용을 입력해 주세요");

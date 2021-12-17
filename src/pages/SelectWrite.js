@@ -34,7 +34,7 @@ export const SelectWrite = (props) => {
         })
       );
       alert("선택지 작성을 성공하였습니다.");
-      history.push("/main");
+      history.push("/selectboard");
       return response;
     } catch {
       alert("선택지 내용을 입력해 주세요");
@@ -203,5 +203,5 @@ const Button = styled.button`
   font-weight: bold;
   font-size: 16px;
   border-radius: 5px;
-  cursor:pointer;
+  cursor: pointer;
 `;

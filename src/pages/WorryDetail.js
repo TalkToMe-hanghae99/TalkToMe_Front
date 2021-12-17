@@ -22,8 +22,7 @@ const WorryDetail = (props) => {
 const [worryList, setWorryList] = useState("");
 const { boardId } = useParams();
 const writerId = worryList.userId
-const logInId = useSelector((state)=>state.user.user)
-
+const logInId = useSelector((state)=>state.user.user.userId)
 
 function worryDelete(){
   //고민 게시글 삭제
@@ -32,8 +31,8 @@ function worryDelete(){
       const response = await instance.delete(
         `/board/${boardId}`
       );
-      alert("게시글이 삭제되었습니다.")
-      history.push("/main")
+      window.confirm("게시글을 삭제하시겠습니까?")
+      history.push("/worryboard")
       } catch(err) {
       alert("게시글 삭제 실패" ,err)
     }
@@ -72,7 +71,7 @@ useEffect(() => {
         <Title>{worryList?.boardTitle}</Title>
         <Info>
           <div>
-            <span>{worryList?.userId}</span>
+            <span>{worryList?.nickname}</span>
             <span>
               <img src={Clock} />
               {worryList?.updatedAt}
@@ -88,23 +87,14 @@ useEffect(() => {
         </Content>
         <EditBox>
           <div>
-            <span>
-              <img src={Heart} /> 0
-            </span>
             <span>댓글 ({commentLength})</span>
           </div>
-          <div>
-            <img src={Share} />
-
           { 
           logInId === writerId ? 
           ( <div><img src={Edit} onClick={()=>{history.push(`/worryrevise/${boardId}`)}} />
             <img src={Trash} onClick={worryDelete}/>
             </div>) : ("")
             }
-
-           
-          </div>
         </EditBox>
       </WriteBox>
       <CommentWrite />

@@ -12,8 +12,8 @@ const postWriteAPI = (worryInfo) => {
       .post(`/board/write`, worryInfo)
       .then((res) => {
         console.log(res);
-        // const history = useHistory();
-        history.replace("/main");
+        window.alert("등록이 완료되었습니다.");
+        history.push("/worryboard");
       })
       .catch((err) => {
         console.log(err, "글쓰기작성");

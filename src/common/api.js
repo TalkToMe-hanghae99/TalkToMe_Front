@@ -2,10 +2,12 @@ import axios from "axios";
 
 export const instance = axios.create({
   baseURL: process.env.REACT_APP_server,
+  withCredentials: true,
   headers: {
     "Content-type": "application/json;charset=UTF-8",
-    accept: "application/json",
-    // "Access-Control-Allow-Origin": "*",
+    // accept: "application/json",
+    accept: "application/x-www-form-urlencoded",
+    "Access-Control-Allow-Origin": process.env.REACT_APP_server,
   },
 });
 
@@ -14,6 +16,7 @@ instance.interceptors.request.use((config) => {
   config.headers["Authorization"] = `Bearer  ${localStorage.getItem(
     "accessToken"
   )}`;
+  config.headers["X-Requested-With"] = "XMLHttpRequest";
   return config;
 });
 
@@ -33,8 +36,8 @@ export const apis = {
     instance.delete(`/board/${boardId}/comment/${commentId}`),
 
   // 댓글 수정
-  editComment: (commentId, boardId) =>
-    instance.delete(`/board/${boardId}/comment/${commentId}`),
+  editComment: (comment, boardId) =>
+    instance.patch(`/board/${boardId}/comment/${comment.commentId}`, comment),
 
   //검색
   getSearch: (group, keyword) =>

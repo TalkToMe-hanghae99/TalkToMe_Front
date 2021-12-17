@@ -22,9 +22,9 @@ const WorryCreateUpdate = (props) => {
         boardDesc,
       };
       dispatch(worryCr.postWriteAPI(worryInfo));
-      // history.replace("/main");}
     }
   };
+
   return (
     <Container>
       <Header>
@@ -59,7 +59,13 @@ const WorryCreateUpdate = (props) => {
       </WriteBox>
       <BtnBox>
         <button onClick={submitBtn}>작성완료</button>
-        <button>취소</button>
+        <button
+          onClick={() => {
+            history.push("/main");
+          }}
+        >
+          취소
+        </button>
       </BtnBox>
     </Container>
   );
@@ -152,14 +158,14 @@ const BtnBox = styled.div`
   button {
     height: 40px;
     width: 135px;
-    margin:25px 10px;
-    border-radius:5px;
-    border:none;
-    background-color:pink;
-    color:white;
-    font-weight:bold;
-    font-size:16px;
-    cursor:pointer;
+    margin: 25px 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: pink;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
   }
 `;
 
