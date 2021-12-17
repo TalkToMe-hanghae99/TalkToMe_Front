@@ -11,7 +11,7 @@ const Login = (props) => {
       <LoginBtn>
         <Google>
           <img src={google} />
-          <a href="http://ozam.shop/user/google">Sign in with Google</a>
+          <a href="https://ozam.shop/user/google">Sign in with Google</a>
         </Google>
       </LoginBtn>
     </Container>

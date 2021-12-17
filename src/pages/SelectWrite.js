@@ -31,7 +31,7 @@ export const SelectWrite = (props) => {
   async function postSelect() {
     try {
       const response = await instance.post(
-        "http://ozam.shop/select/write",
+        "/select/write",
         JSON.stringify({
           selectTitle: TitleValue,
           selectDesc: ContentValue,

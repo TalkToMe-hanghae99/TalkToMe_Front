@@ -6,7 +6,7 @@ import styled from "styled-components";
 import Left from "../assets/left.svg";
 import { actionCreators as worryCr } from "../redux/modules/worrywrite";
 import { instance } from "../common/api";
-import { useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const WorryRevise = (props) => {
   const dispatch = useDispatch();
@@ -15,15 +15,12 @@ const WorryRevise = (props) => {
   const [boardDesc, setboardDesc] = useState(null);
   const { boardId } = useParams();
 
-
-//현재 작업중
+  //현재 작업중
   useEffect(() => {
     //고민 게시글 가져오기
     const getWorryList = async () => {
       try {
-        const response = await instance.get(
-          `http://ozam.shop/board/${boardId}`
-        );
+        const response = await instance.get(`/board/${boardId}`);
         console.log(response.data);
         setboardTitle(response.data);
         setboardDesc(response.data);
@@ -34,14 +31,13 @@ const WorryRevise = (props) => {
     getWorryList();
   }, []);
 
-
   async function reviseWorry() {
     try {
       const response = await instance.patch(
-        `http://ozam.shop/board/${boardId}`,
+        `/board/${boardId}`,
         JSON.stringify({
           boardTitle: boardTitle,
-          boardDesc: boardDesc
+          boardDesc: boardDesc,
         })
       );
       alert("선택지 수정을 성공하였습니다.");
@@ -51,8 +47,6 @@ const WorryRevise = (props) => {
       alert("선택지 내용을 입력해 주세요");
     }
   }
-
-
 
   return (
     <Container>

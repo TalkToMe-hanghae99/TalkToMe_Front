@@ -9,9 +9,7 @@ const SelectDate = (props) => {
   useEffect(() => {
     const getSelectDateList = async () => {
       try {
-        const response = await instance.get(
-          "http://ozam.shop/select?sort=date"
-        );
+        const response = await instance.get("/select?sort=date");
         setSelectList(response.data.selectsList);
       } catch (error) {
         console.log("선택지 get 오류", error.response);
