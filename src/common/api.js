@@ -5,7 +5,8 @@ export const instance = axios.create({
   withCredentials: true,
   headers: {
     "Content-type": "application/json;charset=UTF-8",
-    accept: "application/json",
+    // accept: "application/json",
+    accept: "application/x-www-form-urlencoded",
     "Access-Control-Allow-Origin": process.env.REACT_APP_server,
   },
 });

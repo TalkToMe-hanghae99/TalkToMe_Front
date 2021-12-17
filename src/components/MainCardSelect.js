@@ -25,8 +25,8 @@ function MainCardSelect(props) {
       <Bottom>
         <Title>{props.List?.selectTitle}</Title>
         <Noti>
-          <p>A/B</p>
-          <span>100/100</span>
+          <p>{props.List?.participationCount}</p>
+          <span>투표수</span>
         </Noti>
       </Bottom>
     </CardBox>
