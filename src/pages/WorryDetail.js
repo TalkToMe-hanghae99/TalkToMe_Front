@@ -30,7 +30,7 @@ function worryDelete(){
   const delWorryList = async () => {
     try {
       const response = await instance.delete(
-        `http://ozam.shop/board/${boardId}`
+        `/board/${boardId}`
       );
       alert("게시글이 삭제되었습니다.")
       history.push("/main")
@@ -47,7 +47,7 @@ useEffect(() => {
   const getWorryList = async () => {
     try {
       const response = await instance.get(
-        `http://ozam.shop/board/${boardId}`
+        `/board/${boardId}`
       );
       setWorryList(response.data.boardList.[0]);
     } catch(err) {
@@ -63,7 +63,7 @@ useEffect(() => {
         <img
           src={Left}
           onClick={() => {
-            history.push("/main");
+            history.goBack();
           }}
         />
         <span>톡톡</span>
