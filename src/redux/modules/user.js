@@ -8,16 +8,13 @@ const SET_USER = "SET_USER";
 
 const setUser = createAction(SET_USER, (user) => ({ user }));
 
-const initialState = {
-  user: "",
-  userNickname: "",
-};
+const initialState = {};
 
 export const getUserAPI = () => {
   return function (dispatch, getState, { history }) {
     apis.getUser().then((res) => {
-      const userId = res.data.userId;
-      dispatch(setUser(userId));
+      const user = res.data;
+      dispatch(setUser(user));
     });
   };
 };

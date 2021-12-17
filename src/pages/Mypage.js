@@ -7,8 +7,7 @@ import Left from "../assets/left.svg";
 
 export const Mypage = (props) => {
   const history = useHistory();
-  const nickname = useSelector((state) => state.user);
-  console.log("ddd", nickname);
+  const nickname = useSelector((state) => state.user.user.nickname);
 
   const handleClickLogOut = () => {
     const result = window.confirm("로그아웃을 하시겠습니까?");
@@ -32,9 +31,20 @@ export const Mypage = (props) => {
       </Header>
       <Content>
         <UserInfo>
-          <span>회원</span>
-          <button>닉네임 수정</button>
+          <Circle>
+            <span>{nickname}</span>
+          </Circle>
         </UserInfo>
+
+        <Text>
+          {nickname}님!
+          <br />
+          마음털어 놓을 곳이 없다면
+          <br />
+          언제든지 다시 찾아주세요🥰
+          <br />
+          톡투미는 항상 들을 준비가 되어있답니다.
+        </Text>
         <LogOut onClick={handleClickLogOut}>Logout</LogOut>
       </Content>
     </Container>
@@ -46,6 +56,7 @@ const Container = styled.div`
   height: 100vh;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   background-color: white;
   padding: 20px;
@@ -78,7 +89,9 @@ const Header = styled.div`
 const Content = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 75px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 50px;
 `;
 
 const UserInfo = styled.div`
@@ -86,8 +99,36 @@ const UserInfo = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-size: 50px;
-  font-weight: bold;
+  margin-bottom: 40px;
+
+  button {
+    font-size: 16px;
+    padding: 5px 10px;
+  }
+`;
+
+const Circle = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 160px;
+  height: 160px;
+  background-color: #f2158d;
+  color: white;
+  border-radius: 50%;
+  margin-bottom: 20px;
+
+  span {
+    font-size: 3rem;
+    font-weight: bold;
+  }
+`;
+
+const Text = styled.p`
+  font-size: 18px;
+  line-height: 30px;
+  text-align: center;
+  margin-bottom: 20px;
 `;
 
 const LogOut = styled.div`
@@ -98,9 +139,14 @@ const LogOut = styled.div`
   height: 80px;
   font-size: 20px;
   font-weight: bold;
-  background-color: teal;
+  background-color: #f8f8f8;
   border-radius: 20px;
   cursor: pointer;
+
+  :hover {
+    background-color: #f1158b;
+    color: white;
+  }
 `;
 
 export default Mypage;
