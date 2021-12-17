@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Left from "../assets/left.svg";
 import { useHistory } from "react-router";
@@ -48,7 +48,7 @@ export const EditSelect = (props) => {
     e.target.disabled = true;
   };
   return (
-    <Container>
+    <div>
       <Header>
         <img
           src={Left}
@@ -59,46 +59,48 @@ export const EditSelect = (props) => {
         />
         <span>선택 작성하기</span>
       </Header>
-      <Input
-        onChange={onChange}
-        value={selectTitle}
-        placeholder="투표 제목을 입력하세요."
-        name="selectTitle"
-      ></Input>
+      <Container>
+        <Input
+          onChange={onChange}
+          value={selectTitle}
+          placeholder="투표 제목을 입력하세요."
+          name="selectTitle"
+        ></Input>
 
-      <Border />
-      <Textarea
-        onChange={onChange}
-        value={selectDesc}
-        placeholder="고민을 적어보세요."
-        name="selectDesc"
-      />
-      <Lavel>A 선택지</Lavel>
-      <Select01
-        placeholder="선택지를 적어보세요."
-        value={option1}
-        onChange={onChange}
-        name="option1"
-      />
-      <Lavel>B 선택지</Lavel>
-      <Select02
-        placeholder="선택지를 적어보세요."
-        value={option2}
-        onChange={onChange}
-        name="option2"
-      />
+        <Border />
+        <Textarea
+          onChange={onChange}
+          value={selectDesc}
+          placeholder="고민을 적어보세요."
+          name="selectDesc"
+        />
+        <Lavel>A 선택지</Lavel>
+        <Select01
+          placeholder="선택지를 적어보세요."
+          value={option1}
+          onChange={onChange}
+          name="option1"
+        />
+        <Lavel>B 선택지</Lavel>
+        <Select02
+          placeholder="선택지를 적어보세요."
+          value={option2}
+          onChange={onChange}
+          name="option2"
+        />
 
-      <Flat justify="space-between">
-        <Button onClick={submitBtn}>작성 완료</Button>
-        <Button
-          onClick={() => {
-            history.replace(`/select/${selectId}`);
-          }}
-        >
-          취소
-        </Button>
-      </Flat>
-    </Container>
+        <Flat justify="space-between">
+          <Button onClick={submitBtn}>작성 완료</Button>
+          <Button
+            onClick={() => {
+              history.replace(`/select/${selectId}`);
+            }}
+          >
+            취소
+          </Button>
+        </Flat>
+      </Container>
+    </div>
   );
 };
 
@@ -198,5 +200,5 @@ const Button = styled.button`
   font-weight: bold;
   font-size: 16px;
   border-radius: 5px;
-  cursor:pointer;
+  cursor: pointer;
 `;
