@@ -151,7 +151,10 @@ const Hr = styled.hr`
 const BtnBox = styled.div`
   button {
     height: 40px;
-    width: 100px;
+    width: 150px;
+    margin:7px;
+    border-radius:5px;
+    border:none;
   }
 `;
 

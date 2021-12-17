@@ -27,7 +27,8 @@ export const Chart = (props) => {
     },
   ];
 
-  console.log(data);
+  console.log("차트데이터", data);
+  console.log("차트프롭스", props);
   return (
     <PieChart
       data={data}

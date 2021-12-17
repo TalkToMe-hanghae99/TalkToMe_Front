@@ -15,9 +15,11 @@ export const Select = (props) => {
 
   //디테일페이지 불러오기
   const detail_list = useSelector((state) => state.select.detail_list);
-  console.log(props, "쭝");
+  const 민갑연습 = useSelector((state) => state);
+  console.log(props, "props");
+  console.log(민갑연습, "민갑연습");
   const params = useParams();
-  console.log(detail_list, "맥주");
+  console.log(detail_list, "디테일리스트");
   const selectId = params.selectId;
   const {
     createdAt,
@@ -60,7 +62,7 @@ export const Select = (props) => {
     }
     setTimeout(() => {
       dispatch(SelectCr.getDetailAPI(selectId));
-    }, 1000);
+    }, 0);
   }, [option]);
 
   //모달 여부
@@ -87,8 +89,8 @@ export const Select = (props) => {
   };
 
   return (
-    <Container>
-      <Header>
+<>
+    <Header>
         <img
           src={Left}
           onClick={() => {
@@ -97,6 +99,8 @@ export const Select = (props) => {
         />
         <span>A / B</span>
       </Header>
+    <Container>
+      
       <Flat justify=" space-between">
         <Text size="16px">{selectTitle}</Text>
       </Flat>
@@ -158,8 +162,17 @@ export const Select = (props) => {
         ></Modal>
       )}
     </Container>
+    </>
   );
 };
+
+const Container = styled.div`
+  padding: 50px 20px;
+  display: flex;
+  flex-direction: column;
+  width: 375px;
+  background-color:white;
+`;
 
 const Header = styled.div`
   position: fixed;
@@ -197,39 +210,38 @@ const Days = styled.div`
 const Flat = styled.div`
   display: flex;
   justify-content: ${(props) => props.justify};
-  margin: 10px 0;
+  margin: 20px 0;
 `;
 
-const Container = styled.div`
-  margin: 0 20px;
-  display: flex;
-  flex-direction: column;
-  width: 90%;
-  max-width: 375px;
-`;
 
 const Border = styled.div`
   width: 100%;
   border: 1px solid #e7e7e7;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
 `;
 
 const TextBox = styled.div``;
 
 const VoteOne = styled.div`
-  width: 100%;
-  height: 30px;
+  width: 50%;
+  height: 40px;
   border: 1px solid #e7e7e7;
   margin-top: 20px;
   background-color: #f6cb44;
+  text-align:center;
+  line-height:35px;
+  border-radius:5px;
 `;
 
 const VoteTwo = styled.div`
-  width: 100%;
-  height: 30px;
+  width: 50%;
+  height: 40px;
   border: 1px solid #e7e7e7;
   margin-top: 20px;
   background-color: #76bee3;
+  text-align:center;
+  line-height:35px;
+  border-radius:5px;
 `;
 
 const VoteColor = styled.div`
@@ -240,9 +252,10 @@ const VoteColor = styled.div`
 
 const Button = styled.button`
   width: 100%;
-  height: 50px;
+  height: 40px;
   background: #e9e9e9;
   border: none;
   font-weight: bold;
   margin: 20px 0;
+  border-radius:5px;
 `;
