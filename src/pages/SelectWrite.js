@@ -1,6 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
 import styled from "styled-components";
-import { Calendar } from "../components/Calendar";
 import Left from "../assets/left.svg";
 import { instance } from "../common/api";
 import { useHistory } from "react-router";
@@ -10,7 +9,7 @@ export const SelectWrite = (props) => {
   const history = useHistory();
   const [TitleValue, setTitleValue] = useState(null);
   const [ContentValue, setContentValue] = useState(null);
-  const [CalenderValue, setCalenderValue] = useState(null);
+  
   const [SelectValue01, setSelectValue01] = useState(null);
   const [SelectValue02, setSelectValue02] = useState(null);
 
@@ -22,11 +21,6 @@ export const SelectWrite = (props) => {
 
   console.log("today", year + month + date);
 
-  ////
-
-  const [endDate, setEndDate] = useState(null);
-
-  console.log("selectWrite_setEndDate", endDate);
 
   async function postSelect() {
     try {
@@ -37,7 +31,6 @@ export const SelectWrite = (props) => {
           selectDesc: ContentValue,
           option1: SelectValue01,
           option2: SelectValue02,
-          endDate: endDate,
         })
       );
       alert("선택지 작성을 성공하였습니다.");
@@ -56,9 +49,6 @@ export const SelectWrite = (props) => {
     setContentValue(e.target.value);
   }
 
-  function onCalenderValue(e) {
-    setCalenderValue(e.target.value);
-  }
   function onSelectValue01(e) {
     setSelectValue01(e.target.value);
   }
@@ -101,11 +91,6 @@ export const SelectWrite = (props) => {
         placeholder="선택지를 적어보세요."
         value={SelectValue02}
         onChange={onSelectValue02}
-      />
-      <Calendar
-        value={CalenderValue}
-        onChange={onCalenderValue}
-        setEndDate={setEndDate}
       />
       <Flat justify="space-between">
         <Button onClick={postSelect}>작성 완료</Button>
