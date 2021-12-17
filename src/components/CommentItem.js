@@ -6,13 +6,15 @@ import { actionCreators as commentAction } from "../redux/modules/comment";
 const CommentItem = (props) => {
   const dispatch = useDispatch();
 
-  const loginUserId = useSelector((state) => state.user.user);
+  const loginUserId = useSelector((state) => state.user.user.userId);
 
   const { comment, createdAt, commentId, boardId, userId } = props;
 
   //댓글 수정
   const [showEditInput, setShowEditInput] = useState(false);
   const [editComment, setEditComment] = useState(null);
+
+  console.log("이게뭐여11", editComment);
 
   const onClickEdit = () => {
     setShowEditInput(!showEditInput);
@@ -42,7 +44,7 @@ const CommentItem = (props) => {
       <User>
         <UserInfo>
           <UserName>익명</UserName>
-          <Time>{createdAt}</Time>
+          <Time>{createdAt.slice(0, 10)}</Time>
         </UserInfo>
         {loginUserId === userId ? (
           <Edit>

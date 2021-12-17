@@ -30,12 +30,12 @@ function worryDelete(){
   const delWorryList = async () => {
     try {
       const response = await instance.delete(
-        `http://ozam.shop/board/${boardId}`
+        `/board/${boardId}`
       );
       alert("게시글이 삭제되었습니다.")
       history.push("/main")
-      } catch {
-      alert("게시글 삭제가 취소되었습니다.")
+      } catch(err) {
+      alert("게시글 삭제 실패" ,err)
     }
   };
   delWorryList();
@@ -50,8 +50,8 @@ useEffect(() => {
         `/board/${boardId}`
       );
       setWorryList(response.data.boardList.[0]);
-    } catch {
-      console.log("실패시 게시글 리스트", worryList);
+    } catch(err) {
+      console.log("게시글 리스트 불러오기 실패", err);
     }
   };
   getWorryList();
@@ -63,7 +63,7 @@ useEffect(() => {
         <img
           src={Left}
           onClick={() => {
-            history.push("/main");
+            history.goBack();
           }}
         />
         <span>톡톡</span>
@@ -132,12 +132,10 @@ const Header = styled.div`
   display: flex;
   align-items: center;
   padding: 10px 20px;
-
   img {
     height: 60%;
     cursor: pointer;
   }
-
   span {
     width: 100%;
     text-align: center;
@@ -166,21 +164,17 @@ const Info = styled.div`
   border-bottom: 1px solid rgb(233, 236, 239);
   color: gray;
   font-size: 12px;
-
   div {
     display: flex;
     align-items: center;
-
     span {
       margin-right: 10px;
     }
   }
-
   span {
     display: flex;
     align-items: center;
   }
-
   img {
     height: 16px;
     margin-right: 5px;
@@ -200,22 +194,18 @@ const EditBox = styled.div`
   justify-content: space-between;
   font-weight: 600;
   color: #64656a;
-
   div {
     display: flex;
     align-items: center;
-
     span {
       display: flex;
       align-items: center;
       margin-right: 10px;
-
       img {
         margin: 0 5px 0 0;
       }
     }
   }
-
   img {
     height: 16px;
     margin-left: 15px;

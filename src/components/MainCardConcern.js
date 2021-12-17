@@ -14,7 +14,7 @@ function MainCardConcern(props) {
       <Top>
         <span>
           <img src={clock} />
-          {props.List.createdAt.slice(0, 10)}
+          {props.List?.createdAt.slice(0, 10)}
         </span>
         <span>
           <img src={eye} />
@@ -23,10 +23,10 @@ function MainCardConcern(props) {
       </Top>
       <Bottom>
         <Title>{props.List?.boardTitle}</Title>
-        <Comment>
+        <Noti>
           <p>{props.List?.commentCount}</p>
           <span>댓글</span>
-        </Comment>
+        </Noti>
       </Bottom>
     </CardBox>
   );
@@ -78,7 +78,7 @@ const Title = styled.h1`
   margin: 0;
 `;
 
-const Comment = styled.div`
+const Noti = styled.div`
   width: 50px;
   height: 55px;
   display: flex;
