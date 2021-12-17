@@ -4,14 +4,14 @@ import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import { connectRouter } from "connected-react-router";
 
 import Comment from "./modules/comment";
-import select from "./modules/select";
+import Select from "./modules/select";
 import User from "./modules/user";
 
 export const history = createBrowserHistory();
 
 const rootReducer = combineReducers({
   comment: Comment,
-  select: select,
+  select: Select,
   user: User,
   router: connectRouter(history),
 });

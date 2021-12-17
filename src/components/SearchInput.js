@@ -8,7 +8,7 @@ import Select from "@mui/material/Select";
 import searchImg from "../assets/search.svg";
 import { apis } from "../common/api";
 
-function SearchInput() {
+function SearchInput(props) {
   //drop box
   const [group, setGroup] = useState("");
 
@@ -35,8 +35,8 @@ function SearchInput() {
     }
     try {
       const data = await apis.getSearch(group, keyword);
-      const searchList = data.data.searchList;
-      console.log("확인해보자", searchList);
+      const searchList = data.data;
+      props.setData(searchList);
     } catch (error) {
       console.log(error.response);
     }

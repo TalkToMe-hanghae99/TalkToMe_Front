@@ -14,7 +14,7 @@ function MainCardConcern(props) {
       <Top>
         <span>
           <img src={clock} />
-          {props.List.createdAt.slice(0, 10)}
+          {props.List?.createdAt.slice(0, 10)}
         </span>
         <span>
           <img src={eye} />
