@@ -10,9 +10,7 @@ const WorryDate = (props) => {
   useEffect(() => {
     const getWorryList = async () => {
       try {
-        const response = await instance.get(
-          "https://ozam.shop/board?sort=date"
-        );
+        const response = await instance.get("/board?sort=date");
         setWorryList(response.data.boardViewList);
       } catch (error) {
         console.log("고민 get 실패", error.response);

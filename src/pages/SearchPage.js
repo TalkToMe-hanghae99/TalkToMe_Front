@@ -17,10 +17,10 @@ function SearchPage() {
   useEffect(() => {
     const getWorryList = async () => {
       try {
-        const response = await instance.get("http://ozam.shop/board?sort=date");
+        const response = await instance.get("/board?sort=date");
         setWorryList(response.data.boardViewList);
-      } catch {
-        console.log("고민 get 실패");
+      } catch (err) {
+        console.log("고민 get 실패", err);
       }
     };
     getWorryList();
@@ -29,13 +29,10 @@ function SearchPage() {
   useEffect(() => {
     const getSelectList = async () => {
       try {
-        const response = await instance.get(
-          // '`http://ozam.shop/board?sort=${sort}&page=${page}`'
-          "http://ozam.shop/select?sort=date"
-        );
+        const response = await instance.get("/select?sort=date");
         setSelectList(response.data.selectsList);
-      } catch {
-        console.log(selectList);
+      } catch (err) {
+        console.log("선택 get 실패", err);
       }
     };
     getSelectList();

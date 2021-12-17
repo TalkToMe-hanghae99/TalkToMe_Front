@@ -9,9 +9,7 @@ const WorryComment = (props) => {
   useEffect(() => {
     const getWorryList = async () => {
       try {
-        const response = await instance.get(
-          "http://ozam.shop/board?sort=commentCount"
-        );
+        const response = await instance.get("/board?sort=commentCount");
         setWorryList(response.data.boardViewList);
       } catch (error) {
         console.log("고민 get 실패", error.response);
