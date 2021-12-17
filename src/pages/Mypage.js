@@ -1,75 +1,53 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router";
+import { useSelector } from "react-redux";
 
-import { MySelect } from "../components/MySelect";
-import { MyWrite } from "../components/MyWrite";
-import { NameCorrection } from "../components/NameCorrection";
-import { SelectWrite } from "./SelectWrite";
 import Left from "../assets/left.svg";
 
 export const Mypage = (props) => {
   const history = useHistory();
+  const nickname = useSelector((state) => state.user.user.nickname);
 
-  //탭 바꾸기
-  const [select, setSelect] = useState(true);
-  const [write, setWrite] = useState(false);
+  const handleClickLogOut = () => {
+    const result = window.confirm("로그아웃을 하시겠습니까?");
 
-  //닉네임 바꾸기
-  const [name, setName] = useState(false);
-
-  //나의 선택카드
-  const selectBtn = () => {
-    if (select === false && write === true) {
-      setWrite(false);
-      setSelect(true);
-    }
-  };
-  // 나의 작성 버튼
-  const writeBtn = () => {
-    if (write === false && select === true) {
-      setSelect(false);
-      setWrite(true);
+    if (result) {
+      localStorage.removeItem("accessToken");
+      history.push("/");
     }
   };
 
-  //수정버튼
-  const updateBtn = () => {
-    if (name === false) {
-      setName(true);
-    }
-  };
   return (
-    <Color>
-      <Container>
-        <Header>
-          <img
-            src={Left}
-            onClick={() => {
-              history.goBack();
-            }}
-          />
-          <span>내정보</span>
-        </Header>
-        <Grid>
-          <Name>닉네임 </Name>
-          <Honorific>님</Honorific>
-        </Grid>
-        <Button onClick={updateBtn}>수정하기</Button>
-        <Flat>
-          <Text margin="0 10px 0 0" onClick={selectBtn}>
-            나의 선택지
-          </Text>
-          <Text onClick={writeBtn}>나의 고민거리</Text>
-        </Flat>
-        {/* 버튼 탭 */}
-        {select && <MySelect />}
-        {write && <MyWrite />}
+    <Container>
+      <Header>
+        <img
+          src={Left}
+          onClick={() => {
+            history.goBack();
+          }}
+        />
+        <span>내정보</span>
+      </Header>
+      <Content>
+        <UserInfo>
+          <Circle>
+            <span>{nickname}</span>
+          </Circle>
+        </UserInfo>
 
-        {/* 수정버튼 */}
-        {name && <NameCorrection />}
-      </Container>
-    </Color>
+        <Text>
+          {nickname}님!
+          <br />
+          마음털어 놓을 곳이 없다면
+          <br />
+          언제든지 다시 찾아주세요🥰
+          <br />
+          톡투미는 항상 들을 준비가 되어있답니다.
+        </Text>
+        <LogOut onClick={handleClickLogOut}>Logout</LogOut>
+      </Content>
+    </Container>
   );
 };
 
@@ -78,6 +56,7 @@ const Container = styled.div`
   height: 100vh;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   background-color: white;
   padding: 20px;
@@ -107,45 +86,67 @@ const Header = styled.div`
   }
 `;
 
-const Grid = styled.div`
+const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 50px;
+`;
+
+const UserInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40px;
+
+  button {
+    font-size: 16px;
+    padding: 5px 10px;
+  }
+`;
+
+const Circle = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 70px;
+  align-items: center;
+  width: 160px;
+  height: 160px;
+  background-color: #f2158d;
+  color: white;
+  border-radius: 50%;
+  margin-bottom: 20px;
+
+  span {
+    font-size: 3rem;
+    font-weight: bold;
+  }
 `;
 
-const Name = styled.p`
-  width: 100px;
-  padding: 10px 20px;
-  background: #dadada;
+const Text = styled.p`
+  font-size: 18px;
+  line-height: 30px;
   text-align: center;
-  font-weight: bold;
+  margin-bottom: 20px;
 `;
 
-const Honorific = styled.span`
-  font-size: 30px;
-  font-weight: bold;
-  line-height: 2.5;
-`;
-
-const Button = styled.button`
-  color: #858585;
-  border: none;
-  margin-left: 200px;
-`;
-
-const Flat = styled.div`
+const LogOut = styled.div`
   display: flex;
-  justify-content: ${(props) => props.justify};
-  margin: 10px 0;
-`;
-
-const Text = styled.div`
+  justify-content: center;
+  align-items: center;
+  width: 260px;
+  height: 80px;
+  font-size: 20px;
   font-weight: bold;
-  font-size: ${(props) => props.size};
-  margin: ${(props) => props.margin};
+  background-color: #f8f8f8;
+  border-radius: 20px;
+  cursor: pointer;
+
+  :hover {
+    background-color: #f1158b;
+    color: white;
+  }
 `;
 
-const Color = styled.div`
-  background-color: white;
-  min-height: 558px;
-`;
+export default Mypage;

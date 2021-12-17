@@ -5,7 +5,7 @@ export const instance = axios.create({
   headers: {
     "Content-type": "application/json;charset=UTF-8",
     accept: "application/json",
-    "Access-Control-Allow-Origin": "*",
+    // "Access-Control-Allow-Origin": "*",
   },
 });
 
@@ -35,8 +35,4 @@ export const apis = {
   // 댓글 수정
   editComment: (commentId, boardId) =>
     instance.delete(`/board/${boardId}/comment/${commentId}`),
-
- 
-  
- 
 };
