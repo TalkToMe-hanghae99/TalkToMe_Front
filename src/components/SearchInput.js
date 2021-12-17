@@ -8,7 +8,7 @@ import Select from "@mui/material/Select";
 import searchImg from "../assets/search.svg";
 import { apis } from "../common/api";
 
-function SearchInput() {
+function SearchInput(props) {
   //drop box
   const [group, setGroup] = useState("");
 
@@ -24,10 +24,19 @@ function SearchInput() {
   };
 
   //search Btn
-  const clickSearch = async () => {
+  const clickSearch = async (e) => {
+    if (group === "") {
+      window.alert("게시판을 선택해주세요");
+      e.preventDefault();
+    }
+    if (keyword === "") {
+      window.alert("검색어를 입력해주세요");
+      e.preventDefault();
+    }
     try {
       const data = await apis.getSearch(group, keyword);
-      console.log("확인해보자", data);
+      const searchList = data.data;
+      props.setData(searchList);
     } catch (error) {
       console.log(error.response);
     }
@@ -41,7 +50,6 @@ function SearchInput() {
           <Select
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
-            // value={search}
             onChange={handleSelectChange}
             autoWidth
             label="search"
@@ -52,7 +60,7 @@ function SearchInput() {
           </Select>
         </FormControl>
       </div>
-      <SearchBar onChange={hadleSearchChange} />
+      <SearchBar onChange={hadleSearchChange} required />
       <ImgBox>
         <Img src={searchImg} onClick={clickSearch} />
       </ImgBox>
