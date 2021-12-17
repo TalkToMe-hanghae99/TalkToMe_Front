@@ -10,6 +10,7 @@ const setUser = createAction(SET_USER, (user) => ({ user }));
 
 const initialState = {
   user: "",
+  userNickname: "",
 };
 
 export const getUserAPI = () => {

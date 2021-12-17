@@ -1,75 +1,43 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router";
+import { useSelector } from "react-redux";
 
-import { MySelect } from "../components/MySelect";
-import { MyWrite } from "../components/MyWrite";
-import { NameCorrection } from "../components/NameCorrection";
-import { SelectWrite } from "./SelectWrite";
 import Left from "../assets/left.svg";
 
 export const Mypage = (props) => {
   const history = useHistory();
+  const nickname = useSelector((state) => state.user);
+  console.log("ddd", nickname);
 
-  //탭 바꾸기
-  const [select, setSelect] = useState(true);
-  const [write, setWrite] = useState(false);
+  const handleClickLogOut = () => {
+    const result = window.confirm("로그아웃을 하시겠습니까?");
 
-  //닉네임 바꾸기
-  const [name, setName] = useState(false);
-
-  //나의 선택카드
-  const selectBtn = () => {
-    if (select === false && write === true) {
-      setWrite(false);
-      setSelect(true);
-    }
-  };
-  // 나의 작성 버튼
-  const writeBtn = () => {
-    if (write === false && select === true) {
-      setSelect(false);
-      setWrite(true);
+    if (result) {
+      localStorage.removeItem("accessToken");
+      history.push("/");
     }
   };
 
-  //수정버튼
-  const updateBtn = () => {
-    if (name === false) {
-      setName(true);
-    }
-  };
   return (
-    <Color>
-      <Container>
-        <Header>
-          <img
-            src={Left}
-            onClick={() => {
-              history.goBack();
-            }}
-          />
-          <span>내정보</span>
-        </Header>
-        <Grid>
-          <Name>닉네임 </Name>
-          <Honorific>님</Honorific>
-        </Grid>
-        <Button onClick={updateBtn}>수정하기</Button>
-        <Flat>
-          <Text margin="0 10px 0 0" onClick={selectBtn}>
-            나의 선택지
-          </Text>
-          <Text onClick={writeBtn}>나의 고민거리</Text>
-        </Flat>
-        {/* 버튼 탭 */}
-        {select && <MySelect />}
-        {write && <MyWrite />}
-
-        {/* 수정버튼 */}
-        {name && <NameCorrection />}
-      </Container>
-    </Color>
+    <Container>
+      <Header>
+        <img
+          src={Left}
+          onClick={() => {
+            history.goBack();
+          }}
+        />
+        <span>내정보</span>
+      </Header>
+      <Content>
+        <UserInfo>
+          <span>회원</span>
+          <button>닉네임 수정</button>
+        </UserInfo>
+        <LogOut onClick={handleClickLogOut}>Logout</LogOut>
+      </Content>
+    </Container>
   );
 };
 
@@ -107,45 +75,32 @@ const Header = styled.div`
   }
 `;
 
-const Grid = styled.div`
+const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 75px;
+`;
+
+const UserInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 50px;
+  font-weight: bold;
+`;
+
+const LogOut = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 70px;
-`;
-
-const Name = styled.p`
-  width: 100px;
-  padding: 10px 20px;
-  background: #dadada;
-  text-align: center;
+  align-items: center;
+  width: 260px;
+  height: 80px;
+  font-size: 20px;
   font-weight: bold;
+  background-color: teal;
+  border-radius: 20px;
+  cursor: pointer;
 `;
 
-const Honorific = styled.span`
-  font-size: 30px;
-  font-weight: bold;
-  line-height: 2.5;
-`;
-
-const Button = styled.button`
-  color: #858585;
-  border: none;
-  margin-left: 200px;
-`;
-
-const Flat = styled.div`
-  display: flex;
-  justify-content: ${(props) => props.justify};
-  margin: 10px 0;
-`;
-
-const Text = styled.div`
-  font-weight: bold;
-  font-size: ${(props) => props.size};
-  margin: ${(props) => props.margin};
-`;
-
-const Color = styled.div`
-  background-color: white;
-  min-height: 558px;
-`;
+export default Mypage;
