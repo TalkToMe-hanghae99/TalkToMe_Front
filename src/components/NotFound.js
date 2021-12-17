@@ -10,14 +10,14 @@ const NotFound = (props) => {
   return (
     <Container>
       <h1>주소가 올바르지 않아요!</h1>
-      <button
+      <Button
         onClick={() => {
           history.goBack();
         }}
       >
         <img src={left} />
         뒤로 가기
-      </button>
+      </Button>
     </Container>
   );
 };
@@ -50,5 +50,18 @@ const Container = styled.div`
     }
   }
 `;
+
+const Button = styled.button`
+width:185px;
+height:70px;
+border-radius:5px;
+background-color:#ECECEC;
+margin-top:50px;
+border:none;
+cursor:pointer;
+:hover{
+  background-color:pink;
+}
+`
 
 export default NotFound;

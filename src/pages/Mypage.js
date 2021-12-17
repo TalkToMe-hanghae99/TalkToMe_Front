@@ -7,7 +7,7 @@ import Left from "../assets/left.svg";
 
 export const Mypage = (props) => {
   const history = useHistory();
-  const nickname = useSelector((state) => state.user.user.nickname);
+  const nickname = useSelector((state) => state.user?.user?.nickname);
 
   const handleClickLogOut = () => {
     const result = window.confirm("로그아웃을 하시겠습니까?");
