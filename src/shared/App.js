@@ -20,6 +20,9 @@ import WorryBoard from "../pages/WorryBoard";
 import NotFound from "../components/NotFound";
 import WorryRevise from "../pages/WorryRevise";
 import { EditSelect } from "../components/EditSelect";
+import { ErrorBoundary } from "react-error-boundary";
+import { Fallback } from "../components/Fallback";
+
 function App() {
   // *social login
   if (window.location.pathname.includes("sociallogin")) {
@@ -38,36 +41,50 @@ function App() {
     }
   }, []);
 
+  const errorHandler = (error, errorInfo) => {
+    console.log("Logging", error, errorInfo);
+  };
+
   return (
     <Provider store={store}>
-      <ConnectedRouter history={history}>
-        <Switch>
-          <Route path="/" exact component={Login}></Route>
-          <>
-            <Route path="/searchpage" exact component={SearchPage}></Route>
-            <Route path="/main" exact component={Main}></Route>
-            <Route
-              path="/worrywrite"
-              exact
-              component={WorryCreateUpdate}
-            ></Route>
-            <Route path="/worryboard" exact component={WorryBoard}></Route>
-            <Route path="/selectboard" exact component={SelectBoard}></Route>
-            <Route path="/board/:boardId" exact component={WorryDetail}></Route>
-            <Route path="/select/:selectId" exact component={Select}></Route>
-            <Route path="/selectwrite" exact component={SelectWrite}></Route>
-            <Route
-              path="/select/editSelect/:selectId"
-              exact
-              component={EditSelect}
-            ></Route>
-            <Route path="/mypage" exact component={Mypage} />
-            <Route path="/worryrevise/:boardId" exact component={WorryRevise} />
-            {/* <Route component={NotFound} /> */}
-            <Footer />
-          </>
-        </Switch>
-      </ConnectedRouter>
+      <ErrorBoundary FallbackComponent={Fallback} onError={errorHandler}>
+        <ConnectedRouter history={history}>
+          <Switch>
+            <Route path="/" exact component={Login}></Route>
+            <>
+              <Route path="/searchpage" exact component={SearchPage}></Route>
+              <Route path="/main" exact component={Main}></Route>
+              <Route
+                path="/worrywrite"
+                exact
+                component={WorryCreateUpdate}
+              ></Route>
+              <Route path="/worryboard" exact component={WorryBoard}></Route>
+              <Route path="/selectboard" exact component={SelectBoard}></Route>
+              <Route
+                path="/board/:boardId"
+                exact
+                component={WorryDetail}
+              ></Route>
+              <Route path="/select/:selectId" exact component={Select}></Route>
+              <Route path="/selectwrite" exact component={SelectWrite}></Route>
+              <Route
+                path="/select/editSelect/:selectId"
+                exact
+                component={EditSelect}
+              ></Route>
+              <Route path="/mypage" exact component={Mypage} />
+              <Route
+                path="/worryrevise/:boardId"
+                exact
+                component={WorryRevise}
+              />
+              {/* <Route component={NotFound} /> */}
+              <Footer />
+            </>
+          </Switch>
+        </ConnectedRouter>
+      </ErrorBoundary>
     </Provider>
   );
 }
