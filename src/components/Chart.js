@@ -13,16 +13,16 @@ export const Chart = (props) => {
     cnt = optionCount[0];
   }
 
-  console.log(cnt);
+  console.log(cnt[2]);
   const data = [
     {
       title: option1,
-      value: options[1] ? options[1] : 0,
+      value: cnt[1] ? cnt[1] : 0,
       color: "#f6cb44",
     },
     {
       title: option2,
-      value: options[2] ? options[2] : 0,
+      value: cnt[2] ? cnt[2] : 0,
       color: "#76BEE3",
     },
   ];
