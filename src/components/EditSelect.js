@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, {  useState } from "react";
 import styled from "styled-components";
 import Left from "../assets/left.svg";
 import { useHistory } from "react-router";
@@ -73,13 +73,14 @@ export const EditSelect = (props) => {
         placeholder="고민을 적어보세요."
         name="selectDesc"
       />
-
+      <Lavel>A 선택지</Lavel>
       <Select01
         placeholder="선택지를 적어보세요."
         value={option1}
         onChange={onChange}
         name="option1"
       />
+      <Lavel>B 선택지</Lavel>
       <Select02
         placeholder="선택지를 적어보세요."
         value={option2}
@@ -108,13 +109,14 @@ const Container = styled.div`
   width: 375px;
   height: 100vh;
   background-color: white;
+  padding: 30px;
 `;
 
 const Header = styled.div`
   position: fixed;
   top: 0;
   z-index: 5;
-  background-color: #f8f9fa;
+  background-color: #9ddbf6;
   width: 375px;
   height: 50px;
   display: flex;
@@ -134,56 +136,66 @@ const Header = styled.div`
   }
 `;
 const Input = styled.input`
-  width: 335px;
+  width: 100%;
   height: 40px;
-  margin: 0 auto;
-  margin-top: 60px;
+  margin: 70px auto;
+  margin-bottom: 00px;
   border: #e7e7e7;
   font-size: 16px;
   font-weight: bold;
-`;
-
-const Days = styled.div`
-  color: #858585;
-  display: flex;
-  justify-content: flex-end;
+  background-color: #fafafa;
 `;
 
 const Border = styled.div`
   width: 100%;
   border: 1px solid #e7e7e7;
-  margin-bottom: 30px;
+  margin: 40px 0;
   background-color: red;
 `;
 const Textarea = styled.textarea`
-  width: 335px;
+  width: 100%;
   margin: 0 auto;
   margin-bottom: 10px;
   height: 300px;
   font-size: 15px;
   border: #e7e7e7;
+  background-color: #fafafa;
 `;
 const Flat = styled.div`
   display: flex;
   justify-content: ${(props) => props.justify};
   margin: 10px 0;
 `;
+
+const Lavel = styled.div`
+  height: 25px;
+  width: 100px;
+  margin: 15px 15px 15px 0px;
+`;
+
 const Select01 = styled.input`
-  height: 32px;
-  width: 335px;
-  margin: 10px auto;
+  height: 35px;
+  width: 100%;
+  border: 1px solid #e1e1e1;
+  margin-bottom: 12px;
 `;
 const Select02 = styled.input`
-  height: 32px;
-  width: 335px;
-  margin: 10px auto;
+  height: 35px;
+  width: 100%;
+  border: 1px solid #e1e1e1;
+  margin-bottom: 12px;
 `;
 
 const Button = styled.button`
-  width: 160px;
+  width: 100%;
   height: 40px;
   background: #e9e9e9;
   border: none;
   font-weight: bold;
   margin: 20px 20px;
+  background-color: pink;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  border-radius: 5px;
 `;
