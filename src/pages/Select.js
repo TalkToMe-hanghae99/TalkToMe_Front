@@ -20,7 +20,6 @@ export const Select = (props) => {
   console.log(민갑연습, "민갑연습");
   const params = useParams();
   console.log(detail_list, "디테일리스트");
-  console.log("option1",option1)
   const selectId = params.selectId;
   const {
     createdAt,
