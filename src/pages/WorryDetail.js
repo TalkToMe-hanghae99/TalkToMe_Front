@@ -74,7 +74,7 @@ useEffect(() => {
             <span>{worryList?.nickname}</span>
             <span>
               <img src={Clock} />
-              {worryList?.updatedAt}
+              {worryList?.updatedAt?.slice(0,10)}
             </span>
           </div>
 

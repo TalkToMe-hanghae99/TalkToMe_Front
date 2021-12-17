@@ -27,61 +27,71 @@ function SearchPage(props) {
       </Header>
       <ContentBox>
         <SearchInput setData={setData} />
-        {data.group === "board" &&
-          data.searchList?.map((item, idx) => (
-            <CardBox
-              key={idx}
-              onClick={() => {
-                history.push(`/board/${data.searchList[idx].boardId}`);
-              }}
-            >
-              <Top>
-                <span>
-                  <img src={clock} />
-                  {data.searchList[idx].createdAt.slice(0, 10)}
-                </span>
-                <span>
-                  <img src={eye} />
-                  {data.searchList[idx].boardViewCount}
-                </span>
-              </Top>
-              <Bottom>
-                <Title>{data.searchList[idx].boardTitle}</Title>
-                <Noti>
-                  <p>{data.searchList[idx].commentCount}</p>
-                  <span>댓글</span>
-                </Noti>
-              </Bottom>
-            </CardBox>
-          ))}
 
-        {data.group === "select" &&
-          data.searchList?.map((item, idx) => (
-            <CardBox
-              key={idx}
-              onClick={() => {
-                history.push(`/board/${data.searchList[idx].selectId}`);
-              }}
-            >
-              <Top>
-                <span>
-                  <img src={clock} />
-                  {data.searchList[idx].createdAt.slice(0, 10)}
-                </span>
-                <span>
-                  <img src={eye} />
-                  {data.searchList[idx].selectViewCount}
-                </span>
-              </Top>
-              <Bottom>
-                <Title>{data.searchList[idx].selectTitle}</Title>
-                <Noti>
-                  <p>{data.searchList[idx].participationCount}</p>
-                  <span>투표수</span>
-                </Noti>
-              </Bottom>
-            </CardBox>
-          ))}
+        {data.searchList.length === 0 ? (
+          <Msg>
+            <p>해당되는 검색결과가 없습니다.</p>
+          </Msg>
+        ) : (
+          <>
+            {data.group === "board" &&
+              data.searchList?.map((item, idx) => (
+                <CardBox
+                  key={idx}
+                  onClick={() => {
+                    history.push(`/board/${data.searchList[idx].boardId}`);
+                  }}
+                >
+                  <Top>
+                    <span>
+                      <img src={clock} />
+                      {data.searchList[idx].createdAt.slice(0, 10)}
+                    </span>
+                    <span>
+                      <img src={eye} />
+                      {data.searchList[idx].boardViewCount}
+                    </span>
+                  </Top>
+                  <Bottom>
+                    <Title>{data.searchList[idx].boardTitle}</Title>
+                    <Noti>
+                      <p>{data.searchList[idx].commentCount}</p>
+                      <span>댓글</span>
+                    </Noti>
+                  </Bottom>
+                </CardBox>
+              ))}
+
+            {data.group === "select" &&
+              data.searchList?.map((item, idx) => (
+                <CardBox
+                  key={idx}
+                  onClick={() => {
+                    history.push(`/board/${data.searchList[idx].selectId}`);
+                  }}
+                >
+                  <Top>
+                    <span>
+                      <img src={clock} />
+                      {data.searchList[idx].createdAt.slice(0, 10)}
+                    </span>
+                    <span>
+                      <img src={eye} />
+                      {data.searchList[idx].selectViewCount}
+                    </span>
+                  </Top>
+                  <Bottom>
+                    <Title>{data.searchList[idx].selectTitle}</Title>
+                    <Noti>
+                      <p>{data.searchList[idx].participationCount}</p>
+                      <span>투표수</span>
+                    </Noti>
+                  </Bottom>
+                </CardBox>
+              ))}
+          </>
+        )}
+
         <FakeDiv />
       </ContentBox>
     </SearchPageBox>
@@ -125,6 +135,17 @@ const ContentBox = styled.div`
   margin-top: 40px;
   width: 375px;
   background-color: white;
+`;
+
+const Msg = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  p {
+    font-size: 20px;
+    font-weight: bold;
+  }
 `;
 
 const CardBox = styled.div`
