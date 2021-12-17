@@ -22,7 +22,7 @@ const WorryDetail = (props) => {
 const [worryList, setWorryList] = useState("");
 const { boardId } = useParams();
 const writerId = worryList.userId
-const logInId = useSelector((state)=>state.user.user.userId)
+const logInId = useSelector((state)=>state.user?.user?.userId)
 
 function worryDelete(){
   //고민 게시글 삭제

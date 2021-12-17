@@ -6,7 +6,7 @@ import { actionCreators as commentAction } from "../redux/modules/comment";
 const CommentItem = (props) => {
   const dispatch = useDispatch();
 
-  const loginUserId = useSelector((state) => state.user.user.userId);
+  const loginUserId = useSelector((state) => state.user?.user?.userId);
 
   const { comment, createdAt, commentId, boardId, userId } = props;
 
