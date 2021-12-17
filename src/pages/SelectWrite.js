@@ -9,7 +9,7 @@ export const SelectWrite = (props) => {
   const history = useHistory();
   const [TitleValue, setTitleValue] = useState(null);
   const [ContentValue, setContentValue] = useState(null);
-  
+  const [endDate, setEndDate] = useState("")
   const [SelectValue01, setSelectValue01] = useState(null);
   const [SelectValue02, setSelectValue02] = useState(null);
 
@@ -31,6 +31,7 @@ export const SelectWrite = (props) => {
           selectDesc: ContentValue,
           option1: SelectValue01,
           option2: SelectValue02,
+          endDate: endDate
         })
       );
       alert("선택지 작성을 성공하였습니다.");
