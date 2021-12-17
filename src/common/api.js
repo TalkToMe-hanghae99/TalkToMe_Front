@@ -2,10 +2,11 @@ import axios from "axios";
 
 export const instance = axios.create({
   baseURL: process.env.REACT_APP_server,
+  withCredentials: true,
   headers: {
     "Content-type": "application/json;charset=UTF-8",
     accept: "application/json",
-    // "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Origin": process.env.REACT_APP_server,
   },
 });
 
@@ -14,6 +15,7 @@ instance.interceptors.request.use((config) => {
   config.headers["Authorization"] = `Bearer  ${localStorage.getItem(
     "accessToken"
   )}`;
+  config.headers["X-Requested-With"] = "XMLHttpRequest";
   return config;
 });
 
