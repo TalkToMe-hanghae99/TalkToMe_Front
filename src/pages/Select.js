@@ -32,7 +32,6 @@ export const Select = (props) => {
   } = detail_list;
 
   const options = useSelector((state) => state.select.vote_list);
-  console.log(options);
 
   const [like, setlike] = useState(0);
   // 좋아요버튼
