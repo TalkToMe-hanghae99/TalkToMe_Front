@@ -15,11 +15,8 @@ export const Select = (props) => {
 
   //디테일페이지 불러오기
   const detail_list = useSelector((state) => state.select.detail_list);
-  const 민갑연습 = useSelector((state) => state);
-  console.log(props, "props");
-  console.log(민갑연습, "민갑연습");
+
   const params = useParams();
-  console.log(detail_list, "디테일리스트");
   const selectId = params.selectId;
   const {
     createdAt,
@@ -44,6 +41,13 @@ export const Select = (props) => {
 
   //투표
   const [option, setOption] = useState(0);
+  const [optionCountNum, setOptionCountNum] = useState("")
+
+  //득표 수
+  const vote = useSelector((state) => state?.select?.detail_list?.optionCount);
+
+const [vote01,setVote01] = useState(vote?.[0].[1]);
+const [vote02, setVote02] = useState(vote?.[0].[2]);
 
   //투표버튼
   const oneBtn = (e) => {
@@ -53,7 +57,6 @@ export const Select = (props) => {
   // 시간정리
   const dayTime = detail_list.createdAt;
   const day = new Date(dayTime);
-  console.log(day.toLocaleString());
   const dateUpate = day.toLocaleString();
   //선택디테일페이지
   useEffect(() => {
@@ -111,10 +114,10 @@ export const Select = (props) => {
       <Border />
       <TextBox>{selectDesc}</TextBox>
       <VoteOne className="1" onClick={oneBtn}>
-        {option1}
+        {option1} {vote01}표
       </VoteOne>
       <VoteTwo className="2" onClick={oneBtn}>
-        {option2}
+        {option2} {vote02}표
       </VoteTwo>
 
       <Flat justify="space-evenly">
@@ -148,7 +151,7 @@ export const Select = (props) => {
       </Flat>
       <Border />
 
-      <Chart option1={option1} option2={option2} optionCount={optionCount} />
+      <Chart option1={option1} option2={option2} optionCount={optionCount} setOptionCountNum={setOptionCountNum}/>
       <Button>당신의 선택은?</Button>
 
       {/*  모달 */}

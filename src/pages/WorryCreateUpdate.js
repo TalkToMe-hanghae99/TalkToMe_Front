@@ -72,7 +72,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   background-color: white;
-  padding: 20px;
+  padding: 30px;
 `;
 
 const Header = styled.div`
@@ -104,7 +104,7 @@ const WriteBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: 50px;
+  margin-top: 130px;
 `;
 
 const Title = styled.input`
@@ -114,7 +114,7 @@ const Title = styled.input`
   outline: none;
   border: none;
   background-color: #fafafa;
-  margin: 0 15px 15px 0;
+  margin: 0 15px 35px 0;
   border-radius: 4px;
   font-size: 16px;
   color: rgb(33, 37, 41);
@@ -131,7 +131,7 @@ const Content = styled.textarea`
   outline: none;
   border: none;
   background-color: #fafafa;
-  margin: 0 15px 15px 0;
+  margin: 20px 15px 35px 0;
   border-radius: 4px;
   font-size: 16px;
   color: rgb(33, 37, 41);
@@ -151,10 +151,14 @@ const Hr = styled.hr`
 const BtnBox = styled.div`
   button {
     height: 40px;
-    width: 150px;
-    margin:7px;
+    width: 135px;
+    margin:25px 10px;
     border-radius:5px;
     border:none;
+    background-color:pink;
+    color:white;
+    font-weight:bold;
+    font-size:16px;
   }
 `;
 

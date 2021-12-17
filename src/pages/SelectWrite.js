@@ -9,7 +9,7 @@ export const SelectWrite = (props) => {
   const history = useHistory();
   const [TitleValue, setTitleValue] = useState(null);
   const [ContentValue, setContentValue] = useState(null);
-  const [endDate, setEndDate] = useState("")
+  const [endDate, setEndDate] = useState("");
   const [SelectValue01, setSelectValue01] = useState(null);
   const [SelectValue02, setSelectValue02] = useState(null);
 
@@ -21,7 +21,6 @@ export const SelectWrite = (props) => {
 
   console.log("today", year + month + date);
 
-
   async function postSelect() {
     try {
       const response = await instance.post(
@@ -31,7 +30,7 @@ export const SelectWrite = (props) => {
           selectDesc: ContentValue,
           option1: SelectValue01,
           option2: SelectValue02,
-          endDate: endDate
+          endDate: endDate,
         })
       );
       alert("선택지 작성을 성공하였습니다.");
@@ -58,7 +57,7 @@ export const SelectWrite = (props) => {
   }
 
   return (
-    <Container>
+    <div>
       <Header>
         <img
           src={Left}
@@ -69,41 +68,42 @@ export const SelectWrite = (props) => {
         />
         <span>A / B 작성하기</span>
       </Header>
-      <Input
-        onChange={onTitleChange}
-        value={TitleValue}
-        placeholder="투표 제목을 입력하세요."
-      ></Input>
-      <Days>
-        {year} - {month} - {date}
-      </Days>
-      <Border />
-      <Textarea
-        onChange={onContentChange}
-        value={ContentValue}
-        placeholder="고민을 적어보세요."
-      />
-      <Select01
-        placeholder="선택지를 적어보세요."
-        value={SelectValue01}
-        onChange={onSelectValue01}
-      />
-      <Select02
-        placeholder="선택지를 적어보세요."
-        value={SelectValue02}
-        onChange={onSelectValue02}
-      />
-      <Flat justify="space-between">
-        <Button onClick={postSelect}>작성 완료</Button>
-        <Button
-          onClick={() => {
-            history.replace("/main");
-          }}
-        >
-          취소
-        </Button>
-      </Flat>
-    </Container>
+      <Container>
+        <Input
+          onChange={onTitleChange}
+          value={TitleValue}
+          placeholder="투표 제목을 입력하세요."
+        ></Input>
+        <Border />
+        <Textarea
+          onChange={onContentChange}
+          value={ContentValue}
+          placeholder="고민을 적어보세요."
+        />
+        <Lavel>A 선택지</Lavel>
+        <Select01
+          placeholder="선택지를 적어보세요."
+          value={SelectValue01}
+          onChange={onSelectValue01}
+        />
+        <Lavel>B 선택지</Lavel>
+        <Select02
+          placeholder="선택지를 적어보세요."
+          value={SelectValue02}
+          onChange={onSelectValue02}
+        />
+        <Flat justify="space-between">
+          <Button onClick={postSelect}>작성 완료</Button>
+          <Button
+            onClick={() => {
+              history.replace("/main");
+            }}
+          >
+            취소
+          </Button>
+        </Flat>
+      </Container>
+    </div>
   );
 };
 
@@ -114,6 +114,7 @@ const Container = styled.div`
   width: 375px;
   height: 100vh;
   background-color: white;
+  padding: 30px;
 `;
 
 const Header = styled.div`
@@ -140,56 +141,66 @@ const Header = styled.div`
   }
 `;
 const Input = styled.input`
-  width: 335px;
+  width: 100%;
   height: 40px;
-  margin: 0 auto;
-  margin-top: 60px;
+  margin: 70px auto;
+  margin-bottom: 00px;
   border: #e7e7e7;
   font-size: 16px;
   font-weight: bold;
-`;
-
-const Days = styled.div`
-  color: #858585;
-  display: flex;
-  justify-content: flex-end;
+  background-color: #fafafa;
 `;
 
 const Border = styled.div`
   width: 100%;
   border: 1px solid #e7e7e7;
-  margin-bottom: 30px;
+  margin: 40px 0;
   background-color: red;
 `;
 const Textarea = styled.textarea`
-  width: 335px;
+  width: 100%;
   margin: 0 auto;
   margin-bottom: 10px;
   height: 300px;
   font-size: 15px;
   border: #e7e7e7;
+  background-color: #fafafa;
 `;
 const Flat = styled.div`
   display: flex;
   justify-content: ${(props) => props.justify};
   margin: 10px 0;
 `;
+
+const Lavel = styled.div`
+  height: 25px;
+  width: 100px;
+  margin: 15px 15px 15px 0px;
+`;
+
 const Select01 = styled.input`
-  height: 32px;
-  width: 335px;
-  margin: 10px auto;
+  height: 35px;
+  width: 100%;
+  border: 1px solid #e1e1e1;
+  margin-bottom: 12px;
 `;
 const Select02 = styled.input`
-  height: 32px;
-  width: 335px;
-  margin: 10px auto;
+  height: 35px;
+  width: 100%;
+  border: 1px solid #e1e1e1;
+  margin-bottom: 12px;
 `;
 
 const Button = styled.button`
-  width: 160px;
+  width: 100%;
   height: 40px;
   background: #e9e9e9;
   border: none;
   font-weight: bold;
   margin: 20px 20px;
+  background-color: pink;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  border-radius: 5px;
 `;

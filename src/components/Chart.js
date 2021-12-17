@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { PieChart } from "react-minimal-pie-chart";
 import { useSelector } from "react-redux";
 
@@ -13,22 +13,21 @@ export const Chart = (props) => {
     cnt = optionCount[0];
   }
 
-  console.log(cnt[2]);
+  console.log(cnt);
   const data = [
     {
       title: option1,
-      value: cnt[1] ? cnt[1] : 0,
+      value: options[1] ? options[1] : 0,
       color: "#f6cb44",
     },
     {
       title: option2,
-      value: cnt[2] ? cnt[2] : 0,
+      value: options[2] ? options[2] : 0,
       color: "#76BEE3",
     },
   ];
 
-  console.log("차트데이터", data);
-  console.log("차트프롭스", props);
+  console.log(data);
   return (
     <PieChart
       data={data}
