@@ -22,8 +22,6 @@ const WorryCreateUpdate = (props) => {
         boardDesc,
       };
       dispatch(worryCr.postWriteAPI(worryInfo));
-      window.alert("등록이 완료되었습니다.");
-      history.push("/worryboard");
     }
   };
 

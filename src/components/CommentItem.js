@@ -12,27 +12,24 @@ const CommentItem = (props) => {
 
   //댓글 수정
   const [showEditInput, setShowEditInput] = useState(false);
-  const [editComment, setEditComment] = useState(null);
-
-  console.log("이게뭐여11", editComment);
+  const [editComment, setEditComment] = useState(comment);
 
   const onClickEdit = () => {
     setShowEditInput(!showEditInput);
   };
 
-  const onChangeComment = (e) => {
-    const {
-      target: { name, value },
-    } = e;
-    setEditComment({
-      ...editComment,
-      [name]: value,
-    });
+  const EditComplete = () => {
+    const comment = {
+      commentId: commentId,
+      comment: editComment,
+    };
+    dispatch(commentAction.editCommentAPI(boardId, comment));
+    setShowEditInput(!showEditInput);
   };
 
   //댓글 삭제
   const onClickDelete = () => {
-    const result = window.confirm("댓글을 정말로 삭제하시겠습니까?");
+    const result = window.confirm("댓글을 삭제하시겠습니까?");
 
     if (result) {
       dispatch(commentAction.deleteCommentAPI(boardId, commentId));
@@ -59,11 +56,13 @@ const CommentItem = (props) => {
         <InputBtn>
           <Input
             name="comment"
-            value={comment}
-            onChange={onChangeComment}
+            value={editComment}
+            onChange={(e) => {
+              setEditComment(e.target.value);
+            }}
             required
           />
-          <Button>수정</Button>
+          <Button onClick={EditComplete}>완료</Button>
         </InputBtn>
       )}
     </Container>

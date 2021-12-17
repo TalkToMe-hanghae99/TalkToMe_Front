@@ -36,8 +36,8 @@ export const apis = {
     instance.delete(`/board/${boardId}/comment/${commentId}`),
 
   // 댓글 수정
-  editComment: (commentId, boardId) =>
-    instance.delete(`/board/${boardId}/comment/${commentId}`),
+  editComment: (comment, boardId) =>
+    instance.patch(`/board/${boardId}/comment/${comment.commentId}`, comment),
 
   //검색
   getSearch: (group, keyword) =>
