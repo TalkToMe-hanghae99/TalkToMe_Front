@@ -63,9 +63,9 @@ function App() {
             ></Route>
             <Route path="/mypage" exact component={Mypage} />
             <Route path="/worryrevise/:boardId" exact component={WorryRevise} />
+            {/* <Route component={NotFound} /> */}
             <Footer />
           </>
-          {/* <Route component={NotFound} /> */}
         </Switch>
       </ConnectedRouter>
     </Provider>

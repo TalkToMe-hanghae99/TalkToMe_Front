@@ -47,7 +47,7 @@ useEffect(() => {
   const getWorryList = async () => {
     try {
       const response = await instance.get(
-        `http://ozam.shop/board/${boardId}`
+        `/board/${boardId}`
       );
       setWorryList(response.data.boardList.[0]);
     } catch {

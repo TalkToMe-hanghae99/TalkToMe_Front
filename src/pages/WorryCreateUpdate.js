@@ -159,6 +159,7 @@ const BtnBox = styled.div`
     color:white;
     font-weight:bold;
     font-size:16px;
+    cursor:pointer;
   }
 `;
 

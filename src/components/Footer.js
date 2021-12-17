@@ -74,16 +74,17 @@ const Button = styled.div`
   flex-flow: row wrap;
   font-weight: bold;
   line-height: 20px;
+  cursor:pointer;
+  :hover {
+    filter: invert(35%) sepia(86%) saturate(7440%) hue-rotate(315deg)
+      brightness(95%) contrast(99%);
+  }
 `;
 const Img = styled.img`
   width: 26px;
   height: 26px;
   margin: 0 auto;
 
-  :hover {
-    filter: invert(35%) sepia(86%) saturate(7440%) hue-rotate(315deg)
-      brightness(95%) contrast(99%);
-  }
 `;
 
 const Text = styled.div`
@@ -91,4 +92,5 @@ const Text = styled.div`
   padding-top: 6px;
   width: 70px;
   font-size: 13px;
+  
 `;
