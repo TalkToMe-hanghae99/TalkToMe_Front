@@ -24,9 +24,9 @@ const WorryRevise = (props) => {
         const response = await instance.get(
           `http://ozam.shop/board/${boardId}`
         );
-        console.log(response.data);
-        setboardTitle(response.data);
-        setboardDesc(response.data);
+        console.log(response.data.boardList);
+        setboardTitle(response.data.boardList.[0].boardTitle);
+        setboardDesc(response.data.boardList.[0].boardDesc);
       } catch {
         console.log("실패시 게시글 리스트", boardTitle);
       }
@@ -180,8 +180,12 @@ const Hr = styled.hr`
 const BtnBox = styled.div`
   button {
     height: 40px;
-    width: 100px;
+    width: 150px;
+    margin:7px;
+    border-radius:5px;
+    border:none;
   }
 `;
+
 
 export default WorryRevise;
