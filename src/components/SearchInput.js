@@ -36,7 +36,7 @@ function SearchInput() {
   return (
     <SearchBox>
       <div>
-        <FormControl sx={{ m: 1, minWidth: 80 }}>
+        <FormControl sx={{ m: 0.5, minWidth: 80, p: 0.5 }}>
           <InputLabel id="demo-simple-select-autowidth-label">선택</InputLabel>
           <Select
             labelId="demo-simple-select-autowidth-label"
@@ -45,6 +45,7 @@ function SearchInput() {
             onChange={handleSelectChange}
             autoWidth
             label="search"
+            size="small"
           >
             <MenuItem value={"board"}>고민 톡톡</MenuItem>
             <MenuItem value={"select"}>고민 A/B</MenuItem>
@@ -52,31 +53,49 @@ function SearchInput() {
         </FormControl>
       </div>
       <SearchBar onChange={hadleSearchChange} />
-      <Img src={searchImg} onClick={clickSearch} />
+      <ImgBox>
+        <Img src={searchImg} onClick={clickSearch} />
+      </ImgBox>
     </SearchBox>
   );
 }
 const SearchBox = styled.div`
-  z-index: 5;
-  position: fixed;
-  top: 0px;
   width: 375px;
   height: 75px;
   background-color: white;
-  border-bottom: 1px solid #e3e3e3;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 10px;
+  margin-bottom: 10px;
 `;
 const SearchBar = styled.input`
   width: 100%;
   height: 30px;
 `;
 
-const Img = styled.img`
-  width: 30px;
-  margin-left: 5px;
+const ImgBox = styled.div`
+  width: 40px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e9e9e9;
+  border-radius: 2px;
+  margin: 0 10px;
   cursor: pointer;
+
+  :hover {
+    background-color: #f32793;
+  }
+`;
+
+const Img = styled.img`
+  width: 25px;
+  margin-left: 5px;
+
+  :hover {
+    width: 30px;
+  }
 `;
 export default SearchInput;

@@ -26,6 +26,11 @@ const CardBox = styled.div`
   margin-bottom: 20px;
   border: 1px solid #e9e9e9;
   border-radius: 5px;
+
+  :hover {
+    cursor: pointer;
+    background-color: #ffefe3;
+  }
 `;
 
 const Title = styled.div`

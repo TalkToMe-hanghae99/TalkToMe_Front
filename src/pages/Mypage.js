@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useHistory } from "react-router";
+
 import { MySelect } from "../components/MySelect";
 import { MyWrite } from "../components/MyWrite";
 import { NameCorrection } from "../components/NameCorrection";
 import { SelectWrite } from "./SelectWrite";
+import Left from "../assets/left.svg";
 
 export const Mypage = (props) => {
+  const history = useHistory();
+
   //탭 바꾸기
   const [select, setSelect] = useState(true);
   const [write, setWrite] = useState(false);
@@ -37,6 +42,15 @@ export const Mypage = (props) => {
   return (
     <Color>
       <Container>
+        <Header>
+          <img
+            src={Left}
+            onClick={() => {
+              history.goBack();
+            }}
+          />
+          <span>내정보</span>
+        </Header>
         <Grid>
           <Name>닉네임 </Name>
           <Honorific>님</Honorific>
@@ -60,11 +74,37 @@ export const Mypage = (props) => {
 };
 
 const Container = styled.div`
-  margin: 0 20px;
+  width: 375px;
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  width: 90%;
-  max-width: 375px;
+  align-items: center;
+  background-color: white;
+  padding: 20px;
+`;
+
+const Header = styled.div`
+  position: fixed;
+  top: 0;
+  z-index: 5;
+  background-color: #9ddbf6;
+  width: 375px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+
+  img {
+    height: 60%;
+    cursor: pointer;
+  }
+
+  span {
+    width: 100%;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+  }
 `;
 
 const Grid = styled.div`

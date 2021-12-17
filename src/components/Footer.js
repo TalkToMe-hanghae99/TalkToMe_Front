@@ -59,7 +59,7 @@ const FooterBox = styled.div`
   width: 375px;
   z-index: 5;
   height: 75px;
-  background-color: white;
+  background-color: #fcc2ce;
   display: flex;
   flex-flow: row wrap;
   border-top: 1px solid #e9e9e9;

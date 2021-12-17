@@ -1,26 +1,41 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router";
 
 import Left from "../assets/left.svg";
-import { instance } from "../common/api";
-import MainCardConcern from "../components/MainCardConcern";
+import WorryComment from "../components/WorryComment";
+import WorryDate from "../components/WorryDate";
+import WorryViewCount from "../components/WorryViewCount";
 
 const WorryBoard = (props) => {
   const history = useHistory();
-  const [worryList, setWorryList] = useState("");
 
-  useEffect(() => {
-    const getWorryList = async () => {
-      try {
-        const response = await instance.get("http://ozam.shop/board?sort=date");
-        setWorryList(response.data.boardViewList);
-      } catch (error) {
-        console.log("고민 get 실패", error.response);
-      }
-    };
-    getWorryList();
-  }, []);
+  //탭
+  const [tabs, setTabs] = useState([
+    {
+      title: "최신순",
+      active: true,
+    },
+    {
+      title: "인기순",
+      active: false,
+    },
+    {
+      title: "댓글순",
+      active: false,
+    },
+  ]);
+
+  const [index, setIndex] = useState(0);
+
+  const changeTab = (index) => {
+    setTabs(
+      tabs.map((tab, i) =>
+        i === index ? { ...tab, active: true } : { ...tab, active: false }
+      )
+    );
+    setIndex(index);
+  };
 
   return (
     <Container>
@@ -34,38 +49,35 @@ const WorryBoard = (props) => {
         <span>톡톡 게시판</span>
       </Header>
       <CardBox>
-        <PageNation>
-          <Page
-            onClick={() => {
-              console.log("최신순");
-            }}
-          >
-            최신순
-          </Page>
-          <Page
-            onClick={() => {
-              console.log("인기순");
-            }}
-          >
-            인기순
-          </Page>
-          <Page
-            onClick={() => {
-              console.log("댓글순");
-            }}
-          >
-            댓글순
-          </Page>
-        </PageNation>
-        {worryList &&
-          worryList?.map((list) => (
-            <MainCardConcern key={list.boardId} List={list} />
+        <TabWrapper>
+          {tabs.map((tab, idx) => (
+            <Tab key={idx} onClick={() => changeTab(idx)} active={tab.active}>
+              {tab.title}
+            </Tab>
           ))}
+        </TabWrapper>
+
+        <ArrayWrapper>
+          {index === 0 ? (
+            <WorryDate />
+          ) : index === 1 ? (
+            <WorryViewCount />
+          ) : (
+            <WorryComment />
+          )}
+        </ArrayWrapper>
+        <UpScroll
+          onClick={() => {
+            window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+          }}
+        >
+          <p>맨 위로 🔺</p>
+        </UpScroll>
+        <FakeDiv />
       </CardBox>
     </Container>
   );
 };
-
 const Container = styled.div`
   width: 375px;
   height: 100vh;
@@ -80,7 +92,7 @@ const Header = styled.div`
   position: fixed;
   top: 0;
   z-index: 5;
-  background-color: #f8f9fa;
+  background-color: #9ddbf6;
   width: 375px;
   height: 50px;
   display: flex;
@@ -109,7 +121,7 @@ const CardBox = styled.div`
   background-color: white;
 `;
 
-const PageNation = styled.div`
+const TabWrapper = styled.div`
   width: 335px;
   height: 45px;
   position: relative;
@@ -117,12 +129,47 @@ const PageNation = styled.div`
   flex-flow: row wrap;
 `;
 
-const Page = styled.div`
-  width: 50px;
-  height: 30px;
-  margin: 10px;
+const Tab = styled.div`
+  width: 70px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 10px 10px 0px;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 16px;
   font-weight: bold;
-  padding-top: 3px;
+  background-color: #e9e9e9;
+  border-radius: 20px;
+
+  ${(props) =>
+    props.active
+      ? "background-color: #F2138C; color:white;"
+      : "font-weight: 400;"};
+`;
+
+const ArrayWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+`;
+
+const UpScroll = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+
+  p {
+    margin: 0;
+  }
+`;
+
+const FakeDiv = styled.div`
+  height: 75px;
 `;
 
 export default WorryBoard;
